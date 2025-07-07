@@ -18,7 +18,7 @@
   <body>
     <header>
       <nav id="header-nav" class="navbar navbar-default">
-        <div class="container">
+        <div id="container-header">
           <div class="navbar-header">
             <div id="logo1-container" class="visible-md visible-lg">
               <img class="imagelogo" src="images/gregoria_logo_lg.png" />
@@ -88,19 +88,29 @@
       </nav>
     </header>
 
-    <div id="main-content" class="container">
-      <div id="image-content-container">
-        <img
+    <div id="container-main">
+      <div id="page-content"></div>
+      <div id="adv-buttons">
+        <button class="nav-buttons" onclick="prevPage()">
+          <i class="glyphicon glyphicon-arrow-left"></i> Anterior
+        </button>
+        <button class="jump-buttons" id="home-button" onclick="setPage(2)">
+          <i class="glyphicon glyphicon-home"></i>
+        </button>
+        <button class="nav-buttons" onclick="nextPage()">
+          Siguiente <i class="glyphicon glyphicon-arrow-right"></i>
+        </button>
+      </div>
+      <!-- <img
           id="background-image"
           src="images/intro.png"
           alt="Kosher certification"
-        />
-      </div>
+        /> -->
     </div>
 
-    <footer class="panel-footer">
+    <footer class="panel-footer hidden-xs">
       <div class="container">
-        <div class="row">
+        <!-- <div class="row">
           <section id="hours" class="col-sm-4">
             <span>Hours:</span><br />
             Sun-Thurs: 11:15am - 10:00pm<br />
@@ -128,7 +138,7 @@
               again and again!"
             </p>
           </section>
-        </div>
+        </div> -->
         <div class="text-center">
           &copy; Copyright David Chu's China Bistro 2016
         </div>
