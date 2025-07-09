@@ -90,6 +90,7 @@ header {
 #button-index-container {
   /* border: 1px solid black; */
   /* position: relative; */
+  z-index: 100;
 }
 #navbarToggle {
   /* position: absolute; */
@@ -128,34 +129,24 @@ header {
   align-content: right;
   /* height: 10vh; */
 }
-#nav-list a {
-  padding-top: 0;
-  padding-bottom: 0;
-  color: #951c49;
-  text-align: center;
-  height: 100%;
-}
-#nav-list a:hover {
-  background: #e7e7e7;
-}
-#nav-list a span {
-  font-size: 3.5em;
-  height: 100%;
-}
 
-#phone {
-  margin-top: 5px;
+.list-item {
+  border: 1px solid red;
+  width: 8em;
+  height: 10em;
 }
-#phone a {
-  /* Phone number */
-  text-align: right;
-  padding-bottom: 0;
+.list-button {
+  border: 1px solid black;
+  width: 100%;
+  height: 100%;
 }
-#phone div {
-  /* We Deliver */
-  color: #557c3e;
-  text-align: right;
-  padding-right: 15px;
+.index-buttons {
+  width: 100%;
+  height: 100%;
+  color: white;
+  background-color: green;
+  padding: 0;
+  font-size: 1.5em;
 }
 
 .navbar-header button.navbar-toggle,
@@ -263,10 +254,12 @@ header {
   position: absolute;
   bottom: 40%;
   left: 70%;
-  height: 6em;
+  height: 10vh;
+  width: 20vw;
 }
-#comenzar-button{
-  font-size: 2em;
+#comenzar-button {
+  width: 100%;
+  font-size: 1em;
 }
 .Blayout {
   border: 1px solid purple;
@@ -296,45 +289,25 @@ header {
 
 /* END SINGLE CATEGORY PAGE */
 
-/********** Large devices only **********/
-@media (min-width: 1200px) {
-  .container .jumbotron {
-    background: url("../images/jumbotron_1200.jpg") no-repeat;
-    height: 675px;
+@media (max-width: 1199px) {
+  /* Below 1200px - collapse navbar */
+  .navbar-header {
+    float: none;
   }
-}
 
-/********** Medium devices only **********/
-@media (min-width: 992px) and (max-width: 1199px) {
-  /* Header */
-  #logo-img {
-    background: url("../images/restaurant-logo_medium.png") no-repeat;
-    width: 100px;
-    height: 100px;
-    margin: 5px 5px 5px 0;
+  #navbarToggle {
+    display: block;
   }
-  /* End Header */
 
-  /* Home Page */
-  .container .jumbotron {
-    background: url("../images/jumbotron_992.jpg") no-repeat;
-    height: 558px;
+  #collapsable-nav.collapse {
+    display: none !important;
   }
-  /* End Home Page */
-}
 
-/********** Small devices only **********/
-@media (min-width: 768px) and (max-width: 991px) {
-  /* Home Page */
-  .container .jumbotron {
-    background: url("../images/jumbotron_768.jpg") no-repeat;
-    height: 432px;
+  #collapsable-nav.collapse.in {
+    display: block !important;
+    height: auto !important;
+    overflow: visible !important;
   }
-  /* End Home Page */
-}
-
-/********** Extra small devices only **********/
-@media (max-width: 767px) {
   /* Header */
   header {
     height: 0;
@@ -386,6 +359,7 @@ header {
   } */
 
   #collapsable-nav {
+    border: 1px solid green;
     width: 15em;
     position: absolute;
     top: 2.5em;
@@ -393,17 +367,42 @@ header {
     z-index: 999;
     height: auto;
   }
-
-  #collapsable-nav a {
-    /* Collapsed nav menu text */
-    font-size: 1.2em;
+  #navlist {
+    width: 100%;
   }
-  #collapsable-nav a span {
+  .list-item {
+    border: 1px solid red;
+    width: 100%;
+    height: 3em;
+  }
+  .list-button {
+    border: 1px solid black;
+    width: 100%;
+    height: 100%;
+  }
+  .index-buttons {
+    width: 100%;
+    height: 100%;
+    color: white;
+    background-color: green;
+    padding: 0;
     font-size: 1.5em;
-    margin-right: 5px;
+  }
+  #adv-buttons {
+    /* width: 50%; */
+    height: 8vh;
   }
 
   /* End Header */
+
+  .Blayout {
+    height: 100vh;
+    /* min-height: 85vh; */
+  }
+  .Clayout {
+    /* min-height: 85vh; */
+    height: 100vh;
+  }
 
   /* Footer */
   .panel-footer section {
@@ -457,29 +456,15 @@ header {
   }
 }
 
-/********** Super extra small devices Only :-) (e.g., iPhone 4) **********/
-@media (max-width: 479px) {
-  /* Header */
-  .navbar-brand h1 {
-    /* Restaurant name */
-    padding-top: 5px;
-    font-size: 6vw;
-  }
-  /* End Header */
-
-  /* Home page */
-  #menu-tile,
-  #specials-tile {
-    width: 280px;
-    margin: 0 auto 15px;
+@media (min-width: 1200px) {
+  /* On large screens (1200px and above) - show full navbar */
+  #collapsable-nav {
+    display: block !important;
+    height: auto !important;
+    overflow: visible !important;
   }
 
-  .col-xxs-12 {
-    position: relative;
-    min-height: 1px;
-    padding-right: 15px;
-    padding-left: 15px;
-    float: left;
-    width: 100%;
+  #navbarToggle {
+    display: none;
   }
 }

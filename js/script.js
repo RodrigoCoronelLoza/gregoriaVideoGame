@@ -16,7 +16,7 @@ function renderPage() {
   }
   pageContent.className = layoutData[currentPage];
   pageContent.innerHTML = createStructure(titlesData, layoutData, currentPage);
-  playAudio(audioData, currentPage);
+  // playAudio(audioData, currentPage);
   console.log(currentPage);
 }
 
