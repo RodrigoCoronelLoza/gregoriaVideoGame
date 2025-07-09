@@ -237,7 +237,7 @@ header {
   border: 1px solid purple;
   height: 100vh;
   /* min-height: 85vh; */
-  background-image: url("/images/intro.png");
+  background-image: url("../images/intro.png");
   background-size: 100% 100%; /* or 'contain' depending on your needs */
   background-repeat: no-repeat;
   background-position: center;
@@ -265,7 +265,7 @@ header {
   border: 1px solid purple;
   height: 88vh;
   /* min-height: 85vh; */
-  background-image: url("/images/preguntas.png");
+  background-image: url("../images/preguntas.png");
   background-size: 100% 100%; /* or 'contain' depending on your needs */
   background-repeat: no-repeat;
   background-position: center;
@@ -274,7 +274,7 @@ header {
   /* min-height: 85vh; */
   border: 1px solid purple;
   height: 88vh;
-  background-image: url("/images/gregoria_logo_md.png");
+  background-image: url("../images/gregoria_logo_md.png");
   background-size: 100% 100%; /* or 'contain' depending on your needs */
   background-repeat: no-repeat;
   background-position: center;
