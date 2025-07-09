@@ -16,7 +16,7 @@ function renderPage() {
   }
   pageContent.className = layoutData[currentPage];
   pageContent.innerHTML = createStructure(titlesData, layoutData, currentPage);
-  playAudio(audioData, currentPage);
+  // playAudio(audioData, currentPage);
   console.log(currentPage);
 }
 
@@ -57,7 +57,6 @@ function createStructure(titles, layout, page) {
 function ALayOutGenerator(titles, page) {
   return ` 
   <div id="Alayout-container">
-    <h1 class="titles" id="Atitle">${titles[page]}</h1>
     <div class="button-caratula-container">
       <button class="nav-buttons" id="comenzar-button" onclick="nextPage()">Comienza</button>
     </div>
@@ -65,7 +64,7 @@ function ALayOutGenerator(titles, page) {
 }
 function BLayOutGenerator(titles, page) {
   return ` 
-  <div id="Alayout-container">
+  <div id="Blayout-container">
     <h1 class="titles" id="Btitle">${titles[page]}</h1>
   </div>`;
 }
