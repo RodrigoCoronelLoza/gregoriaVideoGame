@@ -13,11 +13,11 @@ let sentenceGameStartTime = null;
 let sentenceAttempts = 0;
 let completedSentences = 0;
 
-// Recipe ordering game variables
 let recipeGameCompleted = false;
 let recipeGameStartTime = null;
 let recipeAttempts = 0;
-let recipeCurrentIndex = 0;
+let recipeSteps = [];
+let recipeCorrectOrder = [];
 let recipeDraggedElement = null;
 
 function renderPage() {
@@ -110,7 +110,7 @@ function BLayOutGenerator(titles, page, text) {
   const pageTrivia = text[page];
   const totalQuestions = pageTrivia.questions.length;
   const currentQuestion = pageTrivia.questions[currentQuestionIndex];
-  nextButton.disabled = true;
+  // nextButton.disabled = true;
   return `
     <div id="Blayout-container">
       <h1 class="titles" id="Btitle">${titles[page]}</h1>
@@ -172,7 +172,7 @@ function CLayOutGenerator(titles, page, text) {
   const pageTrivia = text[page];
   const totalQuestions = pageTrivia.questions.length;
   const currentQuestion = pageTrivia.questions[currentQuestionIndex];
-  nextButton.disabled = true;
+  // nextButton.disabled = true;
   return `
     <div id="Clayout-container">
       <h1 class="titles" id="Ctitle">${titles[page]}</h1>
@@ -228,7 +228,7 @@ function CLayOutGenerator(titles, page, text) {
 function DLayOutGenerator(titles, page, text) {
   const nextButton = document.getElementById("next-button");
   const pageData = text[page];
-  nextButton.disabled = true;
+  // nextButton.disabled = true;
   return `
     <div id="Dlayout-container">
       <h1 class="titles" id="Dtitle">${titles[page]}</h1>
@@ -284,7 +284,7 @@ function DLayOutGenerator(titles, page, text) {
 function ELayOutGenerator(titles, page, text) {
   const nextButton = document.getElementById("next-button");
   const pageData = text[page];
-  nextButton.disabled = true;
+  // nextButton.disabled = true;
 
   // Initialize game state
   if (pageData && pageData.sentences) {
@@ -359,11 +359,354 @@ function ELayOutGenerator(titles, page, text) {
       </div>
     </div>`;
 }
-function FLayOutGenerator(titles, page) {
-  return ` 
-  <div id="Flayout-container">
-  </div>`;
+function FLayOutGenerator(titles, page,text) {
+  const nextButton = document.getElementById("next-button");
+  const pageData = text[page];
+  // nextButton.disabled = true;
+
+  // Initialize recipe game state
+  if (pageData && pageData.recipe) {
+    initializeRecipeGame(pageData.recipe);
+  }
+
+  return `
+    <div id="Flayout-container">
+      <h1 class="titles" id="Ftitle">${titles[page]}</h1>
+      <div class="recipe-game-container">
+        <div class="game-header">
+          <div class="game-stats">
+            <div class="stat-item">
+              <span class="stat-label">Intentos:</span>
+              <span id="recipe-attempts">0</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Pasos ordenados:</span>
+              <span id="recipe-progress">0/${
+                pageData?.recipe?.steps?.length || 0
+              }</span>
+            </div>
+          </div>
+          <div class="game-progress">
+            <div class="progress-bar">
+              <div id="recipe-progress-fill" class="progress-fill" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="recipe-instructions">
+          <h3>Instrucciones:</h3>
+          <p>Arrastra los pasos en el orden correcto para completar la receta o proceso.</p>
+        </div>
+        
+        <div class="recipe-title">
+          <h3>${pageData?.recipe?.title || "Ordena los pasos"}</h3>
+          <p class="recipe-description">${
+            pageData?.recipe?.description ||
+            "Organiza los pasos en orden lógico"
+          }</p>
+        </div>
+        
+        <div class="recipe-game-area">
+          <div class="recipe-columns">
+            <div class="steps-column">
+              <h4>Pasos disponibles:</h4>
+              <div id="available-steps" class="available-steps">
+                ${generateAvailableSteps(pageData?.recipe?.steps || [])}
+              </div>
+            </div>
+            
+            <div class="order-column">
+              <h4>Orden correcto:</h4>
+              <div id="ordered-steps" class="ordered-steps" ondrop="dropRecipeStep(event)" ondragover="allowRecipeDrop(event)">
+                <div class="drop-zone-placeholder">Arrastra los pasos aquí en el orden correcto</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="recipe-controls">
+          <button id="check-recipe-btn" class="check-recipe-btn" onclick="checkRecipeOrder()">
+            Verificar Orden
+          </button>
+          <button id="reset-recipe-btn" class="reset-recipe-btn" onclick="resetRecipeGame()">
+            Reiniciar
+          </button>
+        </div>
+        
+        <div id="recipe-result" class="recipe-result" style="display: none;">
+          <div id="recipe-feedback" class="recipe-feedback"></div>
+        </div>
+        
+        <div id="recipe-game-summary" class="recipe-game-summary" style="display: none;">
+          <h3>¡Perfecto! 🎉</h3>
+          <div id="recipe-score-display" class="recipe-score-display">
+            <div class="completion-message">
+              <h4>¡Has ordenado todos los pasos correctamente!</h4>
+              <p>La secuencia está completa y tiene sentido lógico.</p>
+            </div>
+          </div>
+          <div class="game-summary">
+            <div class="summary-item">
+              <strong>Tiempo total:</strong> <span id="recipe-total-time">--</span>
+            </div>
+            <div class="summary-item">
+              <strong>Intentos:</strong> <span id="recipe-total-attempts">--</span>
+            </div>
+          </div>
+          <button class="continue-btn" onclick="nextPage()">Continuar</button>
+        </div>
+      </div>
+    </div>`;
 }
+
+// Initialize recipe game
+function initializeRecipeGame(recipe) {
+  if (!recipe || !recipe.steps || recipe.steps.length === 0) return;
+
+  recipeGameCompleted = false;
+  recipeGameStartTime = null;
+  recipeAttempts = 0;
+  recipeSteps = [...recipe.steps];
+  recipeCorrectOrder = recipe.steps.map((_, index) => index);
+}
+
+// Generate available steps (shuffled)
+function generateAvailableSteps(steps) {
+  if (!steps || steps.length === 0) return "";
+
+  // Create shuffled array with original indices
+  const shuffledSteps = steps.map((step, index) => ({
+    content: step,
+    originalIndex: index
+  }));
+  
+  // Shuffle the array
+  for (let i = shuffledSteps.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledSteps[i], shuffledSteps[j]] = [shuffledSteps[j], shuffledSteps[i]];
+  }
+
+  return shuffledSteps.map(step => `
+    <div class="recipe-step-card" 
+         draggable="true"
+         ondragstart="recipeStepDragStart(event)"
+         data-step-content="${step.content}"
+         data-original-index="${step.originalIndex}">
+      <div class="step-number">Paso</div>
+      <div class="step-content">${step.content}</div>
+    </div>
+  `).join("");
+}
+
+// Drag and drop functions for recipe game
+function recipeStepDragStart(event) {
+  if (recipeGameCompleted) return;
+
+  // Start timer on first interaction
+  if (!recipeGameStartTime) {
+    recipeGameStartTime = Date.now();
+  }
+
+  recipeDraggedElement = event.target;
+  event.dataTransfer.setData("text/plain", event.target.dataset.stepContent);
+  event.dataTransfer.setData("originalIndex", event.target.dataset.originalIndex);
+}
+
+function allowRecipeDrop(event) {
+  event.preventDefault();
+}
+
+function dropRecipeStep(event) {
+  event.preventDefault();
+
+  if (!recipeDraggedElement || recipeGameCompleted) return;
+
+  const orderedSteps = document.getElementById("ordered-steps");
+  const stepContent = event.dataTransfer.getData("text/plain");
+  const originalIndex = event.dataTransfer.getData("originalIndex");
+
+  // Create ordered step element
+  const stepElement = document.createElement("div");
+  stepElement.className = "ordered-step";
+  stepElement.innerHTML = `
+    <div class="ordered-step-number">${orderedSteps.children.length}</div>
+    <div class="ordered-step-content">${stepContent}</div>
+    <button class="remove-step-btn" onclick="removeRecipeStep(this)">×</button>
+  `;
+  stepElement.dataset.stepContent = stepContent;
+  stepElement.dataset.originalIndex = originalIndex;
+
+  orderedSteps.appendChild(stepElement);
+
+  // Hide the dragged element
+  recipeDraggedElement.style.display = "none";
+
+  // Hide placeholder if there are steps
+  const placeholder = document.querySelector(".drop-zone-placeholder");
+  if (placeholder && orderedSteps.children.length > 1) { // >1 because placeholder is also a child
+    placeholder.style.display = "none";
+  }
+
+  // Update step numbers
+  updateStepNumbers();
+
+  recipeDraggedElement = null;
+}
+
+// Remove step from ordered list
+function removeRecipeStep(button) {
+  const stepElement = button.parentElement;
+  const stepContent = stepElement.dataset.stepContent;
+
+  // Show the original step again
+  const originalStep = document.querySelector(`[data-step-content="${stepContent}"]`);
+  if (originalStep && originalStep !== stepElement) {
+    originalStep.style.display = "block";
+  }
+
+  // Remove the ordered step
+  stepElement.remove();
+
+  // Update step numbers
+  updateStepNumbers();
+
+  // Show placeholder if no steps
+  const orderedSteps = document.getElementById("ordered-steps");
+  const placeholder = document.querySelector(".drop-zone-placeholder");
+  if (placeholder && orderedSteps.children.length === 1) { // Only placeholder left
+    placeholder.style.display = "block";
+  }
+}
+
+// Update step numbers in ordered list
+function updateStepNumbers() {
+  const orderedSteps = document.querySelectorAll(".ordered-step");
+  orderedSteps.forEach((step, index) => {
+    const numberElement = step.querySelector(".ordered-step-number");
+    if (numberElement) {
+      numberElement.textContent = index + 1;
+    }
+  });
+}
+
+// Check if recipe order is correct
+function checkRecipeOrder() {
+  const orderedSteps = document.querySelectorAll(".ordered-step");
+  const pageData = textData[currentPage];
+  const totalSteps = pageData.recipe.steps.length;
+
+  if (orderedSteps.length === 0) {
+    showRecipeFeedback(false, "Debes arrastrar al menos un paso.");
+    return;
+  }
+
+  if (orderedSteps.length !== totalSteps) {
+    showRecipeFeedback(false, "Debes ordenar todos los pasos.");
+    return;
+  }
+
+  recipeAttempts++;
+  updateRecipeAttempts();
+
+  // Check if order is correct
+  const userOrder = Array.from(orderedSteps).map(step => 
+    parseInt(step.dataset.originalIndex)
+  );
+  
+  const isCorrect = userOrder.every((index, pos) => index === pos);
+
+  if (isCorrect) {
+    showRecipeFeedback(true, "¡Excelente! Has ordenado todos los pasos correctamente.");
+    setTimeout(() => completeRecipeGame(), 1500);
+  } else {
+    showRecipeFeedback(false, "El orden no es correcto. Revisa la secuencia lógica de los pasos.");
+  }
+}
+
+// Show feedback for recipe game
+function showRecipeFeedback(isCorrect, message) {
+  const resultDiv = document.getElementById("recipe-result");
+  const feedbackDiv = document.getElementById("recipe-feedback");
+
+  feedbackDiv.innerHTML = `
+    <div class="feedback-message ${isCorrect ? "correct" : "incorrect"}">
+      ${isCorrect ? "✅" : "❌"} ${message}
+    </div>
+  `;
+
+  resultDiv.style.display = "block";
+
+  // Disable buttons temporarily if correct
+  if (isCorrect) {
+    document.getElementById("check-recipe-btn").disabled = true;
+    document.getElementById("reset-recipe-btn").disabled = true;
+  }
+}
+
+// Complete recipe game
+function completeRecipeGame() {
+  recipeGameCompleted = true;
+  const nextButton = document.getElementById("next-button");
+  nextButton.disabled = false;
+
+  // Calculate statistics
+  const endTime = Date.now();
+  const totalTime = Math.round((endTime - recipeGameStartTime) / 1000);
+
+  // Update summary statistics
+  document.getElementById("recipe-total-time").textContent = `${totalTime} segundos`;
+  document.getElementById("recipe-total-attempts").textContent = recipeAttempts;
+
+  // Show completion summary
+  document.getElementById("recipe-game-summary").style.display = "block";
+  
+  // Hide other elements
+  document.querySelector(".recipe-game-area").style.display = "none";
+  document.querySelector(".recipe-controls").style.display = "none";
+  document.getElementById("recipe-result").style.display = "none";
+}
+
+// Reset recipe game
+function resetRecipeGame() {
+  // Clear ordered steps
+  const orderedSteps = document.getElementById("ordered-steps");
+  orderedSteps.innerHTML = '<div class="drop-zone-placeholder">Arrastra los pasos aquí en el orden correcto</div>';
+
+  // Show all available steps
+  const availableSteps = document.querySelectorAll(".recipe-step-card");
+  availableSteps.forEach(step => {
+    step.style.display = "block";
+  });
+
+  // Hide result
+  document.getElementById("recipe-result").style.display = "none";
+
+  // Re-enable buttons
+  document.getElementById("check-recipe-btn").disabled = false;
+  document.getElementById("reset-recipe-btn").disabled = false;
+
+  // Reset counters
+  updateRecipeAttempts();
+}
+
+// Update recipe attempts counter
+function updateRecipeAttempts() {
+  const counter = document.getElementById("recipe-attempts");
+  if (counter) {
+    counter.textContent = recipeAttempts;
+  }
+}
+
+// Add this to your resetTrivia function
+function resetRecipeGameState() {
+  recipeGameCompleted = false;
+  recipeGameStartTime = null;
+  recipeAttempts = 0;
+  recipeSteps = [];
+  recipeCorrectOrder = [];
+  recipeDraggedElement = null;
+}
+
 
 // Initialize sentence game
 function initializeSentenceGame(sentences) {
@@ -1180,7 +1523,7 @@ function resetTrivia() {
   pageCompleted = false;
   resetMatchPairs();
   resetSentenceGame();
-  // resetRecipeGame();
+  resetRecipeGameState();
 }
 
 function playAudio(audioData, page) {

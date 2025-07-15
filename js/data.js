@@ -142,7 +142,21 @@ const textData = {
       // },
     ],
   },
-  5: "",
+  5: {
+    recipe: {
+      title: "Cómo hacer café",
+      description: "Ordena los pasos para preparar una taza de café perfecta",
+      steps: [
+        "Paso 1",
+        "Paso 2",
+        "Paso 3",
+        // "Añadir el café molido al filtro",
+        // "Verter el agua caliente lentamente sobre el café",
+        // "Esperar a que termine de filtrar",
+        // "Servir en una taza y disfrutar",
+      ],
+    },
+  },
 };
 const audioData = {
   0: "",
