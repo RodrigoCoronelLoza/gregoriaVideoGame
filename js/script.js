@@ -20,6 +20,14 @@ let recipeSteps = [];
 let recipeCorrectOrder = [];
 let recipeDraggedElement = null;
 
+let phraseGameCompleted = false;
+let phraseGameStartTime = null;
+let phraseAttempts = 0;
+let currentPhraseIndex = 0;
+let completedPhrases = 0;
+let phraseGameData = null;
+let phraseDraggedElement = null;
+
 function renderPage() {
   const pageContent = document.getElementById("page-content");
   const headerElement = document.querySelector("header");
@@ -92,11 +100,15 @@ function createStructure(titles, layout, page, text) {
     content = ELayOutGenerator(titles, page, text);
   } else if (currentLayout === "Flayout") {
     content = FLayOutGenerator(titles, page, text);
+  } else if (currentLayout === "Glayout") {
+    content = GLayOutGenerator(titles, page, text);
+  } else if (currentLayout === "Glayout") {
+    content = HLayOutGenerator(titles, page, text);
   }
 
   return content;
 }
-// Plantilla B
+// Plantilla A
 function ALayOutGenerator(titles, page) {
   return ` 
   <div id="Alayout-container">
@@ -359,7 +371,7 @@ function ELayOutGenerator(titles, page, text) {
       </div>
     </div>`;
 }
-function FLayOutGenerator(titles, page,text) {
+function FLayOutGenerator(titles, page, text) {
   const nextButton = document.getElementById("next-button");
   const pageData = text[page];
   // nextButton.disabled = true;
@@ -458,6 +470,526 @@ function FLayOutGenerator(titles, page,text) {
       </div>
     </div>`;
 }
+function GLayOutGenerator(titles, page, text) {
+  const nextButton = document.getElementById("next-button");
+  const pageData = text[page];
+  // nextButton.disabled = true;
+
+  // Initialize phrase game state
+  if (pageData && pageData.phrases) {
+    initializePhraseGame(pageData.phrases);
+  }
+
+  return `
+    <div id="Glayout-container">
+      <h1 class="titles" id="Gtitle">${titles[page]}</h1>
+      <div class="phrase-game-container">
+        <div class="game-header">
+          <div class="game-stats">
+            <div class="stat-item">
+              <span class="stat-label">Frases completadas:</span>
+              <span id="phrase-counter">0/${
+                pageData?.phrases?.length || 0
+              }</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Intentos:</span>
+              <span id="phrase-attempts">0</span>
+            </div>
+          </div>
+          <div class="game-progress">
+            <div class="progress-bar">
+              <div id="phrase-progress-fill" class="progress-fill" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="phrase-instructions">
+          <h3>Instrucciones:</h3>
+          <p>Arrastra las palabras correctas para completar las frases. Cada palabra encaja en un lugar específico.</p>
+        </div>
+        
+        <div id="phrase-game-area" class="phrase-game-area">
+          ${generatePhraseGame(pageData)}
+        </div>
+        
+        <div class="phrase-controls">
+          <button id="check-phrase-btn" class="check-phrase-btn" onclick="checkPhrase()">
+            Verificar Frase
+          </button>
+          <button id="reset-phrase-btn" class="reset-phrase-btn" onclick="resetCurrentPhrase()">
+            Reiniciar Frase
+          </button>
+          <button id="next-phrase-btn" class="next-phrase-btn" onclick="nextPhrase()" style="display: none;">
+            Siguiente Frase
+          </button>
+        </div>
+        
+        <div id="phrase-result" class="phrase-result" style="display: none;">
+          <div id="phrase-feedback" class="phrase-feedback"></div>
+          <div id="phrase-explanation" class="phrase-explanation"></div>
+        </div>
+        
+        <div id="phrase-game-summary" class="phrase-game-summary" style="display: none;">
+          <h3>¡Excelente trabajo! 🎉</h3>
+          <div id="phrase-score-display" class="phrase-score-display">
+            <div class="completion-message">
+              <h4>¡Has completado todas las frases correctamente!</h4>
+              <p>Tu comprensión del tema es excelente.</p>
+            </div>
+          </div>
+          <div class="game-summary">
+            <div class="summary-item">
+              <strong>Tiempo total:</strong> <span id="phrase-total-time">--</span>
+            </div>
+            <div class="summary-item">
+              <strong>Intentos totales:</strong> <span id="phrase-total-attempts">--</span>
+            </div>
+            <div class="summary-item">
+              <strong>Frases completadas:</strong> <span id="phrases-completed">--</span>
+            </div>
+          </div>
+          <button class="continue-btn" onclick="nextPage()">Continuar</button>
+        </div>
+      </div>
+    </div>`;
+}
+function HLayOutGenerator(titles, page, text) {
+  return ` 
+  <div id="Hlayout-container">
+  </div>`;
+}
+
+// Initialize phrase game
+function initializePhraseGame(phrases) {
+  if (!phrases || phrases.length === 0) return;
+
+  phraseGameCompleted = false;
+  phraseGameStartTime = null;
+  phraseAttempts = 0;
+  currentPhraseIndex = 0;
+  completedPhrases = 0;
+  phraseGameData = phrases;
+  phraseDraggedElement = null;
+}
+
+// Generate the phrase game HTML
+function generatePhraseGame(pageData) {
+  if (!pageData || !pageData.phrases || pageData.phrases.length === 0) {
+    return '<div class="no-phrases">No hay frases disponibles para este juego.</div>';
+  }
+
+  const currentPhrase = pageData.phrases[currentPhraseIndex];
+
+  return `
+    <div class="current-phrase-container">
+      <div class="phrase-number">
+        Frase ${currentPhraseIndex + 1} de ${pageData.phrases.length}
+      </div>
+      
+      <div class="phrase-hint">
+        <strong>Tema:</strong> ${
+          currentPhrase.hint || "Completa la frase con las palabras correctas"
+        }
+      </div>
+      
+      <div class="phrase-display">
+        <div class="phrase-text" id="phrase-text">
+          ${generatePhraseWithBlanks(currentPhrase)}
+        </div>
+      </div>
+      
+      <div class="available-words-container">
+        <div class="available-words-title">Palabras disponibles:</div>
+        <div id="available-words" class="available-words">
+          ${generateAvailableWords(currentPhrase.words)}
+        </div>
+      </div>
+      
+      <div class="completed-phrase-preview" id="completed-phrase-preview" style="display: none;">
+        <div class="preview-title">Frase completada:</div>
+        <div id="phrase-preview-text" class="preview-text"></div>
+      </div>
+    </div>
+  `;
+}
+
+// Generate phrase with blank spaces (drop zones)
+function generatePhraseWithBlanks(phraseData) {
+  let phraseHTML = phraseData.template;
+
+  // Replace blanks with drop zones
+  phraseData.blanks.forEach((blank, index) => {
+    const placeholder = `{${index}}`;
+    const dropZone = `
+      <span class="word-drop-zone" 
+            data-blank-index="${index}"
+            data-expected-word="${blank.word}"
+            ondrop="dropWord(event)" 
+            ondragover="allowWordDrop(event)">
+        <span class="drop-placeholder">[${blank.hint || "palabra"}]</span>
+      </span>
+    `;
+    phraseHTML = phraseHTML.replace(placeholder, dropZone);
+  });
+
+  return phraseHTML;
+}
+
+// Generate available words (shuffled)
+function generateAvailableWords(words) {
+  if (!words || words.length === 0) return "";
+
+  // Create array with all words including distractors
+  const allWords = [...words];
+
+  // Shuffle the words
+  const shuffledWords = shuffleArray(allWords);
+
+  return shuffledWords
+    .map(
+      (word) => `
+    <div class="available-word" 
+         draggable="true"
+         ondragstart="phraseWordDragStart(event)"
+         data-word="${word}">
+      ${word}
+    </div>
+  `
+    )
+    .join("");
+}
+
+// Drag and drop functions for phrase game
+function phraseWordDragStart(event) {
+  if (phraseGameCompleted) return;
+
+  // Start timer on first interaction
+  if (!phraseGameStartTime) {
+    phraseGameStartTime = Date.now();
+  }
+
+  phraseDraggedElement = event.target;
+  event.dataTransfer.setData("text/plain", event.target.dataset.word);
+}
+
+function allowWordDrop(event) {
+  event.preventDefault();
+}
+
+function dropWord(event) {
+  event.preventDefault();
+
+  if (!phraseDraggedElement || phraseGameCompleted) return;
+
+  const dropZone = event.target.closest(".word-drop-zone");
+  if (!dropZone) return;
+
+  const droppedWord = event.dataTransfer.getData("text/plain");
+  const blankIndex = dropZone.dataset.blankIndex;
+
+  // Check if drop zone is already filled
+  if (dropZone.querySelector(".dropped-word")) {
+    // Return the existing word to available words
+    const existingWord = dropZone.querySelector(".dropped-word");
+    returnWordToAvailable(existingWord.dataset.word);
+    existingWord.remove();
+  }
+
+  // Create dropped word element
+  const droppedWordElement = document.createElement("span");
+  droppedWordElement.className = "dropped-word";
+  droppedWordElement.innerHTML = `
+    ${droppedWord}
+    <button class="remove-word-btn" onclick="removeDroppedWord(this)">×</button>
+  `;
+  droppedWordElement.dataset.word = droppedWord;
+  droppedWordElement.dataset.blankIndex = blankIndex;
+
+  // Hide placeholder and add dropped word
+  const placeholder = dropZone.querySelector(".drop-placeholder");
+  if (placeholder) {
+    placeholder.style.display = "none";
+  }
+
+  dropZone.appendChild(droppedWordElement);
+
+  // Hide the dragged element
+  phraseDraggedElement.style.display = "none";
+
+  // Update preview
+  updatePhrasePreview();
+
+  phraseDraggedElement = null;
+}
+
+// Remove dropped word
+function removeDroppedWord(button) {
+  const droppedWord = button.parentElement;
+  const dropZone = droppedWord.parentElement;
+  const word = droppedWord.dataset.word;
+
+  // Show placeholder again
+  const placeholder = dropZone.querySelector(".drop-placeholder");
+  if (placeholder) {
+    placeholder.style.display = "inline";
+  }
+
+  // Return word to available words
+  returnWordToAvailable(word);
+
+  // Remove dropped word
+  droppedWord.remove();
+
+  // Update preview
+  updatePhrasePreview();
+}
+
+// Return word to available words
+function returnWordToAvailable(word) {
+  const availableWords = document.getElementById("available-words");
+  const wordElements = availableWords.querySelectorAll(".available-word");
+
+  wordElements.forEach((wordElement) => {
+    if (wordElement.dataset.word === word) {
+      wordElement.style.display = "inline-block";
+    }
+  });
+}
+
+// Update phrase preview
+function updatePhrasePreview() {
+  const dropZones = document.querySelectorAll(".word-drop-zone");
+  const preview = document.getElementById("completed-phrase-preview");
+  const previewText = document.getElementById("phrase-preview-text");
+
+  let hasWords = false;
+  let phraseText = phraseGameData[currentPhraseIndex].template;
+
+  dropZones.forEach((zone, index) => {
+    const droppedWord = zone.querySelector(".dropped-word");
+    const placeholder = `{${index}}`;
+
+    if (droppedWord) {
+      phraseText = phraseText.replace(
+        placeholder,
+        `<strong>${droppedWord.dataset.word}</strong>`
+      );
+      hasWords = true;
+    } else {
+      phraseText = phraseText.replace(placeholder, "_____");
+    }
+  });
+
+  if (hasWords) {
+    previewText.innerHTML = phraseText;
+    preview.style.display = "block";
+  } else {
+    preview.style.display = "none";
+  }
+}
+
+// Check if phrase is correct
+function checkPhrase() {
+  const dropZones = document.querySelectorAll(".word-drop-zone");
+  const currentPhrase = phraseGameData[currentPhraseIndex];
+
+  if (dropZones.length === 0) {
+    showPhraseFeedback(false, "No hay espacios para completar en esta frase.");
+    return;
+  }
+
+  // Check if all blanks are filled
+  const filledBlanks = Array.from(dropZones).filter((zone) =>
+    zone.querySelector(".dropped-word")
+  );
+
+  if (filledBlanks.length !== currentPhrase.blanks.length) {
+    showPhraseFeedback(false, "Debes completar todas las palabras faltantes.");
+    return;
+  }
+
+  phraseAttempts++;
+  updatePhraseAttempts();
+
+  // Check if all words are correct
+  let allCorrect = true;
+  let incorrectBlanks = [];
+
+  dropZones.forEach((zone, index) => {
+    const droppedWord = zone.querySelector(".dropped-word");
+    const expectedWord = zone.dataset.expectedWord;
+
+    if (droppedWord && droppedWord.dataset.word !== expectedWord) {
+      allCorrect = false;
+      incorrectBlanks.push(index);
+      zone.classList.add("incorrect-drop");
+    } else if (droppedWord) {
+      zone.classList.add("correct-drop");
+    }
+  });
+
+  if (allCorrect) {
+    completedPhrases++;
+    showPhraseFeedback(
+      true,
+      "¡Perfecto! Has completado la frase correctamente."
+    );
+
+    // Update counters
+    updatePhraseCounter();
+    updatePhraseProgress();
+
+    // Show next phrase button or complete game
+    if (currentPhraseIndex < phraseGameData.length - 1) {
+      document.getElementById("next-phrase-btn").style.display = "inline-block";
+    } else {
+      setTimeout(() => completePhraseGame(), 1500);
+    }
+  } else {
+    const explanation =
+      currentPhrase.explanation ||
+      "Revisa las palabras incorrectas e intenta de nuevo.";
+    showPhraseFeedback(
+      false,
+      `Algunas palabras son incorrectas. ${explanation}`
+    );
+  }
+}
+
+// Show feedback for phrase attempt
+function showPhraseFeedback(isCorrect, message) {
+  const resultDiv = document.getElementById("phrase-result");
+  const feedbackDiv = document.getElementById("phrase-feedback");
+
+  feedbackDiv.innerHTML = `
+    <div class="feedback-message ${isCorrect ? "correct" : "incorrect"}">
+      ${isCorrect ? "✅" : "❌"} ${message}
+    </div>
+  `;
+
+  resultDiv.style.display = "block";
+
+  // Disable buttons temporarily if correct
+  if (isCorrect) {
+    document.getElementById("check-phrase-btn").disabled = true;
+    document.getElementById("reset-phrase-btn").disabled = true;
+  }
+}
+
+// Reset current phrase
+function resetCurrentPhrase() {
+  // Clear all drop zones
+  const dropZones = document.querySelectorAll(".word-drop-zone");
+  dropZones.forEach((zone) => {
+    const droppedWord = zone.querySelector(".dropped-word");
+    if (droppedWord) {
+      returnWordToAvailable(droppedWord.dataset.word);
+      droppedWord.remove();
+    }
+
+    // Show placeholder
+    const placeholder = zone.querySelector(".drop-placeholder");
+    if (placeholder) {
+      placeholder.style.display = "inline";
+    }
+
+    // Remove styling
+    zone.classList.remove("correct-drop", "incorrect-drop");
+  });
+
+  // Hide preview and result
+  document.getElementById("completed-phrase-preview").style.display = "none";
+  document.getElementById("phrase-result").style.display = "none";
+
+  // Re-enable buttons
+  document.getElementById("check-phrase-btn").disabled = false;
+  document.getElementById("reset-phrase-btn").disabled = false;
+}
+
+// Move to next phrase
+function nextPhrase() {
+  if (currentPhraseIndex < phraseGameData.length - 1) {
+    currentPhraseIndex++;
+
+    // Regenerate game area
+    const gameArea = document.getElementById("phrase-game-area");
+    gameArea.innerHTML = generatePhraseGame({ phrases: phraseGameData });
+
+    // Hide result and next button
+    document.getElementById("phrase-result").style.display = "none";
+    document.getElementById("next-phrase-btn").style.display = "none";
+
+    // Re-enable buttons
+    document.getElementById("check-phrase-btn").disabled = false;
+    document.getElementById("reset-phrase-btn").disabled = false;
+  }
+}
+
+// Complete the phrase game
+function completePhraseGame() {
+  phraseGameCompleted = true;
+  const nextButton = document.getElementById("next-button");
+  nextButton.disabled = false;
+
+  // Calculate statistics
+  const endTime = Date.now();
+  const totalTime = Math.round((endTime - phraseGameStartTime) / 1000);
+
+  // Show completion summary
+  const summaryDiv = document.getElementById("phrase-game-summary");
+
+  // Update summary statistics
+  document.getElementById(
+    "phrase-total-time"
+  ).textContent = `${totalTime} segundos`;
+  document.getElementById("phrase-total-attempts").textContent = phraseAttempts;
+  document.getElementById(
+    "phrases-completed"
+  ).textContent = `${completedPhrases}/${phraseGameData.length}`;
+
+  // Hide other elements and show summary
+  document.getElementById("phrase-game-area").style.display = "none";
+  document.querySelector(".phrase-controls").style.display = "none";
+  document.getElementById("phrase-result").style.display = "none";
+  summaryDiv.style.display = "block";
+}
+
+// Update phrase counter
+function updatePhraseCounter() {
+  const counter = document.getElementById("phrase-counter");
+  if (counter) {
+    counter.textContent = `${completedPhrases}/${phraseGameData.length}`;
+  }
+}
+
+// Update phrase attempts counter
+function updatePhraseAttempts() {
+  const counter = document.getElementById("phrase-attempts");
+  if (counter) {
+    counter.textContent = phraseAttempts;
+  }
+}
+
+// Update progress bar
+function updatePhraseProgress() {
+  const progressFill = document.getElementById("phrase-progress-fill");
+  if (progressFill) {
+    const percentage = (completedPhrases / phraseGameData.length) * 100;
+    progressFill.style.width = `${percentage}%`;
+  }
+}
+
+// Reset phrase game state
+function resetPhraseGame() {
+  phraseGameCompleted = false;
+  phraseGameStartTime = null;
+  phraseAttempts = 0;
+  currentPhraseIndex = 0;
+  completedPhrases = 0;
+  phraseGameData = null;
+  phraseDraggedElement = null;
+}
 
 // Initialize recipe game
 function initializeRecipeGame(recipe) {
@@ -477,16 +1009,18 @@ function generateAvailableSteps(steps) {
   // Create shuffled array with original indices
   const shuffledSteps = steps.map((step, index) => ({
     content: step,
-    originalIndex: index
+    originalIndex: index,
   }));
-  
+
   // Shuffle the array
   for (let i = shuffledSteps.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [shuffledSteps[i], shuffledSteps[j]] = [shuffledSteps[j], shuffledSteps[i]];
   }
 
-  return shuffledSteps.map(step => `
+  return shuffledSteps
+    .map(
+      (step) => `
     <div class="recipe-step-card" 
          draggable="true"
          ondragstart="recipeStepDragStart(event)"
@@ -495,7 +1029,9 @@ function generateAvailableSteps(steps) {
       <div class="step-number">Paso</div>
       <div class="step-content">${step.content}</div>
     </div>
-  `).join("");
+  `
+    )
+    .join("");
 }
 
 // Drag and drop functions for recipe game
@@ -509,7 +1045,10 @@ function recipeStepDragStart(event) {
 
   recipeDraggedElement = event.target;
   event.dataTransfer.setData("text/plain", event.target.dataset.stepContent);
-  event.dataTransfer.setData("originalIndex", event.target.dataset.originalIndex);
+  event.dataTransfer.setData(
+    "originalIndex",
+    event.target.dataset.originalIndex
+  );
 }
 
 function allowRecipeDrop(event) {
@@ -543,7 +1082,8 @@ function dropRecipeStep(event) {
 
   // Hide placeholder if there are steps
   const placeholder = document.querySelector(".drop-zone-placeholder");
-  if (placeholder && orderedSteps.children.length > 1) { // >1 because placeholder is also a child
+  if (placeholder && orderedSteps.children.length > 1) {
+    // >1 because placeholder is also a child
     placeholder.style.display = "none";
   }
 
@@ -559,7 +1099,9 @@ function removeRecipeStep(button) {
   const stepContent = stepElement.dataset.stepContent;
 
   // Show the original step again
-  const originalStep = document.querySelector(`[data-step-content="${stepContent}"]`);
+  const originalStep = document.querySelector(
+    `[data-step-content="${stepContent}"]`
+  );
   if (originalStep && originalStep !== stepElement) {
     originalStep.style.display = "block";
   }
@@ -573,7 +1115,8 @@ function removeRecipeStep(button) {
   // Show placeholder if no steps
   const orderedSteps = document.getElementById("ordered-steps");
   const placeholder = document.querySelector(".drop-zone-placeholder");
-  if (placeholder && orderedSteps.children.length === 1) { // Only placeholder left
+  if (placeholder && orderedSteps.children.length === 1) {
+    // Only placeholder left
     placeholder.style.display = "block";
   }
 }
@@ -609,17 +1152,23 @@ function checkRecipeOrder() {
   updateRecipeAttempts();
 
   // Check if order is correct
-  const userOrder = Array.from(orderedSteps).map(step => 
+  const userOrder = Array.from(orderedSteps).map((step) =>
     parseInt(step.dataset.originalIndex)
   );
-  
+
   const isCorrect = userOrder.every((index, pos) => index === pos);
 
   if (isCorrect) {
-    showRecipeFeedback(true, "¡Excelente! Has ordenado todos los pasos correctamente.");
+    showRecipeFeedback(
+      true,
+      "¡Excelente! Has ordenado todos los pasos correctamente."
+    );
     setTimeout(() => completeRecipeGame(), 1500);
   } else {
-    showRecipeFeedback(false, "El orden no es correcto. Revisa la secuencia lógica de los pasos.");
+    showRecipeFeedback(
+      false,
+      "El orden no es correcto. Revisa la secuencia lógica de los pasos."
+    );
   }
 }
 
@@ -654,12 +1203,14 @@ function completeRecipeGame() {
   const totalTime = Math.round((endTime - recipeGameStartTime) / 1000);
 
   // Update summary statistics
-  document.getElementById("recipe-total-time").textContent = `${totalTime} segundos`;
+  document.getElementById(
+    "recipe-total-time"
+  ).textContent = `${totalTime} segundos`;
   document.getElementById("recipe-total-attempts").textContent = recipeAttempts;
 
   // Show completion summary
   document.getElementById("recipe-game-summary").style.display = "block";
-  
+
   // Hide other elements
   document.querySelector(".recipe-game-area").style.display = "none";
   document.querySelector(".recipe-controls").style.display = "none";
@@ -670,11 +1221,12 @@ function completeRecipeGame() {
 function resetRecipeGame() {
   // Clear ordered steps
   const orderedSteps = document.getElementById("ordered-steps");
-  orderedSteps.innerHTML = '<div class="drop-zone-placeholder">Arrastra los pasos aquí en el orden correcto</div>';
+  orderedSteps.innerHTML =
+    '<div class="drop-zone-placeholder">Arrastra los pasos aquí en el orden correcto</div>';
 
   // Show all available steps
   const availableSteps = document.querySelectorAll(".recipe-step-card");
-  availableSteps.forEach(step => {
+  availableSteps.forEach((step) => {
     step.style.display = "block";
   });
 
@@ -706,7 +1258,6 @@ function resetRecipeGameState() {
   recipeCorrectOrder = [];
   recipeDraggedElement = null;
 }
-
 
 // Initialize sentence game
 function initializeSentenceGame(sentences) {
@@ -1524,6 +2075,7 @@ function resetTrivia() {
   resetMatchPairs();
   resetSentenceGame();
   resetRecipeGameState();
+  resetPhraseGame();
 }
 
 function playAudio(audioData, page) {

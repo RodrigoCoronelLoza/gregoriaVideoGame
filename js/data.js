@@ -5,6 +5,7 @@ const titlesData = {
   3: "TitleD",
   4: "TitleE",
   5: "TitleF",
+  6: "TitleG",
 };
 const layoutData = {
   0: "Alayout",
@@ -13,6 +14,7 @@ const layoutData = {
   3: "Dlayout",
   4: "Elayout",
   5: "Flayout",
+  6: "Glayout",
 };
 
 const textData = {
@@ -156,6 +158,61 @@ const textData = {
         // "Servir en una taza y disfrutar",
       ],
     },
+  },
+  6: {
+    phrases: [
+      {
+        template: "La {0} es fundamental para el {1} de cualquier {2}.",
+        blanks: [
+          {
+            word: "educación",
+            hint: "proceso de aprendizaje",
+          },
+          {
+            word: "desarrollo",
+            hint: "crecimiento",
+          },
+          {
+            word: "sociedad",
+            hint: "comunidad",
+          },
+        ],
+        words: [
+          "educación",
+          "desarrollo",
+          "sociedad",
+          "tecnología", // distractor
+          "economía", // distractor
+          "política", // distractor
+        ],
+        hint: "Importancia de la educación",
+        explanation:
+          "La educación es la base del progreso social y permite el desarrollo integral de las personas.",
+      },
+      {
+        template: "La {0} es fundamental para el {1} de cualquier sociedad.",
+        blanks: [
+          {
+            word: "educación",
+            hint: "proceso de aprendizaje",
+          },
+          {
+            word: "desarrollo",
+            hint: "crecimiento",
+          },
+        ],
+        words: [
+          "educación",
+          "desarrollo",
+          "tecnología", // distractor
+          "economía", // distractor
+          "política", // distractor
+        ],
+        hint: "Importancia de la educación",
+        explanation:
+          "La educación es la base del progreso social y permite el desarrollo integral de las personas.",
+      },
+    ],
   },
 };
 const audioData = {
