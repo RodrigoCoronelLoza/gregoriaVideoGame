@@ -4,6 +4,22 @@ let currentQuestionIndex = 0;
 let userAnswers = [];
 let pageCompleted = false;
 
+let currentSentenceIndex = 0;
+let sentenceFragments = [];
+let correctOrder = [];
+let draggedElement = null;
+let sentenceGameCompleted = false;
+let sentenceGameStartTime = null;
+let sentenceAttempts = 0;
+let completedSentences = 0;
+
+// Recipe ordering game variables
+let recipeGameCompleted = false;
+let recipeGameStartTime = null;
+let recipeAttempts = 0;
+let recipeCurrentIndex = 0;
+let recipeDraggedElement = null;
+
 function renderPage() {
   const pageContent = document.getElementById("page-content");
   const headerElement = document.querySelector("header");
@@ -70,7 +86,14 @@ function createStructure(titles, layout, page, text) {
     content = BLayOutGenerator(titles, page, text);
   } else if (currentLayout === "Clayout") {
     content = CLayOutGenerator(titles, page, text);
+  } else if (currentLayout === "Dlayout") {
+    content = DLayOutGenerator(titles, page, text);
+  } else if (currentLayout === "Elayout") {
+    content = ELayOutGenerator(titles, page, text);
+  } else if (currentLayout === "Flayout") {
+    content = FLayOutGenerator(titles, page, text);
   }
+
   return content;
 }
 // Plantilla B
@@ -202,6 +225,699 @@ function CLayOutGenerator(titles, page, text) {
       </div>
     </div>`;
 }
+function DLayOutGenerator(titles, page, text) {
+  const nextButton = document.getElementById("next-button");
+  const pageData = text[page];
+  nextButton.disabled = true;
+  return `
+    <div id="Dlayout-container">
+      <h1 class="titles" id="Dtitle">${titles[page]}</h1>
+      <div class="match-pairs-container">
+        <div class="game-header">
+          <div class="game-stats">
+            <div class="stat-item">
+              <span class="stat-label">Intentos:</span>
+              <span id="attempts-counter">0</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Parejas encontradas:</span>
+              <span id="pairs-counter">0/${Math.floor(
+                pageData.pairs.length
+              )}</span>
+            </div>
+          </div>
+          <div class="game-progress">
+            <div class="progress-bar">
+              <div id="match-progress-fill" class="progress-fill" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="match-instructions">
+          <h3>Instrucciones:</h3>
+          <p>Haz clic en las cartas para encontrar las parejas correctas. Cada carta tiene su pareja correspondiente.</p>
+        </div>
+        
+        <div id="cards-grid" class="cards-grid">
+          ${generateMatchCards(pageData.pairs)}
+        </div>
+        
+        <div id="match-result" class="match-result" style="display: none;">
+          <div id="game-completion-message" class="completion-message"></div>
+          <div class="game-summary">
+            <div class="summary-item">
+              <strong>Tiempo total:</strong> <span id="total-time">--</span>
+            </div>
+            <div class="summary-item">
+              <strong>Intentos totales:</strong> <span id="total-attempts">--</span>
+            </div>
+            <div class="summary-item">
+              <strong>Precisión:</strong> <span id="accuracy">--</span>
+            </div>
+          </div>
+          <button class="continue-btn" onclick="nextPage()">Continuar al Siguiente Tema</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+function ELayOutGenerator(titles, page, text) {
+  const nextButton = document.getElementById("next-button");
+  const pageData = text[page];
+  nextButton.disabled = true;
+
+  // Initialize game state
+  if (pageData && pageData.sentences) {
+    initializeSentenceGame(pageData.sentences);
+  }
+  return `
+    <div id="Elayout-container">
+      <h1 class="titles" id="Etitle">${titles[page]}</h1>
+      <div class="sentence-game-container">
+        <div class="game-header">
+          <div class="game-stats">
+            <div class="stat-item">
+              <span class="stat-label">Oraciones completadas:</span>
+              <span id="sentence-counter">0/${
+                pageData?.sentences?.length || 0
+              }</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Intentos:</span>
+              <span id="sentence-attempts">0</span>
+            </div>
+          </div>
+          <div class="game-progress">
+            <div class="progress-bar">
+              <div id="sentence-progress-fill" class="progress-fill" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="sentence-instructions">
+          <h3>Instrucciones:</h3>
+          <p>Arrastra las partes de la oración para formar una oración completa con sentido lógico.</p>
+        </div>
+        
+        <div id="sentence-game-area" class="sentence-game-area">
+          ${generateSentenceGame(pageData)}
+        </div>
+        
+        <div class="sentence-controls">
+          <button id="check-sentence-btn" class="check-sentence-btn" onclick="checkSentence()">
+            Verificar Oración
+          </button>
+          <button id="reset-sentence-btn" class="reset-sentence-btn" onclick="resetCurrentSentence()">
+            Reiniciar Oración
+          </button>
+          <button id="next-sentence-btn" class="next-sentence-btn" onclick="nextSentence()" style="display: none;">
+            Siguiente Oración
+          </button>
+        </div>
+        
+        <div id="sentence-result" class="sentence-result" style="display: none;">
+          <div id="sentence-feedback" class="sentence-feedback"></div>
+          <div id="sentence-explanation" class="sentence-explanation"></div>
+        </div>
+        
+        <div id="sentence-game-summary" class="sentence-game-summary" style="display: none;">
+          <h3>¡Juego Completado! 🎉</h3>
+          <div id="sentence-score-display" class="sentence-score-display"></div>
+          <div class="game-summary">
+            <div class="summary-item">
+              <strong>Tiempo total:</strong> <span id="sentence-total-time">--</span>
+            </div>
+            <div class="summary-item">
+              <strong>Intentos totales:</strong> <span id="sentence-total-attempts">--</span>
+            </div>
+            <div class="summary-item">
+              <strong>Oraciones completadas:</strong> <span id="sentences-completed">--</span>
+            </div>
+          </div>
+          <button class="continue-btn" onclick="nextPage()">Continuar al Siguiente Tema</button>
+        </div>
+      </div>
+    </div>`;
+}
+function FLayOutGenerator(titles, page) {
+  return ` 
+  <div id="Flayout-container">
+  </div>`;
+}
+
+// Initialize sentence game
+function initializeSentenceGame(sentences) {
+  if (!sentences || sentences.length === 0) return;
+
+  currentSentenceIndex = 0;
+  sentenceGameCompleted = false;
+  sentenceGameStartTime = null;
+  sentenceAttempts = 0;
+  completedSentences = 0;
+}
+
+// Generate the sentence game HTML
+function generateSentenceGame(pageData) {
+  if (!pageData || !pageData.sentences || pageData.sentences.length === 0) {
+    return '<div class="no-sentences">No hay oraciones disponibles para este juego.</div>';
+  }
+
+  const currentSentence = pageData.sentences[currentSentenceIndex];
+
+  return `
+    <div class="current-sentence-container">
+      <div class="sentence-number">
+        Oración ${currentSentenceIndex + 1} de ${pageData.sentences.length}
+      </div>
+      
+      <div class="sentence-hint">
+        <strong>Tema:</strong> ${
+          currentSentence.hint ||
+          "Organiza las partes para formar una oración coherente"
+        }
+      </div>
+      
+      <div id="drop-zone" class="drop-zone" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <div class="drop-zone-placeholder">Arrastra aquí las partes de la oración en el orden correcto</div>
+        <div id="sentence-slots" class="sentence-slots"></div>
+      </div>
+      
+      <div class="fragments-container">
+        <div class="fragments-title">Partes de la oración:</div>
+        <div id="sentence-fragments" class="sentence-fragments">
+          ${generateFragments(currentSentence.fragments)}
+        </div>
+      </div>
+      
+      <div class="completed-sentence-preview" id="completed-sentence-preview" style="display: none;">
+        <div class="preview-title">Oración formada:</div>
+        <div id="preview-text" class="preview-text"></div>
+      </div>
+    </div>
+  `;
+}
+
+// Generate fragment cards
+function generateFragments(fragments) {
+  if (!fragments || fragments.length === 0) return "";
+
+  // Shuffle fragments for display
+  const shuffledFragments = shuffleArray([...fragments]);
+
+  return shuffledFragments
+    .map(
+      (fragment, index) => `
+    <div class="sentence-fragment" 
+         draggable="true" 
+         ondragstart="dragStart(event)"
+         data-fragment="${fragment}"
+         data-original-index="${fragments.indexOf(fragment)}">
+      ${fragment}
+    </div>
+  `
+    )
+    .join("");
+}
+
+// Drag and drop functions
+function dragStart(event) {
+  if (sentenceGameCompleted) return;
+
+  // Start timer on first interaction
+  if (!sentenceGameStartTime) {
+    sentenceGameStartTime = Date.now();
+  }
+
+  draggedElement = event.target;
+  event.dataTransfer.setData("text/plain", event.target.dataset.fragment);
+}
+
+function allowDrop(event) {
+  event.preventDefault();
+}
+
+function drop(event) {
+  event.preventDefault();
+
+  if (!draggedElement || sentenceGameCompleted) return;
+
+  const dropZone = document.getElementById("sentence-slots");
+  const droppedFragment = event.dataTransfer.getData("text/plain");
+
+  // Create slot for dropped fragment
+  const fragmentSlot = document.createElement("div");
+  fragmentSlot.className = "fragment-slot";
+  fragmentSlot.innerHTML = `
+    <span class="slot-content">${droppedFragment}</span>
+    <button class="remove-fragment-btn" onclick="removeFragment(this)">×</button>
+  `;
+  fragmentSlot.dataset.fragment = droppedFragment;
+  fragmentSlot.dataset.originalIndex = draggedElement.dataset.originalIndex;
+
+  dropZone.appendChild(fragmentSlot);
+
+  // Hide the dragged element
+  draggedElement.style.display = "none";
+
+  // Update preview
+  updateSentencePreview();
+
+  // Hide placeholder if there are fragments
+  const placeholder = document.querySelector(".drop-zone-placeholder");
+  if (placeholder && dropZone.children.length > 0) {
+    placeholder.style.display = "none";
+  }
+
+  draggedElement = null;
+}
+
+// Remove fragment from drop zone
+function removeFragment(button) {
+  const slot = button.parentElement;
+  const fragment = slot.dataset.fragment;
+
+  // Show the original fragment again
+  const originalFragment = document.querySelector(
+    `[data-fragment="${fragment}"]`
+  );
+  if (originalFragment) {
+    originalFragment.style.display = "block";
+  }
+
+  // Remove the slot
+  slot.remove();
+
+  // Update preview
+  updateSentencePreview();
+
+  // Show placeholder if no fragments
+  const dropZone = document.getElementById("sentence-slots");
+  const placeholder = document.querySelector(".drop-zone-placeholder");
+  if (placeholder && dropZone.children.length === 0) {
+    placeholder.style.display = "block";
+  }
+}
+
+// Update sentence preview
+function updateSentencePreview() {
+  const slots = document.querySelectorAll(".fragment-slot");
+  const preview = document.getElementById("completed-sentence-preview");
+  const previewText = document.getElementById("preview-text");
+
+  if (slots.length > 0) {
+    const sentence = Array.from(slots)
+      .map((slot) => slot.dataset.fragment)
+      .join(" ");
+    previewText.textContent = sentence;
+    preview.style.display = "block";
+  } else {
+    preview.style.display = "none";
+  }
+}
+
+// Check if sentence is correct
+function checkSentence() {
+  const slots = document.querySelectorAll(".fragment-slot");
+  const pageData = textData[currentPage];
+  const currentSentence = pageData.sentences[currentSentenceIndex];
+
+  if (slots.length === 0) {
+    showSentenceFeedback(
+      false,
+      "Debes arrastrar al menos una parte de la oración."
+    );
+    return;
+  }
+
+  if (slots.length !== currentSentence.fragments.length) {
+    showSentenceFeedback(false, "Debes usar todas las partes de la oración.");
+    return;
+  }
+
+  sentenceAttempts++;
+  updateSentenceAttempts();
+
+  // Check if order is correct
+  const userOrder = Array.from(slots).map((slot) =>
+    parseInt(slot.dataset.originalIndex)
+  );
+  const correctOrder = currentSentence.fragments.map((_, index) => index);
+
+  const isCorrect = userOrder.every(
+    (index, pos) => index === correctOrder[pos]
+  );
+
+  if (isCorrect) {
+    completedSentences++;
+    showSentenceFeedback(
+      true,
+      "¡Correcto! Has formado la oración correctamente."
+    );
+
+    // Update counters
+    updateSentenceCounter();
+    updateSentenceProgress();
+
+    // Show next sentence button or complete game
+    const totalSentences = pageData.sentences.length;
+    if (currentSentenceIndex < totalSentences - 1) {
+      document.getElementById("next-sentence-btn").style.display =
+        "inline-block";
+    } else {
+      setTimeout(() => completeSentenceGame(), 1500);
+    }
+  } else {
+    showSentenceFeedback(
+      false,
+      `Incorrecto. ${
+        currentSentence.explanation || "Intenta reorganizar las partes."
+      }`
+    );
+  }
+}
+
+// Show feedback for sentence attempt
+function showSentenceFeedback(isCorrect, message) {
+  const resultDiv = document.getElementById("sentence-result");
+  const feedbackDiv = document.getElementById("sentence-feedback");
+
+  feedbackDiv.innerHTML = `
+    <div class="feedback-message ${isCorrect ? "correct" : "incorrect"}">
+      ${isCorrect ? "✅" : "❌"} ${message}
+    </div>
+  `;
+
+  resultDiv.style.display = "block";
+
+  // Disable check button temporarily if correct
+  if (isCorrect) {
+    document.getElementById("check-sentence-btn").disabled = true;
+    document.getElementById("reset-sentence-btn").disabled = true;
+  }
+}
+
+// Reset current sentence
+function resetCurrentSentence() {
+  // Clear drop zone
+  const dropZone = document.getElementById("sentence-slots");
+  dropZone.innerHTML = "";
+
+  // Show placeholder
+  const placeholder = document.querySelector(".drop-zone-placeholder");
+  if (placeholder) {
+    placeholder.style.display = "block";
+  }
+
+  // Show all fragments
+  const fragments = document.querySelectorAll(".sentence-fragment");
+  fragments.forEach((fragment) => {
+    fragment.style.display = "block";
+  });
+
+  // Hide preview and result
+  document.getElementById("completed-sentence-preview").style.display = "none";
+  document.getElementById("sentence-result").style.display = "none";
+
+  // Re-enable buttons
+  document.getElementById("check-sentence-btn").disabled = false;
+  document.getElementById("reset-sentence-btn").disabled = false;
+}
+
+// Move to next sentence
+function nextSentence() {
+  const pageData = textData[currentPage];
+
+  if (currentSentenceIndex < pageData.sentences.length - 1) {
+    currentSentenceIndex++;
+
+    // Regenerate game area
+    const gameArea = document.getElementById("sentence-game-area");
+    gameArea.innerHTML = generateSentenceGame(pageData);
+
+    // Hide result and next button
+    document.getElementById("sentence-result").style.display = "none";
+    document.getElementById("next-sentence-btn").style.display = "none";
+
+    // Re-enable buttons
+    document.getElementById("check-sentence-btn").disabled = false;
+    document.getElementById("reset-sentence-btn").disabled = false;
+  }
+}
+
+// Complete the sentence game
+function completeSentenceGame() {
+  sentenceGameCompleted = true;
+  const nextButton = document.getElementById("next-button");
+  nextButton.disabled = false;
+
+  // Calculate statistics
+  const endTime = Date.now();
+  const totalTime = Math.round((endTime - sentenceGameStartTime) / 1000);
+  const totalSentences = textData[currentPage].sentences.length;
+
+  // Show completion summary
+  const summaryDiv = document.getElementById("sentence-game-summary");
+  const scoreDisplay = document.getElementById("sentence-score-display");
+
+  scoreDisplay.innerHTML = `
+    <div class="completion-message">
+      <h4>¡Excelente trabajo! 🎉</h4>
+      <p>Has completado todas las oraciones correctamente.</p>
+    </div>
+  `;
+
+  // Update summary statistics
+  document.getElementById(
+    "sentence-total-time"
+  ).textContent = `${totalTime} segundos`;
+  document.getElementById("sentence-total-attempts").textContent =
+    sentenceAttempts;
+  document.getElementById(
+    "sentences-completed"
+  ).textContent = `${completedSentences}/${totalSentences}`;
+
+  // Hide other elements and show summary
+  document.getElementById("sentence-game-area").style.display = "none";
+  document.querySelector(".sentence-controls").style.display = "none";
+  document.getElementById("sentence-result").style.display = "none";
+  summaryDiv.style.display = "block";
+}
+
+// Update sentence counter
+function updateSentenceCounter() {
+  const counter = document.getElementById("sentence-counter");
+  if (counter) {
+    const totalSentences = textData[currentPage].sentences.length;
+    counter.textContent = `${completedSentences}/${totalSentences}`;
+  }
+}
+
+// Update sentence attempts counter
+function updateSentenceAttempts() {
+  const counter = document.getElementById("sentence-attempts");
+  if (counter) {
+    counter.textContent = sentenceAttempts;
+  }
+}
+
+// Update progress bar
+function updateSentenceProgress() {
+  const progressFill = document.getElementById("sentence-progress-fill");
+  if (progressFill) {
+    const totalSentences = textData[currentPage].sentences.length;
+    const percentage = (completedSentences / totalSentences) * 100;
+    progressFill.style.width = `${percentage}%`;
+  }
+}
+
+// Reset sentence game (add this to your resetTrivia function)
+function resetSentenceGame() {
+  currentSentenceIndex = 0;
+  sentenceFragments = [];
+  correctOrder = [];
+  draggedElement = null;
+  sentenceGameCompleted = false;
+  sentenceGameStartTime = null;
+  sentenceAttempts = 0;
+  completedSentences = 0;
+}
+
+// Generate cards for the matching game
+function generateMatchCards(pairs) {
+  // Create array with all cards (each pair becomes 2 cards)
+  let cards = [];
+  pairs.forEach((pair, pairIndex) => {
+    cards.push({
+      id: `card-${pairIndex}-0`,
+      content: pair.left,
+      pairIndex: pairIndex,
+      side: "left",
+    });
+    cards.push({
+      id: `card-${pairIndex}-1`,
+      content: pair.right,
+      pairIndex: pairIndex,
+      side: "right",
+    });
+  });
+
+  // Shuffle cards
+  cards = shuffleArray(cards);
+
+  // Generate HTML for cards
+  return cards
+    .map(
+      (card) => `
+    <div class="match-card" 
+         data-pair-index="${card.pairIndex}" 
+         data-side="${card.side}"
+         data-card-id="${card.id}"
+         onclick="selectCard(this)">
+      <div class="card-content">
+        ${card.content}
+      </div>
+    </div>
+  `
+    )
+    .join("");
+}
+
+// Shuffle array utility function
+function shuffleArray(array) {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
+// Handle card selection
+function selectCard(cardElement) {
+  if (matchPairsCompleted) return;
+  if (cardElement.classList.contains("matched")) return;
+  if (cardElement.classList.contains("selected")) return;
+  if (selectedCards.length >= 2) return;
+
+  // Start timer on first card selection
+  if (!gameStartTime) {
+    gameStartTime = Date.now();
+  }
+
+  // Add card to selection
+  cardElement.classList.add("selected");
+  selectedCards.push(cardElement);
+
+  // Check if we have two cards selected
+  if (selectedCards.length === 2) {
+    setTimeout(() => checkMatch(), 500); // Small delay for better UX
+  }
+}
+
+// Check if selected cards match
+function checkMatch() {
+  const [card1, card2] = selectedCards;
+  const pair1 = parseInt(card1.dataset.pairIndex);
+  const pair2 = parseInt(card2.dataset.pairIndex);
+
+  attempts++;
+  updateAttemptsCounter();
+
+  if (pair1 === pair2) {
+    // Cards match!
+    card1.classList.add("matched");
+    card2.classList.add("matched");
+    card1.classList.remove("selected");
+    card2.classList.remove("selected");
+
+    matchedPairs.push(pair1);
+    updatePairsCounter();
+    updateProgress();
+
+    // Check if game is complete
+    const totalPairs = textData[currentPage].pairs.length;
+    if (matchedPairs.length === totalPairs) {
+      setTimeout(() => completeMatchGame(), 1000);
+    }
+  } else {
+    // Cards don't match
+    card1.classList.add("wrong-match");
+    card2.classList.add("wrong-match");
+
+    setTimeout(() => {
+      card1.classList.remove("selected", "wrong-match");
+      card2.classList.remove("selected", "wrong-match");
+    }, 1000);
+  }
+
+  selectedCards = [];
+}
+
+// Update attempts counter
+function updateAttemptsCounter() {
+  const counter = document.getElementById("attempts-counter");
+  if (counter) {
+    counter.textContent = attempts;
+  }
+}
+
+// Update pairs counter
+function updatePairsCounter() {
+  const counter = document.getElementById("pairs-counter");
+  if (counter) {
+    const totalPairs = textData[currentPage].pairs.length;
+    counter.textContent = `${matchedPairs.length}/${totalPairs}`;
+  }
+}
+
+function updateProgress() {
+  const progressFill = document.getElementById("match-progress-fill");
+  if (progressFill) {
+    const totalPairs = textData[currentPage].pairs.length;
+    const percentage = (matchedPairs.length / totalPairs) * 100;
+    progressFill.style.width = `${percentage}%`;
+  }
+}
+
+// Complete the matching game
+function completeMatchGame() {
+  matchPairsCompleted = true;
+  const nextButton = document.getElementById("next-button");
+  nextButton.disabled = false;
+
+  // Calculate game statistics
+  const endTime = Date.now();
+  const totalTime = Math.round((endTime - gameStartTime) / 1000);
+  const totalPairs = textData[currentPage].pairs.length;
+  const accuracy = Math.round((totalPairs / attempts) * 100);
+
+  // Show completion message
+  const resultDiv = document.getElementById("match-result");
+  const messageDiv = document.getElementById("game-completion-message");
+
+  messageDiv.innerHTML = `
+    <h3>¡Felicidades! 🎉</h3>
+    <p>Has completado el juego de parejas correctamente.</p>
+  `;
+
+  // Update summary statistics
+  document.getElementById("total-time").textContent = `${totalTime} segundos`;
+  document.getElementById("total-attempts").textContent = attempts;
+  document.getElementById("accuracy").textContent = `${accuracy}%`;
+
+  // Show results
+  resultDiv.style.display = "block";
+}
+
+// Reset match pairs game (add this to your resetTrivia function or call it separately)
+function resetMatchPairs() {
+  matchPairsCompleted = false;
+  selectedCards = [];
+  matchedPairs = [];
+  attempts = 0;
+  gameStartTime = null;
+}
+
 // Handle multiple choice question answers
 function answerMultipleChoice(selectedOption) {
   const pageTrivia = textData[currentPage];
@@ -359,11 +1075,15 @@ function refreshCurrentQuestion() {
   const questionText = document.querySelector(".question-text");
 
   if (questionCounter) {
-    questionCounter.textContent = `Pregunta ${currentQuestionIndex + 1} de ${totalQuestions}`;
+    questionCounter.textContent = `Pregunta ${
+      currentQuestionIndex + 1
+    } de ${totalQuestions}`;
   }
-  
+
   if (progressFill) {
-    progressFill.style.width = `${((currentQuestionIndex + 1) / totalQuestions) * 100}%`;
+    progressFill.style.width = `${
+      ((currentQuestionIndex + 1) / totalQuestions) * 100
+    }%`;
   }
 
   if (questionText) {
@@ -372,15 +1092,21 @@ function refreshCurrentQuestion() {
 
   // For multiple choice questions (B layout), regenerate the entire button container
   if (currentLayout === "Blayout" && currentQuestion.options) {
-    const buttonContainer = document.querySelector(".trivia-buttons.multiple-choice");
+    const buttonContainer = document.querySelector(
+      ".trivia-buttons.multiple-choice"
+    );
     if (buttonContainer) {
-      buttonContainer.innerHTML = currentQuestion.options.map((option, index) => `
+      buttonContainer.innerHTML = currentQuestion.options
+        .map(
+          (option, index) => `
         <button class="trivia-btn option-btn" 
                 onclick="answerMultipleChoice(${index})" 
                 data-option="${index}">
           ${option}
         </button>
-      `).join('');
+      `
+        )
+        .join("");
     }
   } else {
     // For true/false questions (C layout), just reset the existing buttons
@@ -452,6 +1178,9 @@ function resetTrivia() {
   currentQuestionIndex = 0;
   userAnswers = [];
   pageCompleted = false;
+  resetMatchPairs();
+  resetSentenceGame();
+  // resetRecipeGame();
 }
 
 function playAudio(audioData, page) {
