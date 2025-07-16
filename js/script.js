@@ -699,7 +699,7 @@ function generateMemoryCardsWithImages(images) {
             <div class="card-image">
               ${
                 isImageFile
-                  ? `<img src="${image}" alt="Memory card" style="width: 80%; height: 80%; object-fit: cover; border-radius: 5px;">`
+                  ? `<img src="images/${image}" alt="Memory card" style="width: 80%; height: 80%; object-fit: cover; border-radius: 5px;">`
                   : image
               }
             </div>

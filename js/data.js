@@ -230,10 +230,10 @@ const textData = {
   // },
   7: {
     memoryImages: [
-      "images/apple.jpg",
-      "images/banana.jpg",
-      "images/grapes.jpg",
-      "images/strawberry.jpg",
+      "apple.jpg",
+      "banana.jpg",
+      "grapes.jpg",
+      "strawberry.jpg",
     ],
   },
 };
