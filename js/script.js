@@ -28,6 +28,15 @@ let completedPhrases = 0;
 let phraseGameData = null;
 let phraseDraggedElement = null;
 
+// Memory game variables
+let memoryGameCompleted = false;
+let memoryGameStartTime = null;
+let memoryAttempts = 0;
+let memoryFlippedCards = [];
+let memoryMatchedPairs = 0;
+let memoryCards = [];
+let memoryGameInProgress = false;
+
 function renderPage() {
   const pageContent = document.getElementById("page-content");
   const headerElement = document.querySelector("header");
@@ -102,7 +111,7 @@ function createStructure(titles, layout, page, text) {
     content = FLayOutGenerator(titles, page, text);
   } else if (currentLayout === "Glayout") {
     content = GLayOutGenerator(titles, page, text);
-  } else if (currentLayout === "Glayout") {
+  } else if (currentLayout === "Hlayout") {
     content = HLayOutGenerator(titles, page, text);
   }
 
@@ -555,9 +564,353 @@ function GLayOutGenerator(titles, page, text) {
     </div>`;
 }
 function HLayOutGenerator(titles, page, text) {
-  return ` 
-  <div id="Hlayout-container">
-  </div>`;
+  const nextButton = document.getElementById("next-button");
+  const pageData = text[page];
+  // nextButton.disabled = true;
+  // Initialize memory game state
+  if (pageData && pageData.memoryImages) {
+    initializeMemoryGame(pageData.memoryImages);
+  }
+  return `
+    <div id="Hlayout-container">
+      <h1 class="titles" id="Htitle">${titles[page]}</h1>
+      <div class="memory-game-container">
+        <div class="game-header">
+          <div class="game-stats">
+            <div class="stat-item">
+              <span class="stat-label">Intentos:</span>
+              <span id="memory-attempts">0</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Parejas encontradas:</span>
+              <span id="memory-pairs">0/${
+                (pageData?.memoryImages?.length || 8) / 2
+              }</span>
+            </div>
+          </div>
+          <div class="game-progress">
+            <div class="progress-bar">
+              <div id="memory-progress-fill" class="progress-fill" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="memory-instructions">
+          <h3>Instrucciones:</h3>
+          <p>Haz clic en las cartas para voltearlas y encuentra las parejas. Si te equivocas, todas las cartas se volverán a ocultar.</p>
+        </div>
+        
+        <div id="memory-cards-grid" class="memory-cards-grid">
+          ${generateMemoryCardsWithImages(pageData?.memoryImages || [])}
+        </div>
+        
+        <div class="memory-controls">
+          <button id="restart-memory-btn" class="restart-memory-btn" onclick="restartMemoryGame()">
+            Reiniciar Juego
+          </button>
+        </div>
+        
+        <div id="memory-result" class="memory-result" style="display: none;">
+          <div id="memory-feedback" class="memory-feedback"></div>
+        </div>
+        
+        <div id="memory-game-summary" class="memory-game-summary" style="display: none;">
+          <h3>¡Felicidades! 🎉</h3>
+          <div id="memory-score-display" class="memory-score-display">
+            <div class="completion-message">
+              <h4>¡Has encontrado todas las parejas!</h4>
+              <p>Tu memoria y concentración son excelentes.</p>
+            </div>
+          </div>
+          <div class="game-summary">
+            <div class="summary-item">
+              <strong>Tiempo total:</strong> <span id="memory-total-time">--</span>
+            </div>
+            <div class="summary-item">
+              <strong>Intentos:</strong> <span id="memory-total-attempts">--</span>
+            </div>
+            <div class="summary-item">
+              <strong>Parejas encontradas:</strong> <span id="memory-pairs-found">--</span>
+            </div>
+          </div>
+          <button class="continue-btn" onclick="nextPage()">Continuar</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+// Initialize memory game
+function initializeMemoryGame(images) {
+  memoryGameCompleted = false;
+  memoryGameStartTime = null;
+  memoryAttempts = 0;
+  memoryFlippedCards = [];
+  memoryMatchedPairs = 0;
+  memoryGameInProgress = false;
+
+  // Create pairs of cards (duplicate each image)
+  memoryCards = [];
+  for (let i = 0; i < images.length; i++) {
+    memoryCards.push({
+      id: i * 2,
+      image: images[i],
+      matched: false,
+      flipped: false,
+    });
+    memoryCards.push({
+      id: i * 2 + 1,
+      image: images[i],
+      matched: false,
+      flipped: false,
+    });
+  }
+
+  // Shuffle the cards
+  memoryCards = shuffleArray(memoryCards);
+}
+
+function generateMemoryCardsWithImages(images) {
+  if (!images || images.length === 0) {
+    return generateMemoryCards([]); // fallback to emoji version
+  }
+
+  let cardsHTML = "";
+
+  // Create pairs and shuffle
+  const cardPairs = [];
+  for (let i = 0; i < images.length; i++) {
+    cardPairs.push(images[i], images[i]);
+  }
+  const shuffledCards = shuffleArray(cardPairs);
+
+  shuffledCards.forEach((image, index) => {
+    const isImageFile =
+      image.includes(".jpg") ||
+      image.includes(".png") ||
+      image.includes(".gif");
+
+    cardsHTML += `
+      <div class="memory-card" data-card-id="${index}" data-image="${image}" onclick="flipMemoryCard(${index})">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="card-back-design">?</div>
+          </div>
+          <div class="card-back">
+            <div class="card-image">
+              ${
+                isImageFile
+                  ? `<img src="${image}" alt="Memory card" style="width: 80%; height: 80%; object-fit: cover; border-radius: 5px;">`
+                  : image
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+
+  return cardsHTML;
+}
+// Generate memory cards HTML
+function generateMemoryCards(images) {
+  if (!images || images.length === 0) {
+    // Default images if none provided
+    images = ["🍎", "🍌", "🍇", "🍓", "🍊", "🥝", "🍑", "🍍"];
+  }
+
+  let cardsHTML = "";
+
+  // Create pairs and shuffle
+  const cardPairs = [];
+  for (let i = 0; i < images.length; i++) {
+    cardPairs.push(images[i], images[i]);
+  }
+  const shuffledCards = shuffleArray(cardPairs);
+
+  shuffledCards.forEach((image, index) => {
+    cardsHTML += `
+      <div class="memory-card" data-card-id="${index}" data-image="${image}" onclick="flipMemoryCard(${index})">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="card-back-design">?</div>
+          </div>
+          <div class="card-back">
+            <div class="card-image">${image}</div>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+
+  return cardsHTML;
+}
+
+// Shuffle array utility function
+function shuffleArray(array) {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
+// Flip memory card
+function flipMemoryCard(cardIndex) {
+  if (memoryGameInProgress) return; // Prevent clicks during processing
+
+  const card = document.querySelector(`[data-card-id="${cardIndex}"]`);
+  if (
+    !card ||
+    card.classList.contains("flipped") ||
+    card.classList.contains("matched")
+  ) {
+    return;
+  }
+
+  // Start timer on first click
+  if (!memoryGameStartTime) {
+    memoryGameStartTime = Date.now();
+  }
+
+  // Flip the card
+  card.classList.add("flipped");
+  memoryFlippedCards.push({
+    element: card,
+    index: cardIndex,
+    image: card.dataset.image,
+  });
+
+  // Check if we have two flipped cards
+  if (memoryFlippedCards.length === 2) {
+    memoryGameInProgress = true;
+    memoryAttempts++;
+    updateMemoryStats();
+
+    setTimeout(() => {
+      checkMemoryMatch();
+    }, 1000);
+  }
+}
+
+// Check if flipped cards match
+function checkMemoryMatch() {
+  const [card1, card2] = memoryFlippedCards;
+
+  if (card1.image === card2.image) {
+    // Match found!
+    card1.element.classList.add("matched");
+    card2.element.classList.add("matched");
+    memoryMatchedPairs++;
+
+    // Check if game is complete
+    if (
+      memoryMatchedPairs ===
+      document.querySelectorAll(".memory-card").length / 2
+    ) {
+      setTimeout(() => {
+        completeMemoryGame();
+      }, 500);
+    }
+  } else {
+    // No match - flip all cards back
+    flipAllCardsBack();
+  }
+
+  // Reset flipped cards array
+  memoryFlippedCards = [];
+  memoryGameInProgress = false;
+}
+
+// Flip all cards back (punishment for wrong match)
+function flipAllCardsBack() {
+  const allCards = document.querySelectorAll(".memory-card");
+  allCards.forEach((card) => {
+    if (!card.classList.contains("matched")) {
+      card.classList.remove("flipped");
+    }
+  });
+}
+
+// Update memory game statistics
+function updateMemoryStats() {
+  document.getElementById("memory-attempts").textContent = memoryAttempts;
+  document.getElementById(
+    "memory-pairs"
+  ).textContent = `${memoryMatchedPairs}/${
+    document.querySelectorAll(".memory-card").length / 2
+  }`;
+
+  const totalPairs = document.querySelectorAll(".memory-card").length / 2;
+  const progressPercentage = (memoryMatchedPairs / totalPairs) * 100;
+  document.getElementById(
+    "memory-progress-fill"
+  ).style.width = `${progressPercentage}%`;
+}
+
+// Complete memory game
+function completeMemoryGame() {
+  memoryGameCompleted = true;
+  const endTime = Date.now();
+  const totalTime = Math.round((endTime - memoryGameStartTime) / 1000);
+
+  // Show completion summary
+  document.getElementById("memory-game-summary").style.display = "block";
+  document.getElementById(
+    "memory-total-time"
+  ).textContent = `${totalTime} segundos`;
+  document.getElementById("memory-total-attempts").textContent = memoryAttempts;
+  document.getElementById("memory-pairs-found").textContent =
+    memoryMatchedPairs;
+
+  // Enable next button
+  const nextButton = document.getElementById("next-button");
+  if (nextButton) {
+    nextButton.disabled = false;
+  }
+}
+
+// Restart memory game
+function restartMemoryGame() {
+  memoryGameCompleted = false;
+  memoryGameStartTime = null;
+  memoryAttempts = 0;
+  memoryFlippedCards = [];
+  memoryMatchedPairs = 0;
+  memoryGameInProgress = false;
+
+  // Reset all cards
+  const allCards = document.querySelectorAll(".memory-card");
+  allCards.forEach((card) => {
+    card.classList.remove("flipped", "matched");
+  });
+
+  // Shuffle cards positions
+  const cardsGrid = document.getElementById("memory-cards-grid");
+  const cards = Array.from(cardsGrid.children);
+  const shuffledCards = shuffleArray(cards);
+
+  // Clear grid and re-add shuffled cards
+  cardsGrid.innerHTML = "";
+  shuffledCards.forEach((card) => {
+    cardsGrid.appendChild(card);
+  });
+
+  // Reset stats
+  updateMemoryStats();
+
+  // Hide summary
+  document.getElementById("memory-game-summary").style.display = "none";
+}
+
+// Reset memory game (called in resetTrivia)
+function resetMemoryGame() {
+  memoryGameCompleted = false;
+  memoryGameStartTime = null;
+  memoryAttempts = 0;
+  memoryFlippedCards = [];
+  memoryMatchedPairs = 0;
+  memoryGameInProgress = false;
 }
 
 // Initialize phrase game
@@ -2076,6 +2429,7 @@ function resetTrivia() {
   resetSentenceGame();
   resetRecipeGameState();
   resetPhraseGame();
+  resetMemoryGame();
 }
 
 function playAudio(audioData, page) {

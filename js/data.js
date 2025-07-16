@@ -6,6 +6,7 @@ const titlesData = {
   4: "TitleE",
   5: "TitleF",
   6: "TitleG",
+  7: "TitleH",
 };
 const layoutData = {
   0: "Alayout",
@@ -15,6 +16,7 @@ const layoutData = {
   4: "Elayout",
   5: "Flayout",
   6: "Glayout",
+  7: "Hlayout",
 };
 
 const textData = {
@@ -212,6 +214,26 @@ const textData = {
         explanation:
           "La educación es la base del progreso social y permite el desarrollo integral de las personas.",
       },
+    ],
+  },
+  // 7: {
+  //   memoryImages: [
+  //     "🍎", // Apple
+  //     "🍌", // Banana
+  //     "🍇", // Grapes
+  //     "🍓", // Strawberry
+  //     // "🍊", // Orange
+  //     // "🥝", // Kiwi
+  //     // "🍑", // Cherry
+  //     // "🍍", // Pineapple
+  //   ],
+  // },
+  7: {
+    memoryImages: [
+      "../images/apple.jpg",
+      "../images/banana.jpg",
+      "../images/grapes.jpg",
+      "../images/strawberry.jpg",
     ],
   },
 };
