@@ -1,9 +1,10 @@
 body {
   font-size: 16px;
   color: #fff;
-  background-color: #61122f;
+  background-color: #222;
   font-family: "Oxygen", sans-serif;
-  height: 100vh;
+  /* height: 100vh; */
+  /* height: auto; */
 }
 
 /** HEADER **/
@@ -213,7 +214,8 @@ header {
 #container-main {
   /* padding-top: 0; */
   /* border: 1px solid blue; */
-  height: 88vh;
+  /* height: 88vh; */
+  height: auto;
   padding-left: 0;
   padding-right: 0;
   width: 100%;
@@ -264,10 +266,13 @@ header {
   font-size: 1em;
 }
 .Blayout {
-  height: 88vh;
+  width: 100%;
+  min-height: 88vh;
+  height: auto;
   /* min-height: 85vh; */
+  overflow: hidden;
   background-image: url("../images/preguntas.png");
-  background-size: 100% 100%; /* or 'contain' depending on your needs */
+  background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -296,9 +301,10 @@ header {
 }
 
 .Clayout {
-  /* min-height: 85vh; */
-  border: 1px solid purple;
-  height: 88vh;
+  width: 100%;
+  min-height: 88vh;
+  height: auto;
+  overflow: hidden;
   background-image: url("../images/Inventarios.png");
   background-size: 100% 100%; /* or 'contain' depending on your needs */
   background-repeat: no-repeat;
@@ -596,8 +602,11 @@ header {
 
 .Dlayout {
   /* min-height: 85vh; */
-  border: 1px solid purple;
-  height: 88vh;
+  /* border: 1px solid purple; */
+  width: 100%;
+  min-height: 88vh;
+  height: auto;
+  overflow: hidden;
   background-image: url("../images/Inventarios.png");
   background-size: 100% 100%; /* or 'contain' depending on your needs */
   background-repeat: no-repeat;
@@ -749,8 +758,10 @@ header {
 
 .Elayout {
   /* min-height: 85vh; */
-  border: 1px solid purple;
-  height: 88vh;
+  width: 100%;
+  min-height: 88vh;
+  height: auto;
+  overflow: hidden;
   background-image: url("../images/Inventarios.png");
   background-size: 100% 100%; /* or 'contain' depending on your needs */
   background-repeat: no-repeat;
@@ -1113,8 +1124,10 @@ header {
 }
 .Flayout {
   /* min-height: 85vh; */
-  border: 1px solid purple;
-  height: 88vh;
+  width: 100%;
+  min-height: 88vh;
+  height: auto;
+  overflow: hidden;
   background-image: url("../images/Inventarios.png");
   background-size: 100% 100%; /* or 'contain' depending on your needs */
   background-repeat: no-repeat;
@@ -1417,9 +1430,10 @@ header {
 }
 
 .Glayout {
-  /* min-height: 85vh; */
-  border: 1px solid purple;
-  height: 88vh;
+  width: 100%;
+  min-height: 88vh;
+  height: auto;
+  overflow: hidden;
   background-image: url("../images/Inventarios.png");
   background-size: 100% 100%; /* or 'contain' depending on your needs */
   background-repeat: no-repeat;
@@ -1775,9 +1789,10 @@ header {
 }
 
 .Hlayout {
-  /* min-height: 85vh; */
-  border: 1px solid purple;
-  height: 88vh;
+  width: 100%;
+  min-height: 88vh;
+  height: auto;
+  overflow: hidden;
   background-image: url("../images/Inventarios.png");
   background-size: 100% 100%; /* or 'contain' depending on your needs */
   background-repeat: no-repeat;
@@ -2126,18 +2141,59 @@ header {
 
   #adv-buttons {
     /* width: 50%; */
-    height: 8vh;
+    height: 5vh;
   }
 
   /* End Header */
 
   .Blayout {
-    height: 100vh;
+    min-height: 100vh;
+    height: auto;
     /* min-height: 85vh; */
   }
   .Clayout {
     /* min-height: 85vh; */
-    height: 100vh;
+    min-height: 100vh;
+    height: auto;
+  }
+  .trivia-container {
+    max-width: 95%;
+  }
+
+  .Dlayout {
+    /* min-height: 85vh; */
+    min-height: 100vh;
+    height: auto;
+  }
+  .Elayout {
+    /* min-height: 85vh; */
+    min-height: 100vh;
+    height: auto;
+  }
+  .sentence-game-container {
+    max-width: 95%;
+  }
+  .Flayout {
+    /* min-height: 85vh; */
+    min-height: 100vh;
+    height: auto;
+  }
+  .Glayout {
+    /* min-height: 85vh; */
+    min-height: 100vh;
+    height: auto;
+  }
+
+  .phrase-game-container {
+    max-width: 95%;
+  }
+  .Hlayout {
+    /* min-height: 85vh; */
+    min-height: 100vh;
+    height: auto;
+  }
+  .memory-game-container {
+    max-width: 95%;
   }
 
   /* Footer */
@@ -2174,7 +2230,7 @@ header {
     text-align: center;
   }
   #container-main {
-    height: 100vh;
+    min-height: 100vh;
     padding-left: 0;
     padding-right: 0;
   }
