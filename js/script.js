@@ -42,14 +42,17 @@ function renderPage() {
   const headerElement = document.querySelector("header");
   const footerElement = document.querySelector("footer");
   const advButton = document.getElementById("adv-buttons");
+  const inventory = document.getElementById("inventory-container");
   if (currentPage === 0) {
     headerElement.style.display = "none";
     advButton.style.display = "none";
     footerElement.style.display = "none";
+    inventory.style.visibility = "hidden";
   } else {
     advButton.style.display = "block";
     headerElement.style.display = "block";
     footerElement.style.display = "block";
+    inventory.style.visibility = "visible";
   }
   pageContent.className = layoutData[currentPage];
   pageContent.innerHTML = createStructure(
