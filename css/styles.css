@@ -533,6 +533,20 @@ header {
   color: var(--color1);
   font-weight: bold;
 }
+#historia-button2 {
+  background-color: var(--color12);
+  height: 100%;
+  font-size: 3em;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0.3em;
+  border-bottom-right-radius: 0.3em;
+  border-bottom-left-radius: 0;
+  writing-mode: sideways-lr;
+  border: none;
+  /* box-shadow: 0.2em 0.1em 0.1em var(--color2); */
+  color: var(--color1);
+  font-weight: bold;
+}
 
 #middle-part {
   flex: 1;
@@ -548,6 +562,20 @@ header {
   writing-mode: sideways-rl;
   border: none;
   box-shadow: -0.2em 0.1em 0.1em var(--color2);
+  color: var(--color12);
+  font-weight: bold;
+}
+#desafio-button2{
+  background-color: var(--color11);
+  height: 100%;
+  font-size: 3em;
+  border-top-left-radius: 0.3em;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0.3em;
+  writing-mode: sideways-rl;
+  border: none;
+  /* box-shadow: -0.2em 0.1em 0.1em var(--color2); */
   color: var(--color12);
   font-weight: bold;
 }

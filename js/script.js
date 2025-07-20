@@ -143,7 +143,7 @@ function XLayOutGenerator(titles, page, text, history) {
       <div id="middle-part">
       </div>
       <div id="button-desafio-container">
-        <button class="key-buttons" id="desafio-button">DESAFIO</button>
+        <button class="key-buttons" id="desafio-button">DESAFÍO</button>
       </div>
     </div>
     <div id="sidebar-left">
@@ -158,7 +158,7 @@ function XLayOutGenerator(titles, page, text, history) {
         </div>
         <div id="tab-historia">
           <div id="button-historia-container">
-            <button class="key-buttons" id="historia-button"  onclick="toggleSidebarLeft()">HISTORIA</button>
+            <button class="key-buttons" id="historia-button2"  onclick="toggleSidebarLeft()">HISTORIA</button>
           </div>
         </div>
       </div>
@@ -198,7 +198,7 @@ function BLayOutGenerator(titles, page, text, history) {
         </div>
         <div id="tab-historia">
           <div id="button-historia-container">
-            <button class="key-buttons" id="historia-button"  onclick="toggleSidebarLeft()">HISTORIA</button>
+            <button class="key-buttons" id="historia-button2"  onclick="toggleSidebarLeft()">HISTORIA</button>
           </div>
         </div>
       </div>
@@ -208,7 +208,7 @@ function BLayOutGenerator(titles, page, text, history) {
       <div id="sidebar-right-corpus">
         <div id="tab-desafio">
           <div id="button-desafio-container">
-            <button class="key-buttons" id="desafio-button" onclick="toggleSidebarRight()" >DESAFÍO</button>
+            <button class="key-buttons" id="desafio-button2" onclick="toggleSidebarRight()" >DESAFÍO</button>
           </div>
         </div>
         <div id="game-container">
@@ -284,7 +284,7 @@ function CLayOutGenerator(titles, page, text, history) {
         <div id="middle-part">
         </div>
         <div id="button-desafio-container">
-          <button class="key-buttons" id="desafio-button" onclick="toggleSidebarRight()" >DESAFIO</button>
+          <button class="key-buttons" id="desafio-button" onclick="toggleSidebarRight()" >DESAFÍO</button>
         </div>
       </div>
       <div id="sidebar-left">
@@ -299,7 +299,7 @@ function CLayOutGenerator(titles, page, text, history) {
           </div>
           <div id="tab-historia">
             <div id="button-historia-container">
-              <button class="key-buttons" id="historia-button"  onclick="toggleSidebarLeft()">HISTORIA</button>
+              <button class="key-buttons" id="historia-button2"  onclick="toggleSidebarLeft()">HISTORIA</button>
             </div>
           </div>
         </div>
@@ -308,7 +308,7 @@ function CLayOutGenerator(titles, page, text, history) {
         <div id="sidebar-right-corpus">
           <div id="tab-desafio">
             <div id="button-desafio-container">
-              <button class="key-buttons" id="desafio-button" onclick="toggleSidebarRight()" >DESAFIO</button>
+              <button class="key-buttons" id="desafio-button2" onclick="toggleSidebarRight()" >DESAFÍO</button>
             </div>
           </div>
         <div id="game-container">
@@ -378,7 +378,7 @@ function DLayOutGenerator(titles, page, text, history) {
         <div id="middle-part">
         </div>
         <div id="button-desafio-container">
-          <button class="key-buttons" id="desafio-button" onclick="toggleSidebarRight()" >DESAFIO</button>
+          <button class="key-buttons" id="desafio-button" onclick="toggleSidebarRight()" >DESAFÍO</button>
         </div>
       </div>
       <div id="sidebar-left">
@@ -393,7 +393,7 @@ function DLayOutGenerator(titles, page, text, history) {
           </div>
           <div id="tab-historia">
             <div id="button-historia-container">
-              <button class="key-buttons" id="historia-button"  onclick="toggleSidebarLeft()">HISTORIA</button>
+              <button class="key-buttons" id="historia-button2"  onclick="toggleSidebarLeft()">HISTORIA</button>
             </div>
           </div>
         </div>
@@ -403,7 +403,7 @@ function DLayOutGenerator(titles, page, text, history) {
         <div id="sidebar-right-corpus">
           <div id="tab-desafio">
             <div id="button-desafio-container">
-              <button class="key-buttons" id="desafio-button" onclick="toggleSidebarRight()" >DESAFIO</button>
+              <button class="key-buttons" id="desafio-button2" onclick="toggleSidebarRight()" >DESAFÍO</button>
             </div>
           </div>
           <div id="game-container">
@@ -486,7 +486,7 @@ function ELayOutGenerator(titles, page, text, history) {
         <div id="middle-part">
         </div>
         <div id="button-desafio-container">
-          <button class="key-buttons" id="desafio-button" onclick="toggleSidebarRight()" >DESAFIO</button>
+          <button class="key-buttons" id="desafio-button" onclick="toggleSidebarRight()" >DESAFÍO</button>
         </div>
       </div>
       <div id="sidebar-left">
@@ -501,7 +501,7 @@ function ELayOutGenerator(titles, page, text, history) {
           </div>
           <div id="tab-historia">
             <div id="button-historia-container">
-              <button class="key-buttons" id="historia-button"  onclick="toggleSidebarLeft()">HISTORIA</button>
+              <button class="key-buttons" id="historia-button2"  onclick="toggleSidebarLeft()">HISTORIA</button>
             </div>
           </div>
         </div>
@@ -511,7 +511,7 @@ function ELayOutGenerator(titles, page, text, history) {
         <div id="sidebar-right-corpus">
           <div id="tab-desafio">
             <div id="button-desafio-container">
-              <button class="key-buttons" id="desafio-button" onclick="toggleSidebarRight()" >DESAFIO</button>
+              <button class="key-buttons" id="desafio-button2" onclick="toggleSidebarRight()" >DESAFÍO</button>
             </div>
           </div>
           <div id="game-container">
@@ -612,7 +612,7 @@ function FLayOutGenerator(titles, page, text, history) {
         <div id="middle-part">
         </div>
         <div id="button-desafio-container">
-          <button class="key-buttons" id="desafio-button" onclick="toggleSidebarRight()" >DESAFIO</button>
+          <button class="key-buttons" id="desafio-button" onclick="toggleSidebarRight()" >DESAFÍO</button>
         </div>
       </div>
       <div id="sidebar-left">
@@ -627,7 +627,7 @@ function FLayOutGenerator(titles, page, text, history) {
           </div>
           <div id="tab-historia">
             <div id="button-historia-container">
-              <button class="key-buttons" id="historia-button"  onclick="toggleSidebarLeft()">HISTORIA</button>
+              <button class="key-buttons" id="historia-button2"  onclick="toggleSidebarLeft()">HISTORIA</button>
             </div>
           </div>
         </div>
@@ -637,7 +637,7 @@ function FLayOutGenerator(titles, page, text, history) {
         <div id="sidebar-right-corpus">
           <div id="tab-desafio">
             <div id="button-desafio-container">
-              <button class="key-buttons" id="desafio-button" onclick="toggleSidebarRight()" >DESAFIO</button>
+              <button class="key-buttons" id="desafio-button2" onclick="toggleSidebarRight()" >DESAFÍO</button>
             </div>
           </div>
           <div id="game-container">
@@ -756,7 +756,7 @@ function GLayOutGenerator(titles, page, text, history) {
         <div id="middle-part">
         </div>
         <div id="button-desafio-container">
-          <button class="key-buttons" id="desafio-button" onclick="toggleSidebarRight()" >DESAFIO</button>
+          <button class="key-buttons" id="desafio-button" onclick="toggleSidebarRight()" >DESAFÍO</button>
         </div>
       </div>
       <div id="sidebar-left">
@@ -771,7 +771,7 @@ function GLayOutGenerator(titles, page, text, history) {
           </div>
           <div id="tab-historia">
             <div id="button-historia-container">
-              <button class="key-buttons" id="historia-button"  onclick="toggleSidebarLeft()">HISTORIA</button>
+              <button class="key-buttons" id="historia-button2"  onclick="toggleSidebarLeft()">HISTORIA</button>
             </div>
           </div>
         </div>
@@ -781,7 +781,7 @@ function GLayOutGenerator(titles, page, text, history) {
         <div id="sidebar-right-corpus">
           <div id="tab-desafio">
             <div id="button-desafio-container">
-              <button class="key-buttons" id="desafio-button" onclick="toggleSidebarRight()" >DESAFIO</button>
+              <button class="key-buttons" id="desafio-button2" onclick="toggleSidebarRight()" >DESAFÍO</button>
             </div>
           </div>
           <div id="game-container">
@@ -881,7 +881,7 @@ function HLayOutGenerator(titles, page, text, history) {
         <div id="middle-part">
         </div>
         <div id="button-desafio-container">
-          <button class="key-buttons" id="desafio-button" onclick="toggleSidebarRight()" >DESAFIO</button>
+          <button class="key-buttons" id="desafio-button" onclick="toggleSidebarRight()" >DESAFÍO</button>
         </div>
       </div>
       <div id="sidebar-left">
@@ -896,7 +896,7 @@ function HLayOutGenerator(titles, page, text, history) {
           </div>
           <div id="tab-historia">
             <div id="button-historia-container">
-              <button class="key-buttons" id="historia-button"  onclick="toggleSidebarLeft()">HISTORIA</button>
+              <button class="key-buttons" id="historia-button2"  onclick="toggleSidebarLeft()">HISTORIA</button>
             </div>
           </div>
         </div>
@@ -906,7 +906,7 @@ function HLayOutGenerator(titles, page, text, history) {
         <div id="sidebar-right-corpus">
           <div id="tab-desafio">
             <div id="button-desafio-container">
-              <button class="key-buttons" id="desafio-button" onclick="toggleSidebarRight()" >DESAFIO</button>
+              <button class="key-buttons" id="desafio-button2" onclick="toggleSidebarRight()" >DESAFÍO</button>
             </div>
           </div>
           <div id="game-container">
