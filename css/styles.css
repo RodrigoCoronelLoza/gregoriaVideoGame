@@ -1,10 +1,20 @@
-:root{
-  
+:root {
+  --color1: #f4f1ed;
+  --color2: #191817;
+  --color3: #b36f58;
+  --color4: #512d13;
+  --color5: #ca3c42;
+  --color6: #590f0b;
+  --color7: #f4e9d9;
+  --color8: #bfaa8b;
+  --color9: #5e7547;
+  --color10: #172601;
+  --color11: #d1ebe0;
+  --color12: #518084;
 }
 body {
   font-size: 16px;
-  color: #fff;
-  background-color: #222;
+  background-color: var(--color6);
   font-family: "Oxygen", sans-serif;
   /* height: 100vh; */
   /* height: auto; */
@@ -13,7 +23,8 @@ body {
 /** HEADER **/
 header {
   /* border: 2px solid blue; */
-  height: 10vh;
+  /* height: 10vh; */
+  height: 4vh;
 }
 .navbar-header {
   display: flex;
@@ -22,7 +33,8 @@ header {
   /* width: 100%; */
 }
 #header-nav {
-  background-color: cornsilk;
+  background-color: var(--color12);
+  /* background-color: transparent; */
   border-radius: 0;
   height: 100%;
   /* border: 3px solid red; */
@@ -104,9 +116,10 @@ header {
   /* right: 0; */
   /* left: 20em; */
   /* padding-top: 0; */
-  background-color: cornsilk;
+  background-color: var(--color12);
+  /* background-color: transparent; */
   /* border: 1px solid black; */
-  color: red;
+  border: none;
 }
 
 .icon-bar {
@@ -114,7 +127,7 @@ header {
   /* color:red; */
   margin: 0;
   padding: 0;
-  border: 1px solid black;
+  border: 1px solid white;
   /* height: 100%; */
   /* border: 1px solid var(--secondary); */
   /* z-index: 10000; */
@@ -122,39 +135,58 @@ header {
   /* margin: 0; */
 }
 #collapsable-nav {
-  height: 100%;
-  /* border: 4px solid pink; */
+  width: 15em;
+  position: absolute;
+  top: 2.5em;
+  left: 0;
+  z-index: 999;
+  /* height: auto; */
+  /* height: 100em; */
+  padding: 0;
+  background-color: var(--color11);
+  border-radius: 1em;
 }
 #nav-list {
-  /* margin-top: 10px; */
-  /* width: 100%; */
-  /* border: 3px solid green; */
-  /* align-content: right; */
-  /* height: 10vh; */
+  width: 100%;
+  padding: 0;
+  margin: 0;
 }
-
 .list-item {
-  width: 8em;
-  height: 10vh;
+  width: 100%;
+  height: 3em;
   /* border: 1px solid gray; */
 }
 .list-button {
   width: 100%;
-  height: 100%;
+  height: 95%;
   /* border: 2px solid forestgreen; */
 }
 .index-buttons {
   width: 100%;
   height: 100%;
   color: black;
-  background-color: transparent;
+  /* background-color: transparent; */
+  background-color: var(--color11);
   padding: 0;
   font-size: 1.5em;
   border: none;
+  border-radius: 0.5em;
+  /* transition: all 0.3s ease; */
+  /* margin-bottom: 1em; */
 }
 .index-buttons:hover {
-  background-color: #61122f;
-  color: aliceblue;
+  background-color: var(--color12);
+  color: var(--color1);
+  /* transform: translateY(-2px); */
+  box-shadow: 0.2em 0.1em 0.1em var(--color2);
+  border: none;
+}
+.index-buttons:focus {
+  background-color: var(--color12);
+  color: var(--color1);
+  /* transform: translateY(-2px); */
+  outline: none;
+  /* box-shadow: 0.2em 0.1em 0.1em var(--color2); */
 }
 
 .navbar-header button.navbar-toggle,
@@ -203,17 +235,7 @@ header {
 /* END FOOTER */
 
 /* HOME PAGE */
-/* #image-content-container {
-  height: 100vh;
-}
 
-#background-image {
-  width: 100%;
-  height: 100%;
-}
-#collapsable-nav {
-  background-color: antiquewhite;
-} */
 #container-main {
   /* padding-top: 0; */
   /* border: 1px solid blue; */
@@ -228,16 +250,19 @@ header {
 }
 #adv-buttons {
   position: absolute;
-  bottom: 0;
+  top: 0.2em;
   right: 0;
   /* width: 50%; */
-  height: 4vh;
+  height: 3em;
+  /* border: 1px solid red; */
+  margin-right: 3em;
 }
 .nav-buttons {
-  background-color: green;
+  background-color: var(--color12);
   height: 100%;
-  width: 10em;
+  width: 4em;
   border-radius: 1em;
+  color: var(--color1);
 }
 
 #inventory-container {
@@ -259,6 +284,41 @@ header {
 .inventory-image {
   width: 100%;
   height: 100%;
+}
+
+.modal-header {
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.modal-title {
+  color: #495057;
+  font-weight: bold;
+}
+
+.modal-body {
+  font-family: "Roboto", sans-serif;
+  line-height: 1.6;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+/* Animation for modal */
+.modal.fade .modal-dialog {
+  transform: translateY(-50px);
+  transition: transform 0.3s ease-out;
+}
+
+.modal.fade.in .modal-dialog {
+  transform: translateY(0);
 }
 
 .Alayout {
@@ -289,16 +349,200 @@ header {
   width: 100%;
   font-size: 1em;
 }
+
+.Xlayout {
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+  /* min-height: 85vh; */
+  overflow: hidden;
+  background-image: url("../images/jumbotron_1200.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#sidebar-left {
+  margin-top: 15vh;
+  height: 70vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  /* height: 100%; */
+  background-color: var(--color12);
+  color: white;
+  overflow-x: hidden;
+  transition: width 0.3s ease;
+  /* padding: 20px; */
+  box-sizing: border-box;
+  border-top-left-radius: 0;
+  border-top-right-radius: 1em;
+  border-bottom-right-radius: 1em;
+  border-bottom-left-radius: 0;
+}
+
+/* Content inside sidebar */
+#sidebar-left.open {
+  width: 80%;
+}
+
+#sidebar-left-corpus {
+  display: flex;
+  height: 100%;
+}
+
+#sidebar-right {
+  margin-top: 15vh;
+  height: 70vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 0;
+  /* height: 100%; */
+  background-color: var(--color11);
+  color: white;
+  overflow-x: hidden;
+  transition: width 0.3s ease;
+  /* padding: 20px; */
+  box-sizing: border-box;
+  border-top-left-radius: 1em;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 1em;
+}
+
+/* Content inside sidebar */
+#sidebar-right.open {
+  width: 80%;
+}
+
+#sidebar-right-corpus {
+  /* border: 1px solid green; */
+  display: flex;
+  height: 100%;
+}
+
+#historia-container {
+  height: 100%;
+}
+
+#text-historia {
+  /* border: 1px solid green; */
+  flex: 1;
+  height: 95%;
+  padding: 3em;
+}
+
+#button-historia-close-container {
+  /* width: 100%; */
+  height: 5%;
+  text-align: right;
+  /* border: 1px solid red; */
+}
+
+#historia-close-button {
+  height: 100%;
+  width: 2em;
+  color: var(--color1);
+  border: none;
+  background-color: var(--color12);
+}
+
+#button-desafio-close-container {
+  height: 5%;
+  text-align: right;
+  /* border: 1px solid red; */
+}
+
+#desafio-close-button {
+  height: 100%;
+  width: 2em;
+  color: black;
+  border: none;
+  background-color: var(--color11);
+}
+
+#tab-historia {
+  /* border: 1px solid green; */
+  width: 6em;
+}
+
+#tab-desafio {
+  /* border: 1px solid green; */
+  width: 6em;
+}
+
+#key-buttons-container {
+  /* border: 1px solid red; */
+  display: flex;
+  width: 100%;
+  height: 70vh;
+  margin-top: 15vh;
+}
+
+#button-historia-container {
+  /* border: 1px solid red; */
+  width: 6em;
+  height: 100%;
+}
+
+#button-desafio-container {
+  /* border: 1px solid red; */
+  width: 6em;
+  height: 100%;
+}
+
+#historia-button {
+  background-color: var(--color12);
+  height: 100%;
+  font-size: 3em;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0.3em;
+  border-bottom-right-radius: 0.3em;
+  border-bottom-left-radius: 0;
+  writing-mode: sideways-lr;
+  border: none;
+  box-shadow: 0.2em 0.1em 0.1em var(--color2);
+  color: var(--color1);
+}
+
+#middle-part {
+  flex: 1;
+}
+#desafio-button {
+  background-color: var(--color11);
+  height: 100%;
+  font-size: 3em;
+  border-top-left-radius: 0.3em;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0.3em;
+  writing-mode: sideways-rl;
+  border: none;
+  box-shadow: -0.2em 0.1em 0.1em var(--color2);
+  color: var(--color12);
+}
+
+.key-buttons {
+  width: 100%;
+}
+
 .Blayout {
   width: 100%;
   min-height: 88vh;
   height: auto;
   /* min-height: 85vh; */
   overflow: hidden;
-  background-image: url("../images/preguntas.png");
-  background-size: 100% 100%;
+  /* padding: 20px; */
+  background-image: url("../images/Inventarios.png");
+  background-size: 98% 96%;
+  /* background-size: cover; */
+  /* background-clip: content-box;
+  background-origin: content-box; */
   background-repeat: no-repeat;
   background-position: center;
+  border-radius: 7.8rem;
 }
 
 .titles {
@@ -324,12 +568,17 @@ header {
   margin: 8px 0;
 }
 
+#game-container {
+  width: 100%;
+  /* border: 1px solid green; */
+}
+
 .Clayout {
   width: 100%;
   min-height: 88vh;
   height: auto;
   overflow: hidden;
-  background-image: url("../images/Inventarios.png");
+  background-image: url("../images/jumbotron_1200.jpg");
   background-size: 100% 100%; /* or 'contain' depending on your needs */
   background-repeat: no-repeat;
   background-position: center;
@@ -337,7 +586,8 @@ header {
 
 /* Trivia Container Styles */
 .trivia-container {
-  max-width: 700px;
+  width: 50%;
+  /* max-width: 700px; */
   margin: 2rem auto;
   padding: 2rem;
   background: #f8f9fa;
@@ -2060,10 +2310,12 @@ header {
 
 /* END SINGLE CATEGORY PAGE */
 
-@media (max-width: 1199px) {
+@media screen {
+  /* @media (max-width: 1199px) { */
   /* Below 1200px - collapse navbar */
   .navbar-header {
     float: none;
+    /* position: relative; */
   }
 
   #navbarToggle {
@@ -2086,7 +2338,7 @@ header {
   }
   #header-nav {
     position: absolute;
-    right: 0;
+    left: 0;
     background-color: transparent;
     width: 4em;
     height: 1em;
@@ -2094,16 +2346,17 @@ header {
     /* border: 1px solid green; */
   }
   #button-index-container {
-    /* border: 1px solid black; */
-    /* height: 3em; */
+    height: 2.3em;
+    position: absolute;
+    left: 0;
   }
   .navbar-header {
     height: 1em;
   }
   #navbarToggle {
     /* width:100%; */
-    position: absolute;
-    /* right: 0.1em; */
+    /* position: absolute; */
+    /* left: 0; */
     margin-top: 0.1em;
     margin-left: 0.5em;
     height: 2.3em;
@@ -2129,45 +2382,6 @@ header {
     height: 1em;
   } */
 
-  #collapsable-nav {
-    width: 15em;
-    position: absolute;
-    top: 2.5em;
-    right: 0;
-    z-index: 999;
-    height: auto;
-    padding: 0;
-  }
-  #nav-list {
-    width: 100%;
-    padding: 0;
-    margin: 0;
-  }
-  .list-item {
-    width: 100%;
-    height: 3em;
-  }
-  .list-button {
-    width: 100%;
-    height: 100%;
-  }
-  .index-buttons {
-    width: 100%;
-    height: 100%;
-    color: black;
-    background-color: wheat;
-    font-size: 1.5em;
-  }
-  .index-buttons:hover {
-    background-color: #61122f;
-    color: aliceblue;
-  }
-
-  #adv-buttons {
-    /* width: 50%; */
-    height: 5vh;
-  }
-
   /* End Header */
 
   .Blayout {
@@ -2180,9 +2394,9 @@ header {
     min-height: 100vh;
     height: auto;
   }
-  .trivia-container {
-    max-width: 95%;
-  }
+  /* .trivia-container { */
+  /* max-width: 95%; */
+  /* } */
 
   .Dlayout {
     /* min-height: 85vh; */
@@ -2194,9 +2408,7 @@ header {
     min-height: 100vh;
     height: auto;
   }
-  .sentence-game-container {
-    max-width: 95%;
-  }
+
   .Flayout {
     /* min-height: 85vh; */
     min-height: 100vh;
@@ -2208,16 +2420,10 @@ header {
     height: auto;
   }
 
-  .phrase-game-container {
-    max-width: 95%;
-  }
   .Hlayout {
     /* min-height: 85vh; */
     min-height: 100vh;
     height: auto;
-  }
-  .memory-game-container {
-    max-width: 95%;
   }
 
   /* Footer */
@@ -2265,22 +2471,5 @@ header {
   #background-image {
     width: 100%;
     height: 100%;
-  }
-  #collapsable-nav {
-    background-color: antiquewhite;
-    /* display: flex; */
-  }
-}
-
-@media (min-width: 1200px) {
-  /* On large screens (1200px and above) - show full navbar */
-  #collapsable-nav {
-    display: block !important;
-    height: auto !important;
-    overflow: visible !important;
-  }
-
-  #navbarToggle {
-    display: none;
   }
 }

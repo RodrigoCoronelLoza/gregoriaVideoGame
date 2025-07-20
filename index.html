@@ -20,23 +20,6 @@
       <nav id="header-nav" class="navbar navbar-default">
         <div id="container-header">
           <div class="navbar-header">
-            <div id="logo1-container" class="visible-lg">
-              <img class="imagelogo" src="images/gregoria_logo_lg.png" />
-            </div>
-            <div id="logo2-container" class="visible-lg">
-              <img class="imagelogo" src="images/gregoria_logo_lg.png" />
-            </div>
-            <div id="logo3-container" class="visible-lg">
-              <img class="imagelogo" src="images/gregoria_logo_lg.png" />
-            </div>
-
-            <div class="navbar-brand visible-lg">
-              <h1>VIDEO GAME</h1>
-              <p>
-                <img src="images/star-k-logo.png" alt="Kosher certification" />
-                <span>Kosher Certified</span>
-              </p>
-            </div>
             <div id="button-index-container">
               <button
                 id="navbarToggle"
@@ -57,7 +40,12 @@
             <ul id="nav-list" class="nav navbar-nav navbar-right">
               <li class="list-item">
                 <div class="list-button">
-                  <button class="index-buttons" id="index-button1">
+                  <button
+                    class="index-buttons btn btn-default"
+                    id="index-button1"
+                    data-toggle="modal"
+                    data-target="#modal1"
+                  >
                     BOTON 1
                   </button>
                 </div>
@@ -84,7 +72,6 @@
                 </div>
               </li>
             </ul>
-            <!-- #nav-list -->
           </div>
         </div>
       </nav>
@@ -94,73 +81,57 @@
       <div id="page-content"></div>
       <div id="adv-buttons">
         <button class="nav-buttons" id="prev-button" onclick="prevPage()">
-          <i class="glyphicon glyphicon-arrow-left"></i> Anterior
-        </button>
-        <button class="jump-buttons" id="home-button" onclick="setPage(2)">
-          <i class="glyphicon glyphicon-home"></i>
+          <i class="glyphicon glyphicon-arrow-left"></i>
         </button>
         <button class="nav-buttons" id="next-button" onclick="nextPage()">
-          Siguiente <i class="glyphicon glyphicon-arrow-right"></i>
+          <i class="glyphicon glyphicon-arrow-right"></i>
         </button>
       </div>
-      <div id="inventory-container">
-        <div id="inventory-image1" class="image-inventory-container">
-          <img class="inventory-image" src="images/strawberry.jpg" />
-        </div>
-        <div id="inventory-image2" class="image-inventory-container">
-          <img class="inventory-image" src="images/apple.jpg" />
-        </div>
-        <div id="inventory-image3" class="image-inventory-container">
-          <img class="inventory-image" src="images/banana.jpg" />
-        </div>
-        <div id="inventory-image4" class="image-inventory-container">
-          <img class="inventory-image" src="images/grapes.jpg" />
-        </div>
-      </div>
-      <!-- <img
-          id="background-image"
-          src="images/intro.png"
-          alt="Kosher certification"
-        /> -->
     </div>
 
-    <footer class="panel-footer">
-      <div class="container">
-        <!-- <div class="row">
-          <section id="hours" class="col-sm-4">
-            <span>Hours:</span><br />
-            Sun-Thurs: 11:15am - 10:00pm<br />
-            Fri: 11:15am - 2:30pm<br />
-            Saturday Closed
-            <hr class="visible-xs" />
-          </section>
-          <section id="address" class="col-sm-4">
-            <span>Address:</span><br />
-            7105 Reisterstown Road<br />
-            Baltimore, MD 21215
+    <div
+      class="modal fade"
+      id="modal1"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="modal1Label"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="modal1Label">Botón 1 - Información</h4>
+          </div>
+          <div class="modal-body">
+            <h5>¡Bienvenido a la sección 1!</h5>
             <p>
-              * Delivery area within 3-4 miles, with minimum order of $20 plus
-              $3 charge for all deliveries.
+              Esta es la información del primer botón. Aquí puedes agregar
+              cualquier contenido que desees mostrar cuando el usuario haga clic
+              en "BOTON 1".
             </p>
-            <hr class="visible-xs" />
-          </section>
-          <section id="testimonials" class="col-sm-4">
-            <p>
-              "The best Chinese restaurant I've been to! And that's saying a
-              lot, since I've been to many!"
-            </p>
-            <p>
-              "Amazing food! Great service! Couldn't ask for more! I'll be back
-              again and again!"
-            </p>
-          </section>
-        </div> -->
-        <div class="text-center">
-          &copy; Copyright David Chu's China Bistro 2016
+            <ul>
+              <li>Característica 1</li>
+              <li>Característica 2</li>
+              <li>Característica 3</li>
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              Cerrar
+            </button>
+            <button type="button" class="btn btn-primary">Continuar</button>
+          </div>
         </div>
       </div>
-    </footer>
-    <!-- #header-nav -->
+    </div>
+
     <div id="overlay"></div>
     <script src="js/jquery-3.7.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

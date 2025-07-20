@@ -40,26 +40,27 @@ let memoryGameInProgress = false;
 function renderPage() {
   const pageContent = document.getElementById("page-content");
   const headerElement = document.querySelector("header");
-  const footerElement = document.querySelector("footer");
+  // const footerElement = document.querySelector("footer");
   const advButton = document.getElementById("adv-buttons");
-  const inventory = document.getElementById("inventory-container");
+  // const inventory = document.getElementById("inventory-container");
   if (currentPage === 0) {
     headerElement.style.display = "none";
     advButton.style.display = "none";
-    footerElement.style.display = "none";
-    inventory.style.visibility = "hidden";
+    // footerElement.style.display = "none";
+    // inventory.style.visibility = "hidden";
   } else {
     advButton.style.display = "block";
     headerElement.style.display = "block";
-    footerElement.style.display = "block";
-    inventory.style.visibility = "visible";
+    // footerElement.style.display = "block";
+    // inventory.style.visibility = "visible";
   }
   pageContent.className = layoutData[currentPage];
   pageContent.innerHTML = createStructure(
     titlesData,
     layoutData,
     currentPage,
-    textData
+    textData,
+    historyData
   );
   // playAudio(audioData, currentPage);
   console.log(currentPage);
@@ -97,25 +98,27 @@ function resetAdvButtons() {
 }
 
 //Crear el DOM dinamico
-function createStructure(titles, layout, page, text) {
+function createStructure(titles, layout, page, text, history) {
   let currentLayout = layout[page];
   let content = "";
   if (currentLayout === "Alayout") {
     content = ALayOutGenerator(titles, page);
   } else if (currentLayout === "Blayout") {
-    content = BLayOutGenerator(titles, page, text);
+    content = BLayOutGenerator(titles, page, text, history);
   } else if (currentLayout === "Clayout") {
-    content = CLayOutGenerator(titles, page, text);
+    content = CLayOutGenerator(titles, page, text, history);
   } else if (currentLayout === "Dlayout") {
-    content = DLayOutGenerator(titles, page, text);
+    content = DLayOutGenerator(titles, page, text, history);
   } else if (currentLayout === "Elayout") {
-    content = ELayOutGenerator(titles, page, text);
+    content = ELayOutGenerator(titles, page, text, history);
   } else if (currentLayout === "Flayout") {
-    content = FLayOutGenerator(titles, page, text);
+    content = FLayOutGenerator(titles, page, text, history);
   } else if (currentLayout === "Glayout") {
-    content = GLayOutGenerator(titles, page, text);
+    content = GLayOutGenerator(titles, page, text, history);
   } else if (currentLayout === "Hlayout") {
-    content = HLayOutGenerator(titles, page, text);
+    content = HLayOutGenerator(titles, page, text, history);
+  } else if (currentLayout === "Xlayout") {
+    content = XLayOutGenerator(titles, page, text, history);
   }
 
   return content;
@@ -129,7 +132,42 @@ function ALayOutGenerator(titles, page) {
     </div>
   </div>`;
 }
-function BLayOutGenerator(titles, page, text) {
+
+function XLayOutGenerator(titles, page, text, history) {
+  return ` 
+  <div id="Xlayout-container">
+    <div id="key-buttons-container">
+      <div id="button-historia-container">
+        <button class="key-buttons" id="historia-button"  onclick="toggleSidebarLeft()">HISTORIA</button>
+      </div>
+      <div id="middle-part">
+      </div>
+      <div id="button-desafio-container">
+        <button class="key-buttons" id="desafio-button">DESAFIO</button>
+      </div>
+    </div>
+    <div id="sidebar-left">
+      <div id="sidebar-left-corpus">
+        <div id="historia-container">
+          <div id="button-historia-close-container">
+            <button id="historia-close-button" onclick="toggleSidebarLeft()" >X</button>
+          </div>
+          <div id="text-historia">
+            <p>${history[page]}</p>
+          </div>          
+        </div>
+        <div id="tab-historia">
+          <div id="button-historia-container">
+            <button class="key-buttons" id="historia-button"  onclick="toggleSidebarLeft()">HISTORIA</button>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>`;
+}
+
+function BLayOutGenerator(titles, page, text, history) {
   const nextButton = document.getElementById("next-button");
   const pageTrivia = text[page];
   const totalQuestions = pageTrivia.questions.length;
@@ -137,61 +175,101 @@ function BLayOutGenerator(titles, page, text) {
   // nextButton.disabled = true;
   return `
     <div id="Blayout-container">
-      <h1 class="titles" id="Btitle">${titles[page]}</h1>
-      <div class="trivia-container">
-        <div class="trivia-header">
-          <div class="question-counter">
-            Pregunta ${currentQuestionIndex + 1} de ${totalQuestions}
-          </div>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: ${
-              ((currentQuestionIndex + 1) / totalQuestions) * 100
-            }%"></div>
+      <div id="key-buttons-container">
+        <div id="button-historia-container">
+          <button class="key-buttons" id="historia-button"  onclick="toggleSidebarLeft()">HISTORIA</button>
+        </div>
+        <div id="middle-part">
+        </div>
+        <div id="button-desafio-container">
+          <button class="key-buttons" id="desafio-button" onclick="toggleSidebarRight()" >DESAFIO</button>
+        </div>
+      </div>
+      <div id="sidebar-left">
+        <div id="sidebar-left-corpus">
+          
+          <div id="historia-container">
+            <div id="button-historia-close-container">
+              <button id="historia-close-button" onclick="toggleSidebarLeft()" >X</button>
+            </div>
+            <div id="text-historia">
+              <p>${history[page]}</p>
+            </div> 
+        </div>
+        <div id="tab-historia">
+          <div id="button-historia-container">
+            <button class="key-buttons" id="historia-button"  onclick="toggleSidebarLeft()">HISTORIA</button>
           </div>
         </div>
-        
-        <div class="trivia-question">
-          <h2>Selecciona la respuesta correcta:</h2>
-          <p class="question-text">${currentQuestion.question}</p>
+      </div>
+    </div>
+
+    <div id="sidebar-right">
+      <div id="sidebar-right-corpus">
+        <div id="tab-desafio">
+          <div id="button-desafio-container">
+            <button class="key-buttons" id="desafio-button" onclick="toggleSidebarRight()" >DESAFIO</button>
+          </div>
         </div>
-        
-        <div class="trivia-buttons multiple-choice">
-          ${console.log(currentQuestion)}
-          ${currentQuestion.options
-            .map(
-              (option, index) => `
-            <button class="trivia-btn option-btn" 
+        <div id="game-container">
+        <div id="button-desafio-close-container">
+            <button id="desafio-close-button" onclick="toggleSidebarRight()" >X</button>
+          </div>
+          <div class="trivia-container">
+            <div class="trivia-header">
+              <div class="question-counter">
+                Pregunta ${currentQuestionIndex + 1} de ${totalQuestions}
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: ${
+                  ((currentQuestionIndex + 1) / totalQuestions) * 100
+                }%"></div>
+              </div>
+            </div>
+            <div class="trivia-question">
+              <h2>Selecciona la respuesta correcta:</h2>
+              <p class="question-text">${currentQuestion.question}</p>
+            </div>
+            <div class="trivia-buttons multiple-choice">
+              ${console.log(currentQuestion)}
+              ${currentQuestion.options
+                .map(
+                  (option, index) => `
+              <button class="trivia-btn option-btn" 
                     onclick="answerMultipleChoice(${index})" 
                     ${pageCompleted ? "disabled" : ""}
                     data-option="${index}">
               ${option}
-            </button>
-          `
-            )
-            .join("")}
-        </div>
+              </button>
+              `
+                )
+                .join("")}
+            </div>
         
-        <div id="question-result" class="question-result" style="display: none;">
-          <div id="result-message" class="result-message"></div>
-          <div id="explanation" class="explanation"></div>
-          <div class="navigation-buttons">
-            <button id="next-question-btn" class="next-question-btn" onclick="nextQuestion()">
-              Siguiente Pregunta
-            </button>
+            <div id="question-result" class="question-result" style="display: none;">
+              <div id="result-message" class="result-message"></div>
+              <div id="explanation" class="explanation"></div>
+              <div class="navigation-buttons">
+                <button id="next-question-btn" class="next-question-btn" onclick="nextQuestion()">
+                  Siguiente Pregunta
+                </button>
+              </div>
+            </div>
+        
+            <div id="quiz-summary" class="quiz-summary" style="display: none;">
+              <h3>¡Quiz Completado!</h3>
+              <div id="score-display" class="score-display"></div>
+              <div id="answers-review" class="answers-review"></div>
+                <button class="continue-btn" onclick="nextPage()">Continuar al Siguiente Tema</button>
+            </div>
           </div>
         </div>
-        
-        <div id="quiz-summary" class="quiz-summary" style="display: none;">
-          <h3>¡Quiz Completado!</h3>
-          <div id="score-display" class="score-display"></div>
-          <div id="answers-review" class="answers-review"></div>
-          <button class="continue-btn" onclick="nextPage()">Continuar al Siguiente Tema</button>
-        </div>
       </div>
-    </div>`;
+    </div>    
+  </div>`;
 }
 
-function CLayOutGenerator(titles, page, text) {
+function CLayOutGenerator(titles, page, text, history) {
   const nextButton = document.getElementById("next-button");
   const pageTrivia = text[page];
   const totalQuestions = pageTrivia.questions.length;
@@ -199,64 +277,140 @@ function CLayOutGenerator(titles, page, text) {
   // nextButton.disabled = true;
   return `
     <div id="Clayout-container">
-      <h1 class="titles" id="Ctitle">${titles[page]}</h1>
-      <div class="trivia-container">
-        <div class="trivia-header">
-          <div class="question-counter">
-            Pregunta ${currentQuestionIndex + 1} de ${totalQuestions}
+      <div id="key-buttons-container">
+        <div id="button-historia-container">
+          <button class="key-buttons" id="historia-button"  onclick="toggleSidebarLeft()">HISTORIA</button>
+        </div>
+        <div id="middle-part">
+        </div>
+        <div id="button-desafio-container">
+          <button class="key-buttons" id="desafio-button" onclick="toggleSidebarRight()" >DESAFIO</button>
+        </div>
+      </div>
+      <div id="sidebar-left">
+        <div id="sidebar-left-corpus">
+          <div id="historia-container">
+            <div id="button-historia-close-container">
+              <button id="historia-close-button" onclick="toggleSidebarLeft()" >X</button>
+            </div>
+            <div id="text-historia">
+              <p>${history[page]}</p>
+            </div> 
           </div>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: ${
-              ((currentQuestionIndex + 1) / totalQuestions) * 100
-            }%"></div>
-          </div>
-        </div>
-        
-        <div class="trivia-question">
-          <h2>¿Verdadero o Falso?</h2>
-          <p class="question-text">${currentQuestion.question}</p>
-        </div>
-        
-        <div class="trivia-buttons">
-          <button class="trivia-btn true-btn" onclick="answerQuestion(true)" ${
-            pageCompleted ? "disabled" : ""
-          }>
-            Verdadero
-          </button>
-          <button class="trivia-btn false-btn" onclick="answerQuestion(false)" ${
-            pageCompleted ? "disabled" : ""
-          }>
-            Falso
-          </button>
-        </div>
-        
-        <div id="question-result" class="question-result" style="display: none;">
-          <div id="result-message" class="result-message"></div>
-          <div id="explanation" class="explanation"></div>
-          <div class="navigation-buttons">
-            <button id="next-question-btn" class="next-question-btn" onclick="nextQuestion()">
-              Siguiente Pregunta
-            </button>
+          <div id="tab-historia">
+            <div id="button-historia-container">
+              <button class="key-buttons" id="historia-button"  onclick="toggleSidebarLeft()">HISTORIA</button>
+            </div>
           </div>
         </div>
+      </div>
+      <div id="sidebar-right">
+        <div id="sidebar-right-corpus">
+          <div id="tab-desafio">
+            <div id="button-desafio-container">
+              <button class="key-buttons" id="desafio-button" onclick="toggleSidebarRight()" >DESAFIO</button>
+            </div>
+          </div>
+        <div id="game-container">
+          <div id="button-desafio-close-container">
+            <button id="desafio-close-button" onclick="toggleSidebarRight()" >X</button>
+          </div>
+          <div class="trivia-container">
+            <div class="trivia-header">
+              <div class="question-counter">
+                Pregunta ${currentQuestionIndex + 1} de ${totalQuestions}
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: ${
+                  ((currentQuestionIndex + 1) / totalQuestions) * 100
+                }%">
+                </div>
+              </div>
+            </div>
+            <div class="trivia-question">
+              <h2>¿Verdadero o Falso?</h2>
+              <p class="question-text">${currentQuestion.question}</p>
+            </div>
+            <div class="trivia-buttons">
+              <button class="trivia-btn true-btn" onclick="answerQuestion(true)" ${
+                pageCompleted ? "disabled" : ""
+              }>
+              Verdadero
+              </button>
+              <button class="trivia-btn false-btn" onclick="answerQuestion(false)" ${
+                pageCompleted ? "disabled" : ""
+              }>
+              Falso
+              </button>
+            </div>
         
-        <div id="quiz-summary" class="quiz-summary" style="display: none;">
-          <h3>¡Quiz Completado!</h3>
-          <div id="score-display" class="score-display"></div>
-          <div id="answers-review" class="answers-review"></div>
-          <button class="continue-btn" onclick="nextPage()">Continuar al Siguiente Tema</button>
+            <div id="question-result" class="question-result" style="display: none;">
+              <div id="result-message" class="result-message"></div>
+              <div id="explanation" class="explanation"></div>
+              <div class="navigation-buttons">
+                <button id="next-question-btn" class="next-question-btn" onclick="nextQuestion()">
+                  Siguiente Pregunta
+                </button>
+              </div>
+            </div>
+        
+            <div id="quiz-summary" class="quiz-summary" style="display: none;">
+              <h3>¡Quiz Completado!</h3>
+            <div id="score-display" class="score-display"></div>
+            <div id="answers-review" class="answers-review"></div>
+              <button class="continue-btn" onclick="nextPage()">Continuar al Siguiente Tema</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>`;
 }
-function DLayOutGenerator(titles, page, text) {
+function DLayOutGenerator(titles, page, text, history) {
   const nextButton = document.getElementById("next-button");
   const pageData = text[page];
   // nextButton.disabled = true;
   return `
     <div id="Dlayout-container">
-      <h1 class="titles" id="Dtitle">${titles[page]}</h1>
-      <div class="match-pairs-container">
+      <div id="key-buttons-container">
+        <div id="button-historia-container">
+          <button class="key-buttons" id="historia-button"  onclick="toggleSidebarLeft()">HISTORIA</button>
+        </div>
+        <div id="middle-part">
+        </div>
+        <div id="button-desafio-container">
+          <button class="key-buttons" id="desafio-button" onclick="toggleSidebarRight()" >DESAFIO</button>
+        </div>
+      </div>
+      <div id="sidebar-left">
+        <div id="sidebar-left-corpus">
+          <div id="historia-container">
+            <div id="button-historia-close-container">
+              <button id="historia-close-button" onclick="toggleSidebarLeft()" >X</button>
+            </div>
+            <div id="text-historia">
+              <p>${history[page]}</p>
+            </div> 
+          </div>
+          <div id="tab-historia">
+            <div id="button-historia-container">
+              <button class="key-buttons" id="historia-button"  onclick="toggleSidebarLeft()">HISTORIA</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="sidebar-right">
+        <div id="sidebar-right-corpus">
+          <div id="tab-desafio">
+            <div id="button-desafio-container">
+              <button class="key-buttons" id="desafio-button" onclick="toggleSidebarRight()" >DESAFIO</button>
+            </div>
+          </div>
+          <div id="game-container">
+          <div id="button-desafio-close-container">
+            <button id="desafio-close-button" onclick="toggleSidebarRight()" >X</button>
+          </div>
+          <div class="match-pairs-container">
         <div class="game-header">
           <div class="game-stats">
             <div class="stat-item">
@@ -302,10 +456,18 @@ function DLayOutGenerator(titles, page, text) {
           <button class="continue-btn" onclick="nextPage()">Continuar al Siguiente Tema</button>
         </div>
       </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      
     </div>`;
 }
 
-function ELayOutGenerator(titles, page, text) {
+function ELayOutGenerator(titles, page, text, history) {
   const nextButton = document.getElementById("next-button");
   const pageData = text[page];
   // nextButton.disabled = true;
@@ -316,8 +478,48 @@ function ELayOutGenerator(titles, page, text) {
   }
   return `
     <div id="Elayout-container">
-      <h1 class="titles" id="Etitle">${titles[page]}</h1>
-      <div class="sentence-game-container">
+
+      <div id="key-buttons-container">
+        <div id="button-historia-container">
+          <button class="key-buttons" id="historia-button"  onclick="toggleSidebarLeft()">HISTORIA</button>
+        </div>
+        <div id="middle-part">
+        </div>
+        <div id="button-desafio-container">
+          <button class="key-buttons" id="desafio-button" onclick="toggleSidebarRight()" >DESAFIO</button>
+        </div>
+      </div>
+      <div id="sidebar-left">
+        <div id="sidebar-left-corpus">
+          <div id="historia-container">
+            <div id="button-historia-close-container">
+              <button id="historia-close-button" onclick="toggleSidebarLeft()" >X</button>
+            </div>
+            <div id="text-historia">
+              <p>${history[page]}</p>
+            </div> 
+          </div>
+          <div id="tab-historia">
+            <div id="button-historia-container">
+              <button class="key-buttons" id="historia-button"  onclick="toggleSidebarLeft()">HISTORIA</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="sidebar-right">
+        <div id="sidebar-right-corpus">
+          <div id="tab-desafio">
+            <div id="button-desafio-container">
+              <button class="key-buttons" id="desafio-button" onclick="toggleSidebarRight()" >DESAFIO</button>
+            </div>
+          </div>
+          <div id="game-container">
+          <div id="button-desafio-close-container">
+            <button id="desafio-close-button" onclick="toggleSidebarRight()" >X</button>
+          </div>
+
+          <div class="sentence-game-container">
         <div class="game-header">
           <div class="game-stats">
             <div class="stat-item">
@@ -381,9 +583,17 @@ function ELayOutGenerator(titles, page, text) {
           <button class="continue-btn" onclick="nextPage()">Continuar al Siguiente Tema</button>
         </div>
       </div>
+          </div>
+        </div>
+      </div>
+      
+
+
+
+      
     </div>`;
 }
-function FLayOutGenerator(titles, page, text) {
+function FLayOutGenerator(titles, page, text, history) {
   const nextButton = document.getElementById("next-button");
   const pageData = text[page];
   // nextButton.disabled = true;
@@ -395,8 +605,46 @@ function FLayOutGenerator(titles, page, text) {
 
   return `
     <div id="Flayout-container">
-      <h1 class="titles" id="Ftitle">${titles[page]}</h1>
-      <div class="recipe-game-container">
+      <div id="key-buttons-container">
+        <div id="button-historia-container">
+          <button class="key-buttons" id="historia-button"  onclick="toggleSidebarLeft()">HISTORIA</button>
+        </div>
+        <div id="middle-part">
+        </div>
+        <div id="button-desafio-container">
+          <button class="key-buttons" id="desafio-button" onclick="toggleSidebarRight()" >DESAFIO</button>
+        </div>
+      </div>
+      <div id="sidebar-left">
+        <div id="sidebar-left-corpus">
+          <div id="historia-container">
+            <div id="button-historia-close-container">
+              <button id="historia-close-button" onclick="toggleSidebarLeft()" >X</button>
+            </div>
+            <div id="text-historia">
+              <p>${history[page]}</p>
+            </div> 
+          </div>
+          <div id="tab-historia">
+            <div id="button-historia-container">
+              <button class="key-buttons" id="historia-button"  onclick="toggleSidebarLeft()">HISTORIA</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="sidebar-right">
+        <div id="sidebar-right-corpus">
+          <div id="tab-desafio">
+            <div id="button-desafio-container">
+              <button class="key-buttons" id="desafio-button" onclick="toggleSidebarRight()" >DESAFIO</button>
+            </div>
+          </div>
+          <div id="game-container">
+          <div id="button-desafio-close-container">
+            <button id="desafio-close-button" onclick="toggleSidebarRight()" >X</button>
+          </div>
+          <div class="recipe-game-container">
         <div class="game-header">
           <div class="game-stats">
             <div class="stat-item">
@@ -480,9 +728,16 @@ function FLayOutGenerator(titles, page, text) {
           <button class="continue-btn" onclick="nextPage()">Continuar</button>
         </div>
       </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      
     </div>`;
 }
-function GLayOutGenerator(titles, page, text) {
+function GLayOutGenerator(titles, page, text, history) {
   const nextButton = document.getElementById("next-button");
   const pageData = text[page];
   // nextButton.disabled = true;
@@ -494,8 +749,46 @@ function GLayOutGenerator(titles, page, text) {
 
   return `
     <div id="Glayout-container">
-      <h1 class="titles" id="Gtitle">${titles[page]}</h1>
-      <div class="phrase-game-container">
+      <div id="key-buttons-container">
+        <div id="button-historia-container">
+          <button class="key-buttons" id="historia-button"  onclick="toggleSidebarLeft()">HISTORIA</button>
+        </div>
+        <div id="middle-part">
+        </div>
+        <div id="button-desafio-container">
+          <button class="key-buttons" id="desafio-button" onclick="toggleSidebarRight()" >DESAFIO</button>
+        </div>
+      </div>
+      <div id="sidebar-left">
+        <div id="sidebar-left-corpus">
+          <div id="historia-container">
+            <div id="button-historia-close-container">
+              <button id="historia-close-button" onclick="toggleSidebarLeft()" >X</button>
+            </div>
+            <div id="text-historia">
+              <p>${history[page]}</p>
+            </div> 
+          </div>
+          <div id="tab-historia">
+            <div id="button-historia-container">
+              <button class="key-buttons" id="historia-button"  onclick="toggleSidebarLeft()">HISTORIA</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="sidebar-right">
+        <div id="sidebar-right-corpus">
+          <div id="tab-desafio">
+            <div id="button-desafio-container">
+              <button class="key-buttons" id="desafio-button" onclick="toggleSidebarRight()" >DESAFIO</button>
+            </div>
+          </div>
+          <div id="game-container">
+          <div id="button-desafio-close-container">
+            <button id="desafio-close-button" onclick="toggleSidebarRight()" >X</button>
+          </div>
+            <div class="phrase-game-container">
         <div class="game-header">
           <div class="game-stats">
             <div class="stat-item">
@@ -564,9 +857,14 @@ function GLayOutGenerator(titles, page, text) {
           <button class="continue-btn" onclick="nextPage()">Continuar</button>
         </div>
       </div>
+          </div>
+        </div>
+      </div>  
+
+      
     </div>`;
 }
-function HLayOutGenerator(titles, page, text) {
+function HLayOutGenerator(titles, page, text, history) {
   const nextButton = document.getElementById("next-button");
   const pageData = text[page];
   // nextButton.disabled = true;
@@ -576,8 +874,46 @@ function HLayOutGenerator(titles, page, text) {
   }
   return `
     <div id="Hlayout-container">
-      <h1 class="titles" id="Htitle">${titles[page]}</h1>
-      <div class="memory-game-container">
+      <div id="key-buttons-container">
+        <div id="button-historia-container">
+          <button class="key-buttons" id="historia-button"  onclick="toggleSidebarLeft()">HISTORIA</button>
+        </div>
+        <div id="middle-part">
+        </div>
+        <div id="button-desafio-container">
+          <button class="key-buttons" id="desafio-button" onclick="toggleSidebarRight()" >DESAFIO</button>
+        </div>
+      </div>
+      <div id="sidebar-left">
+        <div id="sidebar-left-corpus">
+          <div id="historia-container">
+            <div id="button-historia-close-container">
+              <button id="historia-close-button" onclick="toggleSidebarLeft()" >X</button>
+            </div>
+            <div id="text-historia">
+              <p>${history[page]}</p>
+            </div> 
+          </div>
+          <div id="tab-historia">
+            <div id="button-historia-container">
+              <button class="key-buttons" id="historia-button"  onclick="toggleSidebarLeft()">HISTORIA</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="sidebar-right">
+        <div id="sidebar-right-corpus">
+          <div id="tab-desafio">
+            <div id="button-desafio-container">
+              <button class="key-buttons" id="desafio-button" onclick="toggleSidebarRight()" >DESAFIO</button>
+            </div>
+          </div>
+          <div id="game-container">
+          <div id="button-desafio-close-container">
+            <button id="desafio-close-button" onclick="toggleSidebarRight()" >X</button>
+          </div>
+            <div class="memory-game-container">
         <div class="game-header">
           <div class="game-stats">
             <div class="stat-item">
@@ -639,9 +975,20 @@ function HLayOutGenerator(titles, page, text) {
           <button class="continue-btn" onclick="nextPage()">Continuar</button>
         </div>
       </div>
+          </div>
+        </div>
+      </div>
+      
     </div>`;
 }
 
+function toggleSidebarLeft() {
+  document.getElementById("sidebar-left").classList.toggle("open");
+}
+
+function toggleSidebarRight() {
+  document.getElementById("sidebar-right").classList.toggle("open");
+}
 // Initialize memory game
 function initializeMemoryGame(images) {
   memoryGameCompleted = false;

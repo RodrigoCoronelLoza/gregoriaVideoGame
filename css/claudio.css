@@ -1,0 +1,699 @@
+:root {
+  --color1: #f4f1ed;
+  --color2: #191817;
+  --color3: #b36f58;
+  --color4: #512d13;
+  --color5: #ca3c42;
+  --color6: #590f0b;
+  --color7: #f4e9d9;
+  --color8: #bfaa8b;
+  --color9: #5e7547;
+  --color10: #172601;
+  --color11: #d1ebe0;
+  --color12: #518084;
+}
+body {
+  font-size: 16px;
+  color: #fff;
+  background-color: #222;
+  font-family: "Oxygen", sans-serif;
+  /* height: 100vh; */
+  /* height: auto; */
+}
+
+/** HEADER **/
+header {
+  /* border: 2px solid blue; */
+  /* height: 10vh; */
+  height: 4vh;
+}
+.navbar-header {
+  display: flex;
+  /* position: relative; */
+  height: 100%;
+  /* width: 100%; */
+}
+#header-nav {
+  background-color: cornsilk;
+  /* background-color: transparent; */
+  border-radius: 0;
+  height: 100%;
+  /* border: 3px solid red; */
+  margin-bottom: 0;
+}
+#container-header {
+  /* border: 2px solid green; */
+  width: 100%;
+  height: 100%;
+}
+
+#logo1-container {
+  /* margin-top: 1em; */
+  /* width: 10em; */
+  height: 100%;
+}
+
+#logo2-container {
+  /* margin-top: 1em; */
+  /* width: 8em; */
+  height: 100%;
+}
+
+#logo3-container {
+  /* margin-top: 1em; */
+  /* width: 6em; */
+  height: 100%;
+}
+
+.imagelogo {
+  width: 100%;
+  height: 100%;
+}
+
+.navbar-brand {
+  /* padding-top: 25px; */
+  padding-top: 0;
+}
+.navbar-brand h1 {
+  /* Restaurant name */
+  font-family: "Lora", serif;
+  color: #557c3e;
+  font-size: 1.5em;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-shadow: 1px 1px 1px #222;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0;
+  line-height: 0.75;
+  /* border: 1px solid blue; */
+}
+.navbar-brand a:hover,
+.navbar-brand a:focus {
+  text-decoration: none;
+}
+.navbar-brand p {
+  /* Kosher cert */
+  color: #000;
+  text-transform: uppercase;
+  font-size: 0.7em;
+  /* margin-top: 15px; */
+}
+.navbar-brand p span {
+  /* Star-K */
+  vertical-align: middle;
+}
+#button-index-container {
+  /* border: 1px solid black; */
+  /* position: relative; */
+  z-index: 100;
+}
+#navbarToggle {
+  /* position: absolute; */
+  /* width:100%; */
+  margin-top: 1em;
+  height: 2em;
+  width: 3em;
+  /* right: 0; */
+  /* left: 20em; */
+  /* padding-top: 0; */
+  background-color: cornsilk;
+  /* background-color: transparent; */
+  /* border: 1px solid black; */
+  color: red;
+}
+
+.icon-bar {
+  /* width: 100%; */
+  /* color:red; */
+  margin: 0;
+  padding: 0;
+  border: 1px solid black;
+  /* height: 100%; */
+  /* border: 1px solid var(--secondary); */
+  /* z-index: 10000; */
+  /* padding: 0; */
+  /* margin: 0; */
+}
+#collapsable-nav {
+  height: 100%;
+  /* border: 4px solid pink; */
+}
+
+
+.list-item {
+  width: 8em;
+  height: 4vh;
+  /* border: 1px solid gray; */
+}
+.list-button {
+  width: 100%;
+  height: 100%;
+  /* border: 2px solid forestgreen; */
+}
+.index-buttons {
+  width: 100%;
+  height: 100%;
+  color: black;
+  background-color: transparent;
+  padding: 0;
+  font-size: 1.5em;
+  border: none;
+}
+.index-buttons:hover {
+  background-color: #61122f;
+  color: aliceblue;
+}
+
+.navbar-header button.navbar-toggle,
+.navbar-header .icon-bar {
+  /* border: 1px solid green; */
+  /* margin: 0; */
+  padding: auto;
+  width: 100%;
+}
+
+/* END HEADER */
+
+/* FOOTER */
+.panel-footer {
+  height: 2vh;
+  /* margin-top: 30px; */
+  /* padding-top: 35px; */
+  /* padding-bottom: 30px; */
+  padding: 0;
+  margin: 0;
+  background-color: #222;
+  border-top: 0;
+}
+.panel-footer div.row {
+  margin-bottom: 35px;
+}
+#hours,
+#address {
+  line-height: 2;
+}
+#hours > span,
+#address > span {
+  font-size: 1.3em;
+}
+#address p {
+  color: #557c3e;
+  font-size: 0.8em;
+  line-height: 1.8;
+}
+#testimonials {
+  font-style: italic;
+}
+#testimonials p:nth-child(2) {
+  margin-top: 25px;
+}
+/* END FOOTER */
+
+/* HOME PAGE */
+/* #image-content-container {
+  height: 100vh;
+}
+
+#background-image {
+  width: 100%;
+  height: 100%;
+}
+#collapsable-nav {
+  background-color: antiquewhite;
+} */
+#container-main {
+  /* padding-top: 0; */
+  /* border: 1px solid blue; */
+  /* height: 88vh; */
+  height: auto;
+  padding-left: 0;
+  padding-right: 0;
+  width: 100%;
+  position: relative;
+
+  /* margin-bottom: 0; */
+}
+#adv-buttons {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  /* width: 50%; */
+  height: 4vh;
+}
+.nav-buttons {
+  background-color: green;
+  height: 100%;
+  width: 10em;
+  border-radius: 1em;
+}
+
+#inventory-container {
+  border: 3px solid black;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  width: 50%;
+  height: 20rem;
+}
+.image-inventory-container {
+  border: 1px solid black;
+  width: 25%;
+  height: 100%;
+  padding: 1em;
+  background-color: #172601;
+}
+.inventory-image {
+  width: 100%;
+  height: 100%;
+}
+
+.Alayout {
+  /* padding: 0;
+  margin: 0; */
+  height: 100vh;
+  /* min-height: 85vh; */
+  background-image: url("../images/intro.png");
+  background-size: 100% 100%; /* or 'contain' depending on your needs */
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#Alayout-container {
+  /* padding: 0; */
+  height: 100%;
+  position: relative;
+}
+
+.button-caratula-container {
+  position: absolute;
+  bottom: 40%;
+  left: 70%;
+  height: 10vh;
+  width: 20vw;
+}
+#comenzar-button {
+  width: 100%;
+  font-size: 1em;
+}
+
+.Xlayout {
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+  /* min-height: 85vh; */
+  overflow: hidden;
+  background-image: url("../images/jumbotron_1200.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#sidebar-left {
+  margin-top: 15vh;
+  height: 70vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  /* height: 100%; */
+  background-color: var(--color12);
+  color: white;
+  overflow-x: hidden;
+  transition: width 0.3s ease;
+  /* padding: 20px; */
+  box-sizing: border-box;
+  border-top-left-radius: 0;
+  border-top-right-radius: 1em;
+  border-bottom-right-radius: 1em;
+  border-bottom-left-radius: 0;
+}
+
+/* Content inside sidebar */
+#sidebar-left.open {
+  width: 80%;
+}
+
+#sidebar-left-corpus {
+  display: flex;
+  height: 100%;
+}
+
+#sidebar-right {
+  margin-top: 15vh;
+  height: 70vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 0;
+  /* height: 100%; */
+  background-color: var(--color11);
+  color: white;
+  overflow-x: hidden;
+  transition: width 0.3s ease;
+  /* padding: 20px; */
+  box-sizing: border-box;
+  border-top-left-radius: 1em;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 1em;
+}
+
+/* Content inside sidebar */
+#sidebar-right.open {
+  width: 80%;
+}
+
+#sidebar-right-corpus {
+  border: 1px solid green;
+  display: flex;
+  height: 100%;
+}
+
+#historia-container {
+  height: 100%;
+}
+
+#text-historia {
+  /* border: 1px solid green; */
+  flex: 1;
+  height: 95%;
+  padding: 3em;
+}
+
+#button-historia-close-container {
+  /* width: 100%; */
+  height: 5%;
+  text-align: right;
+  /* border: 1px solid red; */
+}
+
+#historia-close-button {
+  height: 100%;
+  width: 2em;
+  color: var(--color1);
+  border: none;
+  background-color: var(--color12);
+}
+
+#button-desafio-close-container {
+  height: 5%;
+  text-align: right;
+  /* border: 1px solid red; */
+}
+
+#desafio-close-button {
+  height: 100%;
+  width: 2em;
+  color: black;
+  border: none;
+  background-color: var(--color11);
+}
+
+#tab-historia {
+  border: 1px solid green;
+  width: 6em;
+}
+
+#tab-desafio {
+  border: 1px solid green;
+  width: 6em;
+}
+
+#key-buttons-container {
+  /* border: 1px solid red; */
+  display: flex;
+  width: 100%;
+  height: 70vh;
+  margin-top: 15vh;
+}
+
+#button-historia-container {
+  border: 1px solid red;
+  width: 6em;
+  height: 100%;
+}
+
+#button-desafio-container {
+  border: 1px solid red;
+  width: 6em;
+  height: 100%;
+}
+
+#historia-button {
+  background-color: var(--color12);
+  height: 100%;
+  font-size: 3em;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0.3em;
+  border-bottom-right-radius: 0.3em;
+  border-bottom-left-radius: 0;
+  writing-mode: sideways-lr;
+}
+
+#middle-part {
+  flex: 1;
+}
+#desafio-button {
+  background-color: var(--color11);
+  height: 100%;
+  font-size: 3em;
+  border-top-left-radius: 0.3em;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0.3em;
+  writing-mode: sideways-rl;
+}
+
+.key-buttons {
+  width: 100%;
+}
+
+@media screen {
+  /* @media (max-width: 1199px) { */
+  /* Below 1200px - collapse navbar */
+  .navbar-header {
+    float: none;
+    /* position: relative; */
+  }
+
+  #navbarToggle {
+    display: block;
+  }
+
+  #collapsable-nav.collapse {
+    display: none !important;
+  }
+
+  #collapsable-nav.collapse.in {
+    display: block !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+  /* Header */
+  header {
+    height: 0;
+    position: relative;
+  }
+  #header-nav {
+    position: absolute;
+    left: 0;
+    background-color: transparent;
+    width: 4em;
+    height: 1em;
+    border: none;
+    /* border: 1px solid green; */
+  }
+  #button-index-container {
+    border: 1px solid black;
+    height: 2.3em;
+    position: absolute;
+    left: 0;
+  }
+  .navbar-header {
+    height: 1em;
+  }
+  #navbarToggle {
+    /* width:100%; */
+    /* position: absolute; */
+    /* left: 0; */
+    margin-top: 0.1em;
+    margin-left: 0.5em;
+    height: 2.3em;
+    /* z-index: 10; */
+  }
+
+  .navbar-brand {
+    /* padding-top: 10px; */
+    padding-top: 0;
+    height: 1em;
+  }
+  .navbar-brand h1 {
+    /* Restaurant name */
+    padding-top: 0.1em;
+    font-size: 1.8em; /* 1vw = 1% of viewport width */
+  }
+
+  /* .navbar-brand p {
+    font-size: 0.6em;
+    margin-top: 0;
+  }
+  .navbar-brand p img {
+    height: 1em;
+  } */
+
+  #collapsable-nav {
+    width: 15em;
+    position: absolute;
+    top: 2.5em;
+    left: 0;
+    z-index: 999;
+    height: auto;
+    padding: 0;
+  }
+  #nav-list {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+  .list-item {
+    width: 100%;
+    height: 3em;
+  }
+  .list-button {
+    width: 100%;
+    height: 100%;
+  }
+  .index-buttons {
+    width: 100%;
+    height: 100%;
+    color: black;
+    background-color: wheat;
+    font-size: 1.5em;
+  }
+  .index-buttons:hover {
+    background-color: #61122f;
+    color: aliceblue;
+  }
+
+  #adv-buttons {
+    /* width: 50%; */
+    height: 5vh;
+  }
+
+  /* End Header */
+
+  .Blayout {
+    min-height: 100vh;
+    height: auto;
+    /* min-height: 85vh; */
+  }
+  .Clayout {
+    /* min-height: 85vh; */
+    min-height: 100vh;
+    height: auto;
+  }
+  /* .trivia-container { */
+  /* max-width: 95%; */
+  /* } */
+
+  .Dlayout {
+    /* min-height: 85vh; */
+    min-height: 100vh;
+    height: auto;
+  }
+  .Elayout {
+    /* min-height: 85vh; */
+    min-height: 100vh;
+    height: auto;
+  }
+  .sentence-game-container {
+    max-width: 95%;
+  }
+  .Flayout {
+    /* min-height: 85vh; */
+    min-height: 100vh;
+    height: auto;
+  }
+  .Glayout {
+    /* min-height: 85vh; */
+    min-height: 100vh;
+    height: auto;
+  }
+
+  .phrase-game-container {
+    max-width: 95%;
+  }
+  .Hlayout {
+    /* min-height: 85vh; */
+    min-height: 100vh;
+    height: auto;
+  }
+  .memory-game-container {
+    max-width: 95%;
+  }
+
+  /* Footer */
+  .panel-footer section {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  .panel-footer section:nth-child(3) {
+    margin-bottom: 0; /* margin already exists on the whole row */
+  }
+  .panel-footer section hr {
+    width: 50%;
+  }
+  /* End Footer */
+
+  /* Home Page */
+  .container .jumbotron {
+    margin-top: 30px;
+    padding: 0;
+  }
+  #menu-tile,
+  #specials-tile {
+    width: 360px;
+    margin: 0 auto 15px;
+  }
+
+  .menu-item-photo {
+    margin-right: auto;
+  }
+  .menu-item-tile .menu-item-price {
+    text-align: center;
+  }
+  .menu-item-description {
+    text-align: center;
+  }
+  #container-main {
+    min-height: 100vh;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  #image-content-container {
+    height: 100vh;
+  }
+
+  #background-image {
+    width: 100%;
+    height: 100%;
+  }
+  #collapsable-nav {
+    background-color: antiquewhite;
+    /* display: flex; */
+  }
+}
+
+/* @media (min-width: 9999px) {
+  #collapsable-nav {
+    display: block !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  #navbarToggle {
+    display: none;
+  }
+} */
