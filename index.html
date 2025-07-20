@@ -46,28 +46,43 @@
                     data-toggle="modal"
                     data-target="#modal1"
                   >
-                    BOTON 1
+                    Instrucciones/Creditos
                   </button>
                 </div>
               </li>
               <li class="list-item">
                 <div class="list-button">
-                  <button class="index-buttons" id="index-button2">
-                    BOTON 2
+                  <button
+                    class="index-buttons btn btn-default"
+                    id="index-button2"
+                    data-toggle="modal"
+                    data-target="#modal2"
+                  >
+                    Comenzar de nuevo
                   </button>
                 </div>
               </li>
               <li class="list-item">
                 <div class="list-button">
-                  <button class="index-buttons" id="index-button3">
-                    BOTON 3
+                  <button
+                    class="index-buttons btn btn-default"
+                    id="index-button3"
+                    data-toggle="modal"
+                    data-target="#modal3"
+                  >
+                    Avance del juego
                   </button>
                 </div>
               </li>
               <li class="list-item">
                 <div class="list-button">
-                  <button class="index-buttons" id="index-button4">
-                    BOTON 4
+                  <button
+                    class="index-buttons btn btn-default"
+                    id="index-button4"
+                    data-toggle="modal"
+                    data-target="#modal4"
+                  >
+                    Ayuda
                   </button>
                 </div>
               </li>
@@ -107,7 +122,7 @@
             >
               <span aria-hidden="true">&times;</span>
             </button>
-            <h4 class="modal-title" id="modal1Label">Botón 1 - Información</h4>
+            <h4 class="modal-title" id="modal1Label">Instrucciones</h4>
           </div>
           <div class="modal-body">
             <h5>¡Bienvenido a la sección 1!</h5>
@@ -123,10 +138,198 @@
             </ul>
           </div>
           <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">
+              Cerrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="modal2"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="modal2Label"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="modal2Label">Comienza de nuevo</h4>
+          </div>
+          <div class="modal-body">
+            <h5>Panel de Configuración</h5>
+            <p>Puedes comenzar de nuevo el juego</p>
+            <!-- <div class="form-group">
+              <label for="volume">Volumen:</label>
+              <input
+                type="range"
+                class="form-control"
+                id="volume"
+                min="0"
+                max="100"
+                value="50"
+              />
+            </div>
+            <div class="checkbox">
+              <label> <input type="checkbox" /> Activar sonidos </label>
+            </div> -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary">
+              Comenzar de nuevo
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal 3 -->
+    <div
+      class="modal fade"
+      id="modal3"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="modal3Label"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="modal3Label">Avance/Inventario</h4>
+          </div>
+          <div class="modal-body">
+            <h5>Ver el avance/inventario</h5>
+            <p>
+              Aquí puedes ver todos los elementos que has recolectado o el
+              avance del juego:
+            </p>
+            <div class="row">
+              <div class="col-xs-6 col-sm-3">
+                <div class="thumbnail">
+                  <div
+                    style="
+                      height: 60px;
+                      background-color: #f0f0f0;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    "
+                  >
+                    <span>Objeto 1</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-6 col-sm-3">
+                <div class="thumbnail">
+                  <div
+                    style="
+                      height: 60px;
+                      background-color: #f0f0f0;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    "
+                  >
+                    <span>Objeto 2</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">
               Cerrar
             </button>
-            <button type="button" class="btn btn-primary">Continuar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal 4 -->
+    <div
+      class="modal fade"
+      id="modal4"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="modal4Label"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="modal4Label">Ayuda</h4>
+          </div>
+          <div class="modal-body">
+            <h5>¿Necesitas ayuda?</h5>
+            <p>Aquí encontrarás información útil sobre cómo usar este juego:</p>
+            <div class="panel-group" id="accordion">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h6 class="panel-title">
+                    <a
+                      data-toggle="collapse"
+                      data-parent="#accordion"
+                      href="#collapse1"
+                    >
+                      ¿Cómo empezar?
+                    </a>
+                  </h6>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse in">
+                  <div class="panel-body">
+                    Simplemente haz clic en los botones para comenzar tu
+                    aventura.
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h6 class="panel-title">
+                    <a
+                      data-toggle="collapse"
+                      data-parent="#accordion"
+                      href="#collapse2"
+                    >
+                      Controles del juego
+                    </a>
+                  </h6>
+                </div>
+                <div id="collapse2" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    Usa los botones de navegación para moverte por las páginas.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              Cerrar
+            </button>
           </div>
         </div>
       </div>

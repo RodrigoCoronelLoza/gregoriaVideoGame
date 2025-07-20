@@ -182,7 +182,7 @@ function BLayOutGenerator(titles, page, text, history) {
         <div id="middle-part">
         </div>
         <div id="button-desafio-container">
-          <button class="key-buttons" id="desafio-button" onclick="toggleSidebarRight()" >DESAFIO</button>
+          <button class="key-buttons" id="desafio-button" onclick="toggleSidebarRight()" >DESAFÍO</button>
         </div>
       </div>
       <div id="sidebar-left">
@@ -208,7 +208,7 @@ function BLayOutGenerator(titles, page, text, history) {
       <div id="sidebar-right-corpus">
         <div id="tab-desafio">
           <div id="button-desafio-container">
-            <button class="key-buttons" id="desafio-button" onclick="toggleSidebarRight()" >DESAFIO</button>
+            <button class="key-buttons" id="desafio-button" onclick="toggleSidebarRight()" >DESAFÍO</button>
           </div>
         </div>
         <div id="game-container">
