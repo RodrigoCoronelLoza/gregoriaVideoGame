@@ -11,11 +11,13 @@
   --color10: #172601;
   --color11: #d1ebe0;
   --color12: #518084;
+  --font-rubik: "Rubik", sans-serif;
+  --font-averia: "Averia Serif Libre", serif;
+  --font-openSans: "Open Sans", sans-serif;
 }
 body {
-  font-size: 16px;
   background-color: var(--color6);
-  font-family: "Oxygen", sans-serif;
+  font-family: var(--font-openSans);
   /* height: 100vh; */
   /* height: auto; */
 }
@@ -135,7 +137,7 @@ header {
   /* margin: 0; */
 }
 #collapsable-nav {
-  width: 15em;
+  width: 20em;
   position: absolute;
   top: 2.5em;
   left: 0;
@@ -264,7 +266,7 @@ header {
   /* width: 50%; */
   height: 3em;
   /* border: 1px solid red; */
-  margin-right: 3em;
+  margin-right: 1em;
 }
 .nav-buttons {
   background-color: var(--color12);
@@ -418,6 +420,9 @@ header {
   height: 100%;
 }
 
+#historia-container {
+  font-family: var(--font-averia);
+}
 #sidebar-right {
   margin-top: 15vh;
   height: 70vh;
@@ -531,6 +536,7 @@ header {
   border: none;
   box-shadow: 0.2em 0.1em 0.1em var(--color2);
   color: var(--color1);
+  font-family: var(--font-rubik);
   font-weight: bold;
 }
 #historia-button2 {
@@ -545,6 +551,7 @@ header {
   border: none;
   /* box-shadow: 0.2em 0.1em 0.1em var(--color2); */
   color: var(--color1);
+  font-family: var(--font-rubik);
   font-weight: bold;
 }
 
@@ -563,9 +570,10 @@ header {
   border: none;
   box-shadow: -0.2em 0.1em 0.1em var(--color2);
   color: var(--color12);
+  font-family: var(--font-rubik);
   font-weight: bold;
 }
-#desafio-button2{
+#desafio-button2 {
   background-color: var(--color11);
   height: 100%;
   font-size: 3em;
@@ -576,6 +584,7 @@ header {
   writing-mode: sideways-rl;
   border: none;
   /* box-shadow: -0.2em 0.1em 0.1em var(--color2); */
+  font-family: var(--font-rubik);
   color: var(--color12);
   font-weight: bold;
 }
@@ -586,7 +595,7 @@ header {
 
 .Blayout {
   width: 100%;
-  min-height: 88vh;
+  min-height: 100vh;
   height: auto;
   /* min-height: 85vh; */
   overflow: hidden;
@@ -631,13 +640,14 @@ header {
 
 .Clayout {
   width: 100%;
-  min-height: 88vh;
+  min-height: 100vh;
   height: auto;
   overflow: hidden;
   background-image: url("../images/jumbotron_1200.jpg");
-  background-size: 100% 100%; /* or 'contain' depending on your needs */
+  background-size: 98% 96%; /* or 'contain' depending on your needs */
   background-repeat: no-repeat;
   background-position: center;
+  border-radius: 7.8rem;
 }
 
 /* Trivia Container Styles */
@@ -938,9 +948,10 @@ header {
   height: auto;
   overflow: hidden;
   background-image: url("../images/Inventarios.png");
-  background-size: 100% 100%; /* or 'contain' depending on your needs */
+  background-size: 98% 96%; /* or 'contain' depending on your needs */
   background-repeat: no-repeat;
   background-position: center;
+  border-radius: 7.8rem;
 }
 
 .match-pairs-container {
@@ -1093,9 +1104,10 @@ header {
   height: auto;
   overflow: hidden;
   background-image: url("../images/Inventarios.png");
-  background-size: 100% 100%; /* or 'contain' depending on your needs */
+  background-size: 98% 96%; /* or 'contain' depending on your needs */
   background-repeat: no-repeat;
   background-position: center;
+  border-radius: 7.8rem;
 }
 
 /* Sentence Reconstruction Game Styles */
@@ -1459,9 +1471,10 @@ header {
   height: auto;
   overflow: hidden;
   background-image: url("../images/Inventarios.png");
-  background-size: 100% 100%; /* or 'contain' depending on your needs */
+  background-size: 98% 96%; /* or 'contain' depending on your needs */
   background-repeat: no-repeat;
   background-position: center;
+  border-radius: 7.8rem;
 }
 /* Recipe Game Styles */
 .recipe-game-container {
@@ -1765,9 +1778,10 @@ header {
   height: auto;
   overflow: hidden;
   background-image: url("../images/Inventarios.png");
-  background-size: 100% 100%; /* or 'contain' depending on your needs */
+  background-size: 98% 96%; /* or 'contain' depending on your needs */
   background-repeat: no-repeat;
   background-position: center;
+  border-radius: 7.8rem;
 }
 
 /* Phrase Game Styles */
@@ -2124,9 +2138,10 @@ header {
   height: auto;
   overflow: hidden;
   background-image: url("../images/Inventarios.png");
-  background-size: 100% 100%; /* or 'contain' depending on your needs */
+  background-size: 98% 96%; /* or 'contain' depending on your needs */
   background-repeat: no-repeat;
   background-position: center;
+  border-radius: 7.8rem;
 }
 
 /* Memory Game Styles */
@@ -2399,6 +2414,7 @@ header {
     width: 4em;
     height: 1em;
     border: none;
+    /* font-size: 0.8em; */
     /* border: 1px solid green; */
   }
   #button-index-container {
@@ -2440,16 +2456,6 @@ header {
 
   /* End Header */
 
-  .Blayout {
-    min-height: 100vh;
-    height: auto;
-    /* min-height: 85vh; */
-  }
-  .Clayout {
-    /* min-height: 85vh; */
-    min-height: 100vh;
-    height: auto;
-  }
   /* .trivia-container { */
   /* max-width: 95%; */
   /* } */
@@ -2527,5 +2533,56 @@ header {
   #background-image {
     width: 100%;
     height: 100%;
+  }
+}
+@media (max-width: 1199px) {
+  #button-historia-container {
+    width: 4em;
+  }
+
+  #button-desafio-container {
+    width: 4em;
+  }
+  #adv-buttons {
+    position: absolute;
+    top: 0.2em;
+    right: 0.1em;
+    /* width: 50%; */
+    height: 3em;
+    /* border: 1px solid red; */
+    margin-right: 0;
+  }
+  .nav-buttons {
+    width: 3em;
+  }
+
+  .trivia-container {
+    width: 90%;
+  }
+
+  #collapsable-nav {
+    width: 50vw;
+  }
+
+  .Blayout {
+    border-radius: 4rem;
+  }
+  .Clayout {
+    border-radius: 4rem;
+  }
+  .Dlayout {
+    border-radius: 4rem;
+  }
+  .Elayout {
+    border-radius: 4rem;
+  }
+  .Flayout {
+    border-radius: 4rem;
+  }
+  .Glayout {
+    border-radius: 4rem;
+  }
+  .Hlayout {
+    border-radius: 4rem;
   }
 }
