@@ -2564,6 +2564,10 @@ header {
     width: 50vw;
   }
 
+  .button-caratula-container {
+    font-size: 1.5em;
+  }
+
   .Blayout {
     border-radius: 4rem;
   }
