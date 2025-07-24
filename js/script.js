@@ -114,7 +114,7 @@ function createStructure(
   let currentLayout = layout[page];
   let content = "";
   if (currentLayout === "Alayout") {
-    content = ALayOutGenerator(titles, page);
+    content = ALayOutGenerator(titles, page, images);
   } else if (currentLayout === "Blayout") {
     content = BLayOutGenerator(titles, page, text, history, images);
   } else if (currentLayout === "Clayout") {
@@ -163,7 +163,7 @@ function createStructure(
   } else if (currentLayout === "Xlayout") {
     content = XLayOutGenerator(titles, page, text, history, images);
   } else if (currentLayout === "Ilayout") {
-    content = ILayOutGenerator(titles, page, text, history);
+    content = ILayOutGenerator(titles, page, text, history, images);
   } else if (currentLayout === "Jlayout") {
     content = JLayOutGenerator(titles, page, text, history, images);
   }
@@ -171,7 +171,10 @@ function createStructure(
   return content;
 }
 // Plantilla A
-function ALayOutGenerator(titles, page) {
+function ALayOutGenerator(titles, page, images) {
+  document.querySelector(
+    ".Alayout"
+  ).style.backgroundImage = `url('images/${images[page]}')`;
   return ` 
   <div id="Alayout-container">
     <div class="button-caratula-container">
@@ -180,7 +183,10 @@ function ALayOutGenerator(titles, page) {
   </div>`;
 }
 
-function ILayOutGenerator(titles, page, text, history) {
+function ILayOutGenerator(titles, page, text, history, images) {
+  document.querySelector(
+    ".Ilayout"
+  ).style.backgroundImage = `url('images/${images[page]}')`;
   return ` 
   <div id="Ilayout-container">
     <div id="text-container">

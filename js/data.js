@@ -413,13 +413,13 @@ const textData = {
 };
 
 const imagesData = {
-  0: "banana.jpg",
-  1: "apple.jpg",
-  2: "grapes.jpg",
+  0: "intro.png",
+  1: "blackback.jpeg",
+  2: "blackback.jpeg",
   3: "strawberry.jpg",
   4: "preguntas.png",
   5: "apple.jpg",
-  6: "grapes.jpg",
+  6: "preguntas.png",
   7: "strawberry.jpg",
   8: "banana.jpg",
   9: "apple.jpg",
