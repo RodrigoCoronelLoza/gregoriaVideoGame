@@ -60,7 +60,9 @@ function renderPage() {
     layoutData,
     currentPage,
     textData,
-    historyData
+    historyData,
+    instruccionesData,
+    feedbackData
   );
   // playAudio(audioData, currentPage);
   console.log(currentPage);
@@ -68,7 +70,7 @@ function renderPage() {
 
 //Siguiente pagina
 function nextPage() {
-  if (currentPage < Object.keys(titlesData).length - 1) {
+  if (currentPage < Object.keys(layoutData).length - 1) {
     currentPage++;
     resetTrivia();
     resetAdvButtons();
@@ -98,7 +100,15 @@ function resetAdvButtons() {
 }
 
 //Crear el DOM dinamico
-function createStructure(titles, layout, page, text, history) {
+function createStructure(
+  titles,
+  layout,
+  page,
+  text,
+  history,
+  instructions,
+  feedback
+) {
   let currentLayout = layout[page];
   let content = "";
   if (currentLayout === "Alayout") {
@@ -106,9 +116,16 @@ function createStructure(titles, layout, page, text, history) {
   } else if (currentLayout === "Blayout") {
     content = BLayOutGenerator(titles, page, text, history);
   } else if (currentLayout === "Clayout") {
-    content = CLayOutGenerator(titles, page, text, history);
+    content = CLayOutGenerator(titles, page, text, history, instructions);
   } else if (currentLayout === "Dlayout") {
-    content = DLayOutGenerator(titles, page, text, history);
+    content = DLayOutGenerator(
+      titles,
+      page,
+      text,
+      history,
+      instructions,
+      feedback
+    );
   } else if (currentLayout === "Elayout") {
     content = ELayOutGenerator(titles, page, text, history);
   } else if (currentLayout === "Flayout") {
@@ -116,9 +133,20 @@ function createStructure(titles, layout, page, text, history) {
   } else if (currentLayout === "Glayout") {
     content = GLayOutGenerator(titles, page, text, history);
   } else if (currentLayout === "Hlayout") {
-    content = HLayOutGenerator(titles, page, text, history);
+    content = HLayOutGenerator(
+      titles,
+      page,
+      text,
+      history,
+      instructions,
+      feedback
+    );
   } else if (currentLayout === "Xlayout") {
     content = XLayOutGenerator(titles, page, text, history);
+  } else if (currentLayout === "Ilayout") {
+    content = ILayOutGenerator(titles, page, text, history);
+  } else if (currentLayout === "Jlayout") {
+    content = JLayOutGenerator(titles, page, text, history);
   }
 
   return content;
@@ -130,6 +158,21 @@ function ALayOutGenerator(titles, page) {
     <div class="button-caratula-container">
       <button class="nav-buttons" id="comenzar-button" onclick="nextPage()">Comienza</button>
     </div>
+  </div>`;
+}
+
+function ILayOutGenerator(titles, page, text, history) {
+  return ` 
+  <div id="Ilayout-container">
+    <div id="text-container">
+      <p>${history[page]}</p>
+    </div>
+  </div>`;
+}
+
+function JLayOutGenerator(titles, page, text, history) {
+  return ` 
+  <div id="Jlayout-container">
   </div>`;
 }
 
@@ -269,7 +312,7 @@ function BLayOutGenerator(titles, page, text, history) {
   </div>`;
 }
 
-function CLayOutGenerator(titles, page, text, history) {
+function CLayOutGenerator(titles, page, text, history, instructions) {
   const nextButton = document.getElementById("next-button");
   const pageTrivia = text[page];
   const totalQuestions = pageTrivia.questions.length;
@@ -328,7 +371,7 @@ function CLayOutGenerator(titles, page, text, history) {
               </div>
             </div>
             <div class="trivia-question">
-              <h2>¿Verdadero o Falso?</h2>
+              <h2>${instructions[page]}</h2>
               <p class="question-text">${currentQuestion.question}</p>
             </div>
             <div class="trivia-buttons">
@@ -365,7 +408,7 @@ function CLayOutGenerator(titles, page, text, history) {
       </div>
     </div>`;
 }
-function DLayOutGenerator(titles, page, text, history) {
+function DLayOutGenerator(titles, page, text, history, instructions, feedback) {
   const nextButton = document.getElementById("next-button");
   const pageData = text[page];
   // nextButton.disabled = true;
@@ -433,11 +476,13 @@ function DLayOutGenerator(titles, page, text, history) {
         
         <div class="match-instructions">
           <h3>Instrucciones:</h3>
-          <p>Haz clic en las cartas para encontrar las parejas correctas. Cada carta tiene su pareja correspondiente.</p>
+          <p>${
+            instructions[page]
+          }.  Haz clic en las cartas para encontrar las parejas correctas. Cada carta tiene su pareja correspondiente.</p>
         </div>
         
         <div id="cards-grid" class="cards-grid">
-          ${generateMatchCards(pageData.pairs)}
+          ${generateMatchCards(pageData.pairs, feedback[page])}
         </div>
         
         <div id="match-result" class="match-result" style="display: none;">
@@ -864,7 +909,7 @@ function GLayOutGenerator(titles, page, text, history) {
       
     </div>`;
 }
-function HLayOutGenerator(titles, page, text, history) {
+function HLayOutGenerator(titles, page, text, history, instructions, feedback) {
   const nextButton = document.getElementById("next-button");
   const pageData = text[page];
   // nextButton.disabled = true;
@@ -936,7 +981,9 @@ function HLayOutGenerator(titles, page, text, history) {
         
         <div class="memory-instructions">
           <h3>Instrucciones:</h3>
-          <p>Haz clic en las cartas para voltearlas y encuentra las parejas. Si te equivocas, todas las cartas se volverán a ocultar.</p>
+          <p> ${
+            instructions[page]
+          }Haz clic en las cartas para voltearlas y encuentra las parejas. Si te equivocas, todas las cartas se volverán a ocultar.</p>
         </div>
         
         <div id="memory-cards-grid" class="memory-cards-grid">
@@ -958,7 +1005,7 @@ function HLayOutGenerator(titles, page, text, history) {
           <div id="memory-score-display" class="memory-score-display">
             <div class="completion-message">
               <h4>¡Has encontrado todas las parejas!</h4>
-              <p>Tu memoria y concentración son excelentes.</p>
+              <p>${feedback[page]}</p>
             </div>
           </div>
           <div class="game-summary">
@@ -2340,7 +2387,7 @@ function resetSentenceGame() {
 }
 
 // Generate cards for the matching game
-function generateMatchCards(pairs) {
+function generateMatchCards(pairs, feedbackMessage) {
   // Create array with all cards (each pair becomes 2 cards)
   let cards = [];
   pairs.forEach((pair, pairIndex) => {
@@ -2369,7 +2416,7 @@ function generateMatchCards(pairs) {
          data-pair-index="${card.pairIndex}" 
          data-side="${card.side}"
          data-card-id="${card.id}"
-         onclick="selectCard(this)">
+         onclick="selectCard(this,'${feedbackMessage}')">
       <div class="card-content">
         ${card.content}
       </div>
@@ -2390,7 +2437,7 @@ function shuffleArray(array) {
 }
 
 // Handle card selection
-function selectCard(cardElement) {
+function selectCard(cardElement, feedbackMessage) {
   if (matchPairsCompleted) return;
   if (cardElement.classList.contains("matched")) return;
   if (cardElement.classList.contains("selected")) return;
@@ -2407,12 +2454,12 @@ function selectCard(cardElement) {
 
   // Check if we have two cards selected
   if (selectedCards.length === 2) {
-    setTimeout(() => checkMatch(), 500); // Small delay for better UX
+    setTimeout(() => checkMatch(feedbackMessage), 500); // Small delay for better UX
   }
 }
 
 // Check if selected cards match
-function checkMatch() {
+function checkMatch(feedbackMessage) {
   const [card1, card2] = selectedCards;
   const pair1 = parseInt(card1.dataset.pairIndex);
   const pair2 = parseInt(card2.dataset.pairIndex);
@@ -2434,7 +2481,7 @@ function checkMatch() {
     // Check if game is complete
     const totalPairs = textData[currentPage].pairs.length;
     if (matchedPairs.length === totalPairs) {
-      setTimeout(() => completeMatchGame(), 1000);
+      setTimeout(() => completeMatchGame(feedbackMessage), 1000);
     }
   } else {
     // Cards don't match
@@ -2477,7 +2524,7 @@ function updateProgress() {
 }
 
 // Complete the matching game
-function completeMatchGame() {
+function completeMatchGame(feedbackMessage) {
   matchPairsCompleted = true;
   const nextButton = document.getElementById("next-button");
   nextButton.disabled = false;
@@ -2494,7 +2541,7 @@ function completeMatchGame() {
 
   messageDiv.innerHTML = `
     <h3>¡Felicidades! 🎉</h3>
-    <p>Has completado el juego de parejas correctamente.</p>
+    <p>${feedbackMessage} Has completado el juego de parejas correctamente. </p>
   `;
 
   // Update summary statistics

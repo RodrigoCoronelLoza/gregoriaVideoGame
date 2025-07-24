@@ -378,6 +378,43 @@ header {
   font-size: 1em;
 }
 
+.Ilayout {
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+  /* min-height: 85vh; */
+  overflow: hidden;
+  background-color: black;
+  color: var(--color1);
+  font-family: var(--font-averia);
+  font-size: 1.5em;
+  position: relative;
+}
+
+#text-container {
+  /* width: 50%;
+  height: 50%; */
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: justify;
+}
+
+.Jlayout {
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+  /* min-height: 85vh; */
+  overflow: hidden;
+  background-image: url("../images/jumbotron_1200.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 .Xlayout {
   width: 100%;
   min-height: 100vh;
@@ -456,6 +493,7 @@ header {
 
 #historia-container {
   height: 100%;
+  flex: 1;
 }
 
 #text-historia {
@@ -2588,5 +2626,8 @@ header {
   }
   .Hlayout {
     border-radius: 4rem;
+  }
+  .Ilayout {
+    font-size: 1em;
   }
 }
