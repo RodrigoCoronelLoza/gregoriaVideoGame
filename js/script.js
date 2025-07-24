@@ -62,7 +62,8 @@ function renderPage() {
     textData,
     historyData,
     instruccionesData,
-    feedbackData
+    feedbackData,
+    imagesData
   );
   // playAudio(audioData, currentPage);
   console.log(currentPage);
@@ -107,16 +108,24 @@ function createStructure(
   text,
   history,
   instructions,
-  feedback
+  feedback,
+  images
 ) {
   let currentLayout = layout[page];
   let content = "";
   if (currentLayout === "Alayout") {
     content = ALayOutGenerator(titles, page);
   } else if (currentLayout === "Blayout") {
-    content = BLayOutGenerator(titles, page, text, history);
+    content = BLayOutGenerator(titles, page, text, history, images);
   } else if (currentLayout === "Clayout") {
-    content = CLayOutGenerator(titles, page, text, history, instructions);
+    content = CLayOutGenerator(
+      titles,
+      page,
+      text,
+      history,
+      instructions,
+      images
+    );
   } else if (currentLayout === "Dlayout") {
     content = DLayOutGenerator(
       titles,
@@ -124,14 +133,23 @@ function createStructure(
       text,
       history,
       instructions,
-      feedback
+      feedback,
+      images
     );
   } else if (currentLayout === "Elayout") {
-    content = ELayOutGenerator(titles, page, text, history);
+    content = ELayOutGenerator(titles, page, text, history, images);
   } else if (currentLayout === "Flayout") {
-    content = FLayOutGenerator(titles, page, text, history);
+    content = FLayOutGenerator(
+      titles,
+      page,
+      text,
+      history,
+      instructions,
+      feedback,
+      images
+    );
   } else if (currentLayout === "Glayout") {
-    content = GLayOutGenerator(titles, page, text, history);
+    content = GLayOutGenerator(titles, page, text, history, images);
   } else if (currentLayout === "Hlayout") {
     content = HLayOutGenerator(
       titles,
@@ -139,14 +157,15 @@ function createStructure(
       text,
       history,
       instructions,
-      feedback
+      feedback,
+      images
     );
   } else if (currentLayout === "Xlayout") {
-    content = XLayOutGenerator(titles, page, text, history);
+    content = XLayOutGenerator(titles, page, text, history, images);
   } else if (currentLayout === "Ilayout") {
     content = ILayOutGenerator(titles, page, text, history);
   } else if (currentLayout === "Jlayout") {
-    content = JLayOutGenerator(titles, page, text, history);
+    content = JLayOutGenerator(titles, page, text, history, images);
   }
 
   return content;
@@ -170,13 +189,22 @@ function ILayOutGenerator(titles, page, text, history) {
   </div>`;
 }
 
-function JLayOutGenerator(titles, page, text, history) {
+function JLayOutGenerator(titles, page, text, history, images) {
+  // const layoutActual = document.getElementsByClassName("Jlayout");
+  // console.log(layoutActual);
+  // layoutActual.style.backgroundImage = "url('../images/apple.jpg')";
+  document.querySelector(
+    ".Jlayout"
+  ).style.backgroundImage = `url('../images/${images[page]}')`;
   return ` 
   <div id="Jlayout-container">
   </div>`;
 }
 
-function XLayOutGenerator(titles, page, text, history) {
+function XLayOutGenerator(titles, page, text, history, images) {
+  document.querySelector(
+    ".Xlayout"
+  ).style.backgroundImage = `url('../images/${images[page]}')`;
   return ` 
   <div id="Xlayout-container">
     <div id="key-buttons-container">
@@ -210,12 +238,15 @@ function XLayOutGenerator(titles, page, text, history) {
   </div>`;
 }
 
-function BLayOutGenerator(titles, page, text, history) {
+function BLayOutGenerator(titles, page, text, history, images) {
   const nextButton = document.getElementById("next-button");
   const pageTrivia = text[page];
   const totalQuestions = pageTrivia.questions.length;
   const currentQuestion = pageTrivia.questions[currentQuestionIndex];
   // nextButton.disabled = true;
+  document.querySelector(
+    ".Blayout"
+  ).style.backgroundImage = `url('../images/${images[page]}')`;
   return `
     <div id="Blayout-container">
       <div id="key-buttons-container">
@@ -312,12 +343,15 @@ function BLayOutGenerator(titles, page, text, history) {
   </div>`;
 }
 
-function CLayOutGenerator(titles, page, text, history, instructions) {
+function CLayOutGenerator(titles, page, text, history, instructions, images) {
   const nextButton = document.getElementById("next-button");
   const pageTrivia = text[page];
   const totalQuestions = pageTrivia.questions.length;
   const currentQuestion = pageTrivia.questions[currentQuestionIndex];
   // nextButton.disabled = true;
+  document.querySelector(
+    ".Clayout"
+  ).style.backgroundImage = `url('../images/${images[page]}')`;
   return `
     <div id="Clayout-container">
       <div id="key-buttons-container">
@@ -408,10 +442,21 @@ function CLayOutGenerator(titles, page, text, history, instructions) {
       </div>
     </div>`;
 }
-function DLayOutGenerator(titles, page, text, history, instructions, feedback) {
+function DLayOutGenerator(
+  titles,
+  page,
+  text,
+  history,
+  instructions,
+  feedback,
+  images
+) {
   const nextButton = document.getElementById("next-button");
   const pageData = text[page];
   // nextButton.disabled = true;
+  document.querySelector(
+    ".Dlayout"
+  ).style.backgroundImage = `url('../images/${images[page]}')`;
   return `
     <div id="Dlayout-container">
       <div id="key-buttons-container">
@@ -512,7 +557,7 @@ function DLayOutGenerator(titles, page, text, history, instructions, feedback) {
     </div>`;
 }
 
-function ELayOutGenerator(titles, page, text, history) {
+function ELayOutGenerator(titles, page, text, history, images) {
   const nextButton = document.getElementById("next-button");
   const pageData = text[page];
   // nextButton.disabled = true;
@@ -521,6 +566,9 @@ function ELayOutGenerator(titles, page, text, history) {
   if (pageData && pageData.sentences) {
     initializeSentenceGame(pageData.sentences);
   }
+  document.querySelector(
+    ".Elayout"
+  ).style.backgroundImage = `url('../images/${images[page]}')`;
   return `
     <div id="Elayout-container">
 
@@ -638,7 +686,15 @@ function ELayOutGenerator(titles, page, text, history) {
       
     </div>`;
 }
-function FLayOutGenerator(titles, page, text, history) {
+function FLayOutGenerator(
+  titles,
+  page,
+  text,
+  history,
+  instructions,
+  feedback,
+  images
+) {
   const nextButton = document.getElementById("next-button");
   const pageData = text[page];
   // nextButton.disabled = true;
@@ -647,6 +703,10 @@ function FLayOutGenerator(titles, page, text, history) {
   if (pageData && pageData.recipe) {
     initializeRecipeGame(pageData.recipe);
   }
+
+  document.querySelector(
+    ".Flayout"
+  ).style.backgroundImage = `url('../images/${images[page]}')`;
 
   return `
     <div id="Flayout-container">
@@ -759,7 +819,7 @@ function FLayOutGenerator(titles, page, text, history) {
           <div id="recipe-score-display" class="recipe-score-display">
             <div class="completion-message">
               <h4>¡Has ordenado todos los pasos correctamente!</h4>
-              <p>La secuencia está completa y tiene sentido lógico.</p>
+              <p>${feedback[page]}}</p>
             </div>
           </div>
           <div class="game-summary">
@@ -791,6 +851,10 @@ function GLayOutGenerator(titles, page, text, history) {
   if (pageData && pageData.phrases) {
     initializePhraseGame(pageData.phrases);
   }
+
+  document.querySelector(
+    ".Glayout"
+  ).style.backgroundImage = `url('../images/${images[page]}')`;
 
   return `
     <div id="Glayout-container">
@@ -909,7 +973,15 @@ function GLayOutGenerator(titles, page, text, history) {
       
     </div>`;
 }
-function HLayOutGenerator(titles, page, text, history, instructions, feedback) {
+function HLayOutGenerator(
+  titles,
+  page,
+  text,
+  history,
+  instructions,
+  feedback,
+  images
+) {
   const nextButton = document.getElementById("next-button");
   const pageData = text[page];
   // nextButton.disabled = true;
@@ -917,6 +989,9 @@ function HLayOutGenerator(titles, page, text, history, instructions, feedback) {
   if (pageData && pageData.memoryImages) {
     initializeMemoryGame(pageData.memoryImages);
   }
+  document.querySelector(
+    ".Hlayout"
+  ).style.backgroundImage = `url('../images/${images[page]}')`;
   return `
     <div id="Hlayout-container">
       <div id="key-buttons-container">

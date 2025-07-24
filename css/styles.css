@@ -409,7 +409,7 @@ header {
   height: auto;
   /* min-height: 85vh; */
   overflow: hidden;
-  background-image: url("../images/jumbotron_1200.jpg");
+  /* background-image: url("../images/jumbotron_1200.jpg"); */
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center;
@@ -494,13 +494,22 @@ header {
 #historia-container {
   height: 100%;
   flex: 1;
+  position: relative;
 }
 
 #text-historia {
   /* border: 1px solid green; */
-  flex: 1;
+  /* flex: 1;
   height: 95%;
-  padding: 3em;
+  padding: 3em; */
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: justify;
+  font-size: 2em;
 }
 
 #button-historia-close-container {
