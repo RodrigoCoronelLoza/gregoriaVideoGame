@@ -195,7 +195,7 @@ function JLayOutGenerator(titles, page, text, history, images) {
   // layoutActual.style.backgroundImage = "url('../images/apple.jpg')";
   document.querySelector(
     ".Jlayout"
-  ).style.backgroundImage = `url('../images/${images[page]}')`;
+  ).style.backgroundImage = `url('images/${images[page]}')`;
   return ` 
   <div id="Jlayout-container">
   </div>`;
@@ -204,7 +204,7 @@ function JLayOutGenerator(titles, page, text, history, images) {
 function XLayOutGenerator(titles, page, text, history, images) {
   document.querySelector(
     ".Xlayout"
-  ).style.backgroundImage = `url('../images/${images[page]}')`;
+  ).style.backgroundImage = `url('images/${images[page]}')`;
   return ` 
   <div id="Xlayout-container">
     <div id="key-buttons-container">
@@ -246,7 +246,7 @@ function BLayOutGenerator(titles, page, text, history, images) {
   // nextButton.disabled = true;
   document.querySelector(
     ".Blayout"
-  ).style.backgroundImage = `url('../images/${images[page]}')`;
+  ).style.backgroundImage = `url('images/${images[page]}')`;
   return `
     <div id="Blayout-container">
       <div id="key-buttons-container">
@@ -351,7 +351,7 @@ function CLayOutGenerator(titles, page, text, history, instructions, images) {
   // nextButton.disabled = true;
   document.querySelector(
     ".Clayout"
-  ).style.backgroundImage = `url('../images/${images[page]}')`;
+  ).style.backgroundImage = `url('images/${images[page]}')`;
   return `
     <div id="Clayout-container">
       <div id="key-buttons-container">
@@ -456,7 +456,7 @@ function DLayOutGenerator(
   // nextButton.disabled = true;
   document.querySelector(
     ".Dlayout"
-  ).style.backgroundImage = `url('../images/${images[page]}')`;
+  ).style.backgroundImage = `url('images/${images[page]}')`;
   return `
     <div id="Dlayout-container">
       <div id="key-buttons-container">
@@ -568,7 +568,7 @@ function ELayOutGenerator(titles, page, text, history, images) {
   }
   document.querySelector(
     ".Elayout"
-  ).style.backgroundImage = `url('../images/${images[page]}')`;
+  ).style.backgroundImage = `url('images/${images[page]}')`;
   return `
     <div id="Elayout-container">
 
@@ -706,7 +706,7 @@ function FLayOutGenerator(
 
   document.querySelector(
     ".Flayout"
-  ).style.backgroundImage = `url('../images/${images[page]}')`;
+  ).style.backgroundImage = `url('images/${images[page]}')`;
 
   return `
     <div id="Flayout-container">
@@ -854,7 +854,7 @@ function GLayOutGenerator(titles, page, text, history) {
 
   document.querySelector(
     ".Glayout"
-  ).style.backgroundImage = `url('../images/${images[page]}')`;
+  ).style.backgroundImage = `url('images/${images[page]}')`;
 
   return `
     <div id="Glayout-container">
@@ -991,7 +991,7 @@ function HLayOutGenerator(
   }
   document.querySelector(
     ".Hlayout"
-  ).style.backgroundImage = `url('../images/${images[page]}')`;
+  ).style.backgroundImage = `url('images/${images[page]}')`;
   return `
     <div id="Hlayout-container">
       <div id="key-buttons-container">
