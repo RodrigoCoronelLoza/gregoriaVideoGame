@@ -12,70 +12,92 @@ const titlesData = {
   10: "TitleX",
 };
 const layoutData = {
+  // 0: "Alayout",
+  // 1: "Ilayout",
+  // 2: "Ilayout",
   0: "Alayout",
-  1: "Ilayout",
-  2: "Ilayout",
-  3: "Jlayout",
-  4: "Blayout",
-  5: "Dlayout",
-  6: "Hlayout",
-  7: "Dlayout",
-  8: "Blayout",
-  9: "Clayout",
-  10: "Elayout",
-  11: "Flayout",
-  12: "Dlayout",
-  13: "Blayout",
-  14: "Hlayout",
-  15: "Clayout",
-  16: "Dlayout",
-  17: "Flayout",
-  18: "Blayout",
-  19: "Blayout",
+  1: "Blayout",
+  2: "Dlayout",
+  3: "Hlayout",
+  4: "Dlayout",
+  5: "Blayout",
+  6: "Clayout",
+  7: "Elayout",
+  8: "Flayout",
+  9: "Dlayout",
+  10: "Blayout",
+  11: "Hlayout",
+  12: "Clayout",
+  13: "Dlayout",
+  14: "Flayout",
+  15: "Blayout",
+  16: "Blayout",
+  17: "Xlayout",
 };
+// const layoutData = {
+//   0: "Alayout",
+//   1: "Ilayout",
+//   2: "Ilayout",
+//   3: "Jlayout",
+//   4: "Blayout",
+//   5: "Dlayout",
+//   6: "Hlayout",
+//   7: "Dlayout",
+//   8: "Blayout",
+//   9: "Clayout",
+//   10: "Elayout",
+//   11: "Flayout",
+//   12: "Dlayout",
+//   13: "Blayout",
+//   14: "Hlayout",
+//   15: "Clayout",
+//   16: "Dlayout",
+//   17: "Flayout",
+//   18: "Blayout",
+//   19: "Blayout",
+// };
 const instruccionesData = {
+  // 0: "",
+  // 1: "",
+  // 2: "",
   0: "",
   1: "",
-  2: "",
-  3: "",
-  4: "",
-  5: "María estaba más callada, evita ciertas conversaciones y ya no se queda con nosotras en los recreos. ¿Qué hubieras hecho tú?",
-  6: "Explora las páginas del diario de María. ¿Qué te está intentando decir?",
-  7: "Relaciona las frases del diario de María con las emociones que podrían reflejar.",
-  8: "",
-  9: "Lee las frases a continuación y responde si son verdaderas o falsas:",
+  2: "María estaba más callada, evita ciertas conversaciones y ya no se queda con nosotras en los recreos. ¿Qué hubieras hecho tú?",
+  3: "Explora las páginas del diario de María. ¿Qué te está intentando decir?",
+  4: "Relaciona las frases del diario de María con las emociones que podrían reflejar.",
+  5: "",
+  6: "Lee las frases a continuación y responde si son verdaderas o falsas:",
+  7: "",
+  8: "¿Qué pensamientos pudo tener María al decidir no contar nada? Ordena estas frases como crees que ella lo sintió.",
+  9: "Lee estas frases y decide si representan amor sano o señales de alerta. Une cada una con su interpretación real.",
   10: "",
-  11: "¿Qué pensamientos pudo tener María al decidir no contar nada? Ordena estas frases como crees que ella lo sintió.",
-  12: "Lee estas frases y decide si representan amor sano o señales de alerta. Une cada una con su interpretación real.",
-  13: "",
-  14: "Encuentra las parejas que revelan mensajes escondidos entre las publicaciones eliminadas. ¿Qué imágenes y frases podrían haber sido señales?",
-  15: "¿Puedes reconocer cuáles de estas afirmaciones son señales de una cultura del silencio que puede poner en riesgo a alguien?",
-  16: "Lee cada pensamiento o creencia y une con su reflexión correcta. ¿Qué aprendizaje puedes extraer de esta situación?",
-  17: "Ordena estas frases en la secuencia que revela cómo se fue ocultando y normalizando una relación que debería haber despertado alertas.",
-  18: "",
-  19: "",
+  11: "Encuentra las parejas que revelan mensajes escondidos entre las publicaciones eliminadas. ¿Qué imágenes y frases podrían haber sido señales?",
+  12: "¿Puedes reconocer cuáles de estas afirmaciones son señales de una cultura del silencio que puede poner en riesgo a alguien?",
+  13: "Lee cada pensamiento o creencia y une con su reflexión correcta. ¿Qué aprendizaje puedes extraer de esta situación?",
+  14: "Ordena estas frases en la secuencia que revela cómo se fue ocultando y normalizando una relación que debería haber despertado alertas.",
+  15: "",
+  16: "",
+  17: "",
 };
 const feedbackData = {
   0: "",
   1: "",
-  2: "",
-  3: "",
-  4: "",
-  5: "Prestar atención, no minimizar lo que se cuenta, crear un espacio seguro y ofrecer orientación profesional son formas efectivas de acompañar.",
-  6: "Estas frases reflejan emociones profundas que muchas veces se callan. Reconocerlas es el primer paso para pedir ayuda",
-  7: "Identificar emociones es el primer paso para pedir ayuda. Reconocer estas frases puede ayudarnos a detectar señales ocultas en personas cercanas",
-  8: "",
-  9: "",
-  10: "Fomenta confianza y puede desbloquear a Luisa en una siguiente escena",
-  11: "A veces el silencio no es decisión, es miedo aprendido.”",
-  12: "¡Bien! El amor no necesita pruebas ni control. Reconocer estos mitos nos ayuda a prevenir relaciones dañinas.",
-  13: "",
-  14: "Muchos jóvenes no pueden contar lo que viven, pero sus redes sí lo gritan. Presta atención a los cambios, símbolos y silencios.",
+  2: "Prestar atención, no minimizar lo que se cuenta, crear un espacio seguro y ofrecer orientación profesional son formas efectivas de acompañar.",
+  3: "Estas frases reflejan emociones profundas que muchas veces se callan. Reconocerlas es el primer paso para pedir ayuda",
+  4: "Identificar emociones es el primer paso para pedir ayuda. Reconocer estas frases puede ayudarnos a detectar señales ocultas en personas cercanas",
+  5: "",
+  6: "",
+  7: "Fomenta confianza y puede desbloquear a Luisa en una siguiente escena",
+  8: "A veces el silencio no es decisión, es miedo aprendido.”",
+  9: "¡Bien! El amor no necesita pruebas ni control. Reconocer estos mitos nos ayuda a prevenir relaciones dañinas.",
+  10: "",
+  11: "Muchos jóvenes no pueden contar lo que viven, pero sus redes sí lo gritan. Presta atención a los cambios, símbolos y silencios.",
+  12: "",
+  13: "La lealtad verdadera también se demuestra cuando ayudamos a quien no puede pedir ayuda abiertamente",
+  14: "Las relaciones que comienzan con secretos, aislamiento y control suelen escalar. Identificar estos patrones es clave para prevenir daños",
   15: "",
-  16: "La lealtad verdadera también se demuestra cuando ayudamos a quien no puede pedir ayuda abiertamente",
-  17: "Las relaciones que comienzan con secretos, aislamiento y control suelen escalar. Identificar estos patrones es clave para prevenir daños",
-  18: "",
-  19: "",
+  16: "",
+  17: "",
 };
 
 // const layoutData = {
@@ -94,34 +116,32 @@ const feedbackData = {
 // };
 
 const historyData = {
-  0: "AAALorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc",
-  1: "Esto no es un juego. Es una carrera contra el tiempo. Debes atar cabos, leer entre líneas y tomar decisiones que podrían cambiar una historia que aún no termina.   ",
-  2: "María es muy lista y amable. Su risa es inconfundible, sus dibujos muy bonitos y de paso es muy graciosa. Sin embargo, cuando se falto a clases por primera vez ni lo notamos. La empezamos extrañar después de que se perdió el examen de matemáticas. Luego incluso cuando venía, parecía no estar con nosotros. </br></br>Finalmente un día solo vino su papá y nadie supo dar respuestas. </br></br> Este juego busca comprender. Porque detrás de cada historia de violencia hay señales que fueron ignoradas. </br> Podrás jugar desde el punto de vista de Mónica, una compañera, o de Miguel, el hermano mayor. Ambos te llevarán por caminos distintos, pero con un objetivo común: hallar a María, saber la verdad y activar un cambio.",
-  3: "",
-  4: "Al principio eran cosas pequeñas: dejó de reírse con nuestros chistes, y sus respuestas eran vagas y sarcásticas.",
-  5: "Monica piensa: </br> Noté que algo pasó, pero no pregunté mucho más. Quizás lo  hubiera hecho si hubieramos sido más amigas, pero siempre estaba ocupada en el puesto de su familia. </br></br>Mónica observa el pupitre vacío donde solía sentarse María.",
-  6: "Cuando la profe Inés me pidió que devolviera esa libreta extraviada y sin nombre, me fue difícil reconocer su letra... pero estaba segura que era de ella. No es un cuaderno de clases, sino un Diario personal. Aún no logro descifrarlo por completo.",
-  7: "¿Acaso fui tan ciega? Ni siquiera puedo creer que sea su cuaderno. Los suyos siempre eran tan pulcros, mientras este es... Con razón ni la profe Inés se dio cuenta.”</br>“No entiendo todo lo que escribió, pero sí la siento a ella. </br> Guardaré este cuaderno por ahora",
-  8: "Un día, un extraño vino esperarla a la salida y se fueron juntos en un auto. Yo pensaba que era su hermano mayor, el que vive en Viacha, pero luego me enteré que no era él.",
-  9: "Poco después de aquella vez que la vinieron a recoger, María apareció con un celular nuevo. Con un estuche verde y una cámara muy buena. “Me la regaló un admirador”, dijo haciendose la interesante. Luisa me susurró: “Su chico ha debido ser para que puedan hablar sin que sus papás se enteren”.</br> </br>En ese momento,  sentí envidia. Pensé que era emocionante tener un teléfono solo para ti, sin que nadie lo controle. Deberia buscar ese numero talvez si la llamo allí si conteste.",
-  10: "Después de todo lo que había visto, decidí hablar con las chicas que más estaban con María. Tal vez alguna tuviera su número, o supiera algo más del chico del celular rosado.”“Pero todas se miraron con caras largas, incómodas. Nadie dijo nada por un rato.”</br>Mónica: —¿Ninguna sabe cómo contactarla?</br>Luisa (tras una pausa): —Ya no hablaba tanto con nosotras… últimamente estaba muy rara.",
-  11: "Luisa fue la primera en hablar:</br></br>—No le pedí el número… ya me olía que no me lo iba a dar.</br>—Se ha escapado con su chico de seguro —dijo la de Acshon.</br>—¿Pero cuál chico? —pregunté. Nadie supo decirme. Solo risas incómodas. </br>Y nadie me supo responder con certeza. Entre risas incómodas y silencios largos, me quedó claro que sabían menos de lo que pensaban… o no querían aceptar lo que ya sospechaban. nada nuevo",
-  12: "Entonces recordamos una charla que habíamos tenido semanas atrás, mientras esperábamos el micro. Luisa estaba molesta porque se había peleado con Ramiro, su chico. En medio del chisme, María soltó una frase que ahora nos retumbaba en la cabeza: </br> —“No te enojes porque te cela, si no fuera celoso deberías preocuparte. Es porque te quiere mucho que se intensea”.</br></br>Ese rato nos reimos, pero ahora… solo nos quedamos calladas.",
-  13: "Narración interna de Mónica:</br>—Buscando en su Insta, noté que había eliminado casi todo. La última foto no era selfie, sino una tomada por alguien más. María señalaba algo fuera del cuadro. El pie de foto decía: “Lo mejor nunca se sube ;)”",
-  14: "Buscando en su Insta, recién noté que María había borrado muchas selfies, como si borrara capítulos de su vida. La última imagen no era selfie, sino una foto tomada hace unos tres meses por alguien más. En ella aparece señalando algo fuera de cuadro. En el pie de foto - ‘Lo mejor nunca se sube ;)’",
-  15: "Mientras veíamos esa foto notamos que Luisa se le escapó un grito ahogado. Con lo blanca que se puso blanca, no tuvimos que increparla. Ella sabía que sabíamos que sabía algo. </br></br> Bajó la mirada y se quedó en silencio. Luego, con voz baja, me confesó que al principio  María le pedía que la cubriera cuando salía con “su patito”, así le decía. “Luego solo se empezó a faltar sin más“</br></br>Luisa pensaba que la estaba ayudando, que era una sororidad entre amigas con chicos.",
-  16: "Por su parte, Laura igual admitió que María le pidió cubrirla una vez, pero ella no lo hizo.</br></br>- Me dió miedo y por eso tampoco la acusé, solo no me quería meter en problemas.",
-  17: "Le preguntamos por detalles, y en realidad no sabía mucho del patito</br></br>-Siempre le pedi chisme, pero nunca me dijo nada. Solo sé que no viene a nuestro cole, y por eso se escapaban. </br></br>-A qué cole irá? - Preguntó la de Laura </br></br>-Y si ese chico no va al colegio? - Pregunté, recordando al chico del auto.",
-  18: "Nos despedimos sin encontrar una respuesta a mi pregunta… pero en sus silencios había más de lo que querían admitir.",
-  19: "Dos días despúes vino un joven a preguntar por María, era su hermano Miguel. Parece que los profesores no le dejaron entrar a hablar con la clase. En especial desde que su papá vino a amenzar al director. María no solía hablar mucho de él,  pero Luisa lo reconoció. Cuando estaba partiendo, vi en su mano el celular rosado. ",
+  // 0: "AAALorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc",
+  // 1: "Esto no es un juego. Es una carrera contra el tiempo. Debes atar cabos, leer entre líneas y tomar decisiones que podrían cambiar una historia que aún no termina.   ",
+  // 2: "María es muy lista y amable. Su risa es inconfundible, sus dibujos muy bonitos y de paso es muy graciosa. Sin embargo, cuando se falto a clases por primera vez ni lo notamos. La empezamos extrañar después de que se perdió el examen de matemáticas. Luego incluso cuando venía, parecía no estar con nosotros. </br></br>Finalmente un día solo vino su papá y nadie supo dar respuestas. </br></br> Este juego busca comprender. Porque detrás de cada historia de violencia hay señales que fueron ignoradas. </br> Podrás jugar desde el punto de vista de Mónica, una compañera, o de Miguel, el hermano mayor. Ambos te llevarán por caminos distintos, pero con un objetivo común: hallar a María, saber la verdad y activar un cambio.",
+  0: "",
+  1: "Al principio eran cosas pequeñas: dejó de reírse con nuestros chistes, y sus respuestas eran vagas y sarcásticas.",
+  2: "Monica piensa: </br> Noté que algo pasó, pero no pregunté mucho más. Quizás lo  hubiera hecho si hubieramos sido más amigas, pero siempre estaba ocupada en el puesto de su familia. </br></br>Mónica observa el pupitre vacío donde solía sentarse María.",
+  3: "Cuando la profe Inés me pidió que devolviera esa libreta extraviada y sin nombre, me fue difícil reconocer su letra... pero estaba segura que era de ella. No es un cuaderno de clases, sino un Diario personal. Aún no logro descifrarlo por completo.",
+  4: "¿Acaso fui tan ciega? Ni siquiera puedo creer que sea su cuaderno. Los suyos siempre eran tan pulcros, mientras este es... Con razón ni la profe Inés se dio cuenta.”</br>“No entiendo todo lo que escribió, pero sí la siento a ella. </br> Guardaré este cuaderno por ahora",
+  5: "Un día, un extraño vino esperarla a la salida y se fueron juntos en un auto. Yo pensaba que era su hermano mayor, el que vive en Viacha, pero luego me enteré que no era él.",
+  6: "Poco después de aquella vez que la vinieron a recoger, María apareció con un celular nuevo. Con un estuche verde y una cámara muy buena. “Me la regaló un admirador”, dijo haciendose la interesante. Luisa me susurró: “Su chico ha debido ser para que puedan hablar sin que sus papás se enteren”.</br> </br>En ese momento,  sentí envidia. Pensé que era emocionante tener un teléfono solo para ti, sin que nadie lo controle. Deberia buscar ese numero talvez si la llamo allí si conteste.",
+  7: "Después de todo lo que había visto, decidí hablar con las chicas que más estaban con María. Tal vez alguna tuviera su número, o supiera algo más del chico del celular rosado.”“Pero todas se miraron con caras largas, incómodas. Nadie dijo nada por un rato.”</br>Mónica: —¿Ninguna sabe cómo contactarla?</br>Luisa (tras una pausa): —Ya no hablaba tanto con nosotras… últimamente estaba muy rara.",
+  8: "Luisa fue la primera en hablar:</br></br>—No le pedí el número… ya me olía que no me lo iba a dar.</br>—Se ha escapado con su chico de seguro —dijo la de Acshon.</br>—¿Pero cuál chico? —pregunté. Nadie supo decirme. Solo risas incómodas. </br>Y nadie me supo responder con certeza. Entre risas incómodas y silencios largos, me quedó claro que sabían menos de lo que pensaban… o no querían aceptar lo que ya sospechaban. nada nuevo",
+  9: "Entonces recordamos una charla que habíamos tenido semanas atrás, mientras esperábamos el micro. Luisa estaba molesta porque se había peleado con Ramiro, su chico. En medio del chisme, María soltó una frase que ahora nos retumbaba en la cabeza: </br> —“No te enojes porque te cela, si no fuera celoso deberías preocuparte. Es porque te quiere mucho que se intensea”.</br></br>Ese rato nos reimos, pero ahora… solo nos quedamos calladas.",
+  10: "Narración interna de Mónica:</br>—Buscando en su Insta, noté que había eliminado casi todo. La última foto no era selfie, sino una tomada por alguien más. María señalaba algo fuera del cuadro. El pie de foto decía: “Lo mejor nunca se sube ;)”",
+  11: "Buscando en su Insta, recién noté que María había borrado muchas selfies, como si borrara capítulos de su vida. La última imagen no era selfie, sino una foto tomada hace unos tres meses por alguien más. En ella aparece señalando algo fuera de cuadro. En el pie de foto - ‘Lo mejor nunca se sube ;)’",
+  12: "Mientras veíamos esa foto notamos que Luisa se le escapó un grito ahogado. Con lo blanca que se puso blanca, no tuvimos que increparla. Ella sabía que sabíamos que sabía algo. </br></br> Bajó la mirada y se quedó en silencio. Luego, con voz baja, me confesó que al principio  María le pedía que la cubriera cuando salía con “su patito”, así le decía. “Luego solo se empezó a faltar sin más“</br></br>Luisa pensaba que la estaba ayudando, que era una sororidad entre amigas con chicos.",
+  13: "Por su parte, Laura igual admitió que María le pidió cubrirla una vez, pero ella no lo hizo.</br></br>- Me dió miedo y por eso tampoco la acusé, solo no me quería meter en problemas.",
+  14: "Le preguntamos por detalles, y en realidad no sabía mucho del patito</br></br>-Siempre le pedi chisme, pero nunca me dijo nada. Solo sé que no viene a nuestro cole, y por eso se escapaban. </br></br>-A qué cole irá? - Preguntó la de Laura </br></br>-Y si ese chico no va al colegio? - Pregunté, recordando al chico del auto.",
+  15: "Nos despedimos sin encontrar una respuesta a mi pregunta… pero en sus silencios había más de lo que querían admitir.",
+  16: "Dos días despúes vino un joven a preguntar por María, era su hermano Miguel. Parece que los profesores no le dejaron entrar a hablar con la clase. En especial desde que su papá vino a amenzar al director. María no solía hablar mucho de él,  pero Luisa lo reconoció. Cuando estaba partiendo, vi en su mano el celular rosado. ",
+  17: "Era el celular de María, antes de que se vaya logré señalar el celular y cruzar una mirada con él. Miguel me esperó a la salida.</br></br>Este encuentro cambiará la historia de María.</br></br></br></br>Gracias por jugar el piloto de este juego",
 };
 
 const textData = {
   0: "",
-  1: "",
-  2: "",
-  3: "",
-  4: {
+  1: {
     // Page 1 (B layout)
     questions: [
       {
@@ -141,7 +161,7 @@ const textData = {
       },
     ],
   },
-  5: {
+  2: {
     pairs: [
       {
         left: "Evita juzgar o",
@@ -161,10 +181,10 @@ const textData = {
       },
     ],
   },
-  6: {
+  3: {
     memoryImages: ["6-1.png", "6-2.png", "6-3.png", "6-4.png"],
   },
-  7: {
+  4: {
     pairs: [
       {
         left: "A veces quiero hablar, pero no sé si me creerían.",
@@ -180,7 +200,7 @@ const textData = {
       },
     ],
   },
-  8: {
+  5: {
     // Page 1 (B layout)
     questions: [
       {
@@ -198,7 +218,7 @@ const textData = {
       },
     ],
   },
-  9: {
+  6: {
     questions: [
       {
         question:
@@ -237,7 +257,7 @@ const textData = {
       },
     ],
   },
-  10: {
+  7: {
     sentences: [
       {
         fragments: [
@@ -252,7 +272,7 @@ const textData = {
       },
     ],
   },
-  11: {
+  8: {
     recipe: {
       title: "",
       description:
@@ -270,7 +290,7 @@ const textData = {
       ],
     },
   },
-  12: {
+  9: {
     pairs: [
       {
         left: "“Te celo porque me importas.” ",
@@ -290,7 +310,7 @@ const textData = {
       },
     ],
   },
-  13: {
+  10: {
     // Page 1 (B layout)
     questions: [
       {
@@ -309,10 +329,10 @@ const textData = {
       },
     ],
   },
-  14: {
+  11: {
     memoryImages: ["14-1.png", "14-3.png", "14-5.png", "14-7.png"],
   },
-  15: {
+  12: {
     questions: [
       {
         question: "“Si ella me lo pidió, debe estar bien.”",
@@ -343,7 +363,7 @@ const textData = {
       },
     ],
   },
-  16: {
+  13: {
     pairs: [
       {
         left: "Guardar secretos puede parecer leal ",
@@ -359,7 +379,7 @@ const textData = {
       },
     ],
   },
-  17: {
+  14: {
     recipe: {
       title: "",
       description:
@@ -374,7 +394,7 @@ const textData = {
       ],
     },
   },
-  18: {
+  15: {
     // Page 1 (B layout)
     questions: [
       {
@@ -393,7 +413,7 @@ const textData = {
       },
     ],
   },
-  19: {
+  16: {
     // Page 1 (B layout)
     questions: [
       {
@@ -410,29 +430,31 @@ const textData = {
       },
     ],
   },
+  17: "",
 };
 
 const imagesData = {
-  0: "intro.png",
-  1: "blackback.jpeg",
-  2: "blackback.jpeg",
-  3: "S01 v1.0.png",
-  4: "X00.png",
-  5: "A1-001 v1.0.png",
-  6: "A2 v1.0.png",
-  7: "A3 v0.8.png",
-  8: "A4 v1.0.png",
-  9: "A05 v1.0.png",
-  10: "A06 v1.0.png",
-  11: "A07 v1.0.png",
-  12: "A08 v1.0.png",
-  13: "A09 v1.0.png",
-  14: "A10 v1.0.png",
-  15: "A11 v1.0.png",
-  16: "A12 v1.0.png",
-  17: "A12 v1.0.png",
-  18: "A14 v1.0.png",
-  19: "A15 v1.0.png",
+  // 0: "intro.png",
+  // 1: "blackback.jpeg",
+  // 2: "blackback.jpeg",
+  0: "Ecos del silencio.png",
+  1: "S01 v1.0.png",
+  2: "A1-001 v1.0.png",
+  3: "A2 v1.0.png",
+  4: "A3 v1.0 .png",
+  5: "A4 v1.0.png",
+  6: "A05 v1.0.png",
+  7: "A06 v1.0.png",
+  8: "A07 v1.0.png",
+  9: "A08 v1.0.png",
+  10: "A09 v1.0.png",
+  11: "A10 v1.0.png",
+  12: "A11 v1.0.png",
+  13: "A12 v1.0.png",
+  14: "A13 v0.5.png",
+  15: "A14 v1.0.png",
+  16: "A15 v1.0.png",
+  17: "X00.png",
 };
 /*const textData = {
   0: "",
