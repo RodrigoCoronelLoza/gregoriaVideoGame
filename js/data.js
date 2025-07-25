@@ -162,7 +162,7 @@ const textData = {
     ],
   },
   6: {
-    memoryImages: ["apple.jpg", "banana.jpg", "grapes.jpg", "strawberry.jpg"],
+    memoryImages: ["6-1.png", "6-2.png", "6-3.png", "6-4.png"],
   },
   7: {
     pairs: [
@@ -310,7 +310,7 @@ const textData = {
     ],
   },
   14: {
-    memoryImages: ["apple.jpg", "banana.jpg", "grapes.jpg", "strawberry.jpg"],
+    memoryImages: ["14-1.png", "14-3.png", "14-5.png", "14-7.png"],
   },
   15: {
     questions: [
@@ -416,23 +416,23 @@ const imagesData = {
   0: "intro.png",
   1: "blackback.jpeg",
   2: "blackback.jpeg",
-  3: "strawberry.jpg",
-  4: "preguntas.png",
-  5: "apple.jpg",
-  6: "preguntas.png",
-  7: "strawberry.jpg",
-  8: "banana.jpg",
-  9: "apple.jpg",
-  10: "grapes.jpg",
-  11: "strawberry.jpg",
-  12: "banana.jpg",
-  13: "apple.jpg",
-  14: "grapes.jpg",
-  15: "strawberry.jpg",
-  16: "banana.jpg",
-  17: "apple.jpg",
-  18: "banana.jpg",
-  19: "grapes.jpg",
+  3: "S01 v1.0.png",
+  4: "X00.png",
+  5: "A1-001 v1.0.png",
+  6: "A2 v1.0.png",
+  7: "A3 v0.8.png",
+  8: "A4 v1.0.png",
+  9: "A05 v1.0.png",
+  10: "A06 v1.0.png",
+  11: "A07 v1.0.png",
+  12: "A08 v1.0.png",
+  13: "A09 v1.0.png",
+  14: "A10 v1.0.png",
+  15: "A11 v1.0.png",
+  16: "A12 v1.0.png",
+  17: "A12 v1.0.png",
+  18: "A14 v1.0.png",
+  19: "A15 v1.0.png",
 };
 /*const textData = {
   0: "",

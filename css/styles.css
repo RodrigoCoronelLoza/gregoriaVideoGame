@@ -16,7 +16,7 @@
   --font-openSans: "Open Sans", sans-serif;
 }
 body {
-  background-color: var(--color6);
+  background-color: var(--color4);
   font-family: var(--font-openSans);
   /* height: 100vh; */
   /* height: auto; */
@@ -2280,12 +2280,12 @@ header {
 }
 
 .card-front {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--color11) 0%, var(--color12) 100%);
   color: white;
 }
 
 .card-back {
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  background: linear-gradient(135deg, var(--color9) 0%, var(--color10) 100%);
   color: white;
   transform: rotateY(180deg);
 }
