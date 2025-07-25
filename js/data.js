@@ -66,7 +66,7 @@ const feedbackData = {
   7: "Identificar emociones es el primer paso para pedir ayuda. Reconocer estas frases puede ayudarnos a detectar señales ocultas en personas cercanas",
   8: "",
   9: "",
-  10: "",
+  10: "Fomenta confianza y puede desbloquear a Luisa en una siguiente escena",
   11: "A veces el silencio no es decisión, es miedo aprendido.”",
   12: "¡Bien! El amor no necesita pruebas ni control. Reconocer estos mitos nos ayuda a prevenir relaciones dañinas.",
   13: "",

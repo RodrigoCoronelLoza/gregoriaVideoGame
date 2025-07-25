@@ -137,7 +137,15 @@ function createStructure(
       images
     );
   } else if (currentLayout === "Elayout") {
-    content = ELayOutGenerator(titles, page, text, history, images);
+    content = ELayOutGenerator(
+      titles,
+      page,
+      text,
+      history,
+      instructions,
+      feedback,
+      images
+    );
   } else if (currentLayout === "Flayout") {
     content = FLayOutGenerator(
       titles,
@@ -292,7 +300,7 @@ function BLayOutGenerator(titles, page, text, history, images) {
           </div>
         </div>
         <div id="game-container">
-        <div id="button-desafio-close-container">
+          <div id="button-desafio-close-container">
             <button id="desafio-close-button" onclick="toggleSidebarRight()" >X</button>
           </div>
           <div class="trivia-container">
@@ -311,7 +319,6 @@ function BLayOutGenerator(titles, page, text, history, images) {
               <p class="question-text">${currentQuestion.question}</p>
             </div>
             <div class="trivia-buttons multiple-choice">
-              ${console.log(currentQuestion)}
               ${currentQuestion.options
                 .map(
                   (option, index) => `
@@ -563,7 +570,15 @@ function DLayOutGenerator(
     </div>`;
 }
 
-function ELayOutGenerator(titles, page, text, history, images) {
+function ELayOutGenerator(
+  titles,
+  page,
+  text,
+  history,
+  instructions,
+  feedback,
+  images
+) {
   const nextButton = document.getElementById("next-button");
   const pageData = text[page];
   // nextButton.disabled = true;
@@ -641,7 +656,9 @@ function ELayOutGenerator(titles, page, text, history, images) {
         
         <div class="sentence-instructions">
           <h3>Instrucciones:</h3>
-          <p>Arrastra las partes de la oración para formar una oración completa con sentido lógico.</p>
+          <p> ${
+            instructions[page]
+          }Arrastra las partes de la oración para formar una oración completa con sentido lógico.</p>
         </div>
         
         <div id="sentence-game-area" class="sentence-game-area">
@@ -666,7 +683,7 @@ function ELayOutGenerator(titles, page, text, history, images) {
         </div>
         
         <div id="sentence-game-summary" class="sentence-game-summary" style="display: none;">
-          <h3>¡Juego Completado! 🎉</h3>
+          <h3>¡Juego Completado! 🎉 ${feedback[page]}</h3>
           <div id="sentence-score-display" class="sentence-score-display"></div>
           <div class="game-summary">
             <div class="summary-item">
