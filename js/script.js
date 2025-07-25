@@ -66,7 +66,7 @@ function renderPage() {
     imagesData
   );
   // playAudio(audioData, currentPage);
-  console.log(currentPage);
+  // console.log(currentPage);
 }
 
 //Siguiente pagina
@@ -1129,10 +1129,19 @@ function HLayOutGenerator(
 
 function toggleSidebarLeft() {
   document.getElementById("sidebar-left").classList.toggle("open");
+  // console.log(document.getElementById("sidebar-right"));
+  if (document.getElementById("sidebar-right").classList.contains("open")) {
+    document.getElementById("sidebar-right").classList.toggle("open");
+  }
+  //document.getElementById("sidebar-right").classList.toggle("open");
 }
 
 function toggleSidebarRight() {
   document.getElementById("sidebar-right").classList.toggle("open");
+  //document.getElementById("sidebar-left").classList.toggle("open");
+  if (document.getElementById("sidebar-left").classList.contains("open")) {
+    document.getElementById("sidebar-left").classList.toggle("open");
+  }
 }
 // Initialize memory game
 function initializeMemoryGame(images) {
