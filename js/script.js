@@ -3,6 +3,8 @@ let currentAudio = null;
 let currentQuestionIndex = 0;
 let userAnswers = [];
 let pageCompleted = false;
+let coins = 1000;
+const lostCoins = 50;
 
 let currentSentenceIndex = 0;
 let sentenceFragments = [];
@@ -37,33 +39,37 @@ let memoryMatchedPairs = 0;
 let memoryCards = [];
 let memoryGameInProgress = false;
 
+currentTitlesData = titlesVData;
+currentLayoutData = layoutVData;
+currentIntructionsData = instructionsVData;
+currentFeedbackData = feedbackVData;
+currentHistoryData = historyVData;
+currentTextData = textVData;
+currentImagesData = imagesVData;
+currentJumpsData = jumpsVData;
+
 function renderPage() {
   const pageContent = document.getElementById("page-content");
   const headerElement = document.querySelector("header");
-  // const footerElement = document.querySelector("footer");
   const advButton = document.getElementById("adv-buttons");
-  // const inventory = document.getElementById("inventory-container");
-  if (currentPage === 0) {
+  if (currentPage === 0 && currentLayoutData === layoutVData) {
     headerElement.style.display = "none";
     advButton.style.display = "none";
-    // footerElement.style.display = "none";
-    // inventory.style.visibility = "hidden";
   } else {
     advButton.style.display = "block";
     headerElement.style.display = "block";
-    // footerElement.style.display = "block";
-    // inventory.style.visibility = "visible";
   }
-  pageContent.className = layoutData[currentPage];
+  pageContent.className = currentLayoutData[currentPage];
   pageContent.innerHTML = createStructure(
-    titlesData,
-    layoutData,
+    currentTitlesData,
+    currentLayoutData,
     currentPage,
-    textData,
-    historyData,
-    instruccionesData,
-    feedbackData,
-    imagesData
+    currentTextData,
+    currentHistoryData,
+    currentIntructionsData,
+    currentFeedbackData,
+    currentImagesData,
+    currentJumpsData
   );
   // playAudio(audioData, currentPage);
   // console.log(currentPage);
@@ -71,7 +77,10 @@ function renderPage() {
 
 //Siguiente pagina
 function nextPage() {
-  if (currentPage < Object.keys(layoutData).length - 1) {
+  if (currentPage < Object.keys(currentLayoutData).length - 1) {
+    if (currentLayoutData !== layoutVData) {
+      coins = coins - lostCoins;
+    }
     currentPage++;
     resetTrivia();
     resetAdvButtons();
@@ -109,7 +118,8 @@ function createStructure(
   history,
   instructions,
   feedback,
-  images
+  images,
+  jumps
 ) {
   let currentLayout = layout[page];
   let content = "";
@@ -174,8 +184,11 @@ function createStructure(
     content = ILayOutGenerator(titles, page, text, history, images);
   } else if (currentLayout === "Jlayout") {
     content = JLayOutGenerator(titles, page, text, history, images);
+  } else if (currentLayout === "Klayout") {
+    content = KLayOutGenerator(titles, page, text, history, images, jumps);
+  } else if (currentLayout === "Llayout") {
+    content = LLayOutGenerator(titles, page, text, history, images, jumps);
   }
-
   return content;
 }
 // Plantilla A
@@ -188,7 +201,8 @@ function ALayOutGenerator(titles, page, images) {
     <div class="button-caratula-container">
       <button class="nav-buttons" id="comenzar-button" onclick="nextPage()">Comienza</button>
     </div>
-  </div>`;
+  </div>
+  <h1>${titles[page]}</h1>`;
 }
 
 function ILayOutGenerator(titles, page, text, history, images) {
@@ -200,9 +214,11 @@ function ILayOutGenerator(titles, page, text, history, images) {
     <div id="text-container">
       <p>${history[page]}</p>
     </div>
-  </div>`;
+  </div>
+  <h1>${titles[page]}</h1>`;
 }
 
+// Plantilla J
 function JLayOutGenerator(titles, page, text, history, images) {
   // const layoutActual = document.getElementsByClassName("Jlayout");
   // console.log(layoutActual);
@@ -212,15 +228,105 @@ function JLayOutGenerator(titles, page, text, history, images) {
   ).style.backgroundImage = `url('images/${images[page]}')`;
   return ` 
   <div id="Jlayout-container">
+  </div>
+  <h1>${titles[page]}</h1>`;
+}
+
+// Plantilla K
+function KLayOutGenerator(titles, page, text, history, images, jumps) {
+  // const layoutActual = document.getElementsByClassName("Jlayout");
+  // console.log(layoutActual);
+  // layoutActual.style.backgroundImage = "url('../images/apple.jpg')";
+  document.querySelector(
+    ".Klayout"
+  ).style.backgroundImage = `url('images/${images[page]}')`;
+  let newLayout0 = jumps[page][0].newLayout;
+  let numberOfPage0 = jumps[page][0].numberOfPage;
+  let newLayout1 = jumps[page][1].newLayout;
+  let numberOfPage1 = jumps[page][1].numberOfPage;
+
+  return ` 
+  <div id="Klayout-container">
+    <h1>SELECCIONA EL PERSONAJE</h1>
+    <div id="characters-container">
+      <div id="cha1-button-container" class="cha-container">
+        <button class="cha-button" id="cha1-button" onclick="selectPersonaje('${newLayout0}',${numberOfPage0})">PERSONAJE1</button>
+        <div class="container-text-character">
+          <p>'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur '</p>
+        </div>
+      </div>
+      <div id="cha2-button-container" class="cha-container">
+        <button class="cha-button" id="cha2-button" onclick="selectPersonaje('${newLayout1}',${numberOfPage1})">PERSONAJE2</button>
+        <div class="container-text-character">
+          <p>'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur '</p>
+        </div>
+      </div>
+    </div>
   </div>`;
 }
 
+// Plantilla L
+function LLayOutGenerator(titles, page, text, history, images, jumps) {
+  document.querySelector(
+    ".Llayout"
+  ).style.backgroundImage = `url('images/${images[page][0]}')`;
+
+  return ` 
+  <div id="Llayout-container">
+    <div id="coins-container">
+      <div id="image-coins-container">
+        <img id="image-coins" src="images/banana.jpg"/>
+      </div>
+      <div id="number-coins-container">
+        ${coins}
+      </div>
+    </div>
+    <div id="decision-container">
+      <div id="title-container">
+        DECISIÓN
+      </div>
+      <div id="image-dec-container">
+        <img id="image-dec" src="images/${images[page][1]}"/>
+      </div>
+      <div id="question-container">
+        <p>${text[page][0]}</p>
+      </div>
+      <div id="options-container">
+        ${buttonGeneratorOptions(jumps, page, text)}
+      </div>
+    </div>
+  </div>`;
+}
+
+function buttonGeneratorOptions(jumps, page, text) {
+  let result = "";
+  for (let i = 0; i < jumps[page].length; i++) {
+    console.log(jumps[page][i].newLayout);
+    result =
+      result +
+      `<div id="dec${i}-button-container" class="dec-container">
+        <button class="dec-button" id="dec${i}-button" onclick="selectPersonaje('${
+        jumps[page][i].newLayout
+      }',${jumps[page][i].numberOfPage})"> ${text[page][i + 1]}</button>
+      </div>`;
+  }
+  return `${result}`;
+}
+// Plantilla X
 function XLayOutGenerator(titles, page, text, history, images) {
   document.querySelector(
     ".Xlayout"
   ).style.backgroundImage = `url('images/${images[page]}')`;
   return ` 
   <div id="Xlayout-container">
+    <div id="coins-container">
+      <div id="image-coins-container">
+        <img id="image-coins" src="images/banana.jpg"/>
+      </div>
+      <div id="number-coins-container">
+        ${coins}
+      </div>
+    </div>
     <div id="key-buttons-container">
       <div id="button-historia-container">
         <button class="key-buttons" id="historia-button"  onclick="toggleSidebarLeft()">HISTORIA</button>
@@ -249,9 +355,11 @@ function XLayOutGenerator(titles, page, text, history, images) {
       </div>
       
     </div>
-  </div>`;
+  </div>
+  <h1>${titles[page]}</h1>`;
 }
 
+// Plantilla B
 function BLayOutGenerator(titles, page, text, history, images) {
   const nextButton = document.getElementById("next-button");
   const pageTrivia = text[page];
@@ -263,6 +371,14 @@ function BLayOutGenerator(titles, page, text, history, images) {
   ).style.backgroundImage = `url('images/${images[page]}')`;
   return `
     <div id="Blayout-container">
+      <div id="coins-container">
+        <div id="image-coins-container">
+          <img id="image-coins" src="images/banana.jpg"/>
+        </div>
+        <div id="number-coins-container">
+          ${coins}
+        </div>
+      </div>
       <div id="key-buttons-container">
         <div id="button-historia-container">
           <button class="key-buttons" id="historia-button"  onclick="toggleSidebarLeft()">HISTORIA</button>
@@ -353,8 +469,11 @@ function BLayOutGenerator(titles, page, text, history, images) {
         </div>
       </div>
     </div>    
-  </div>`;
+  </div>
+  <h1>${titles[page]}</h1>`;
 }
+
+// Plantilla C
 
 function CLayOutGenerator(titles, page, text, history, instructions, images) {
   const nextButton = document.getElementById("next-button");
@@ -367,6 +486,14 @@ function CLayOutGenerator(titles, page, text, history, instructions, images) {
   ).style.backgroundImage = `url('images/${images[page]}')`;
   return `
     <div id="Clayout-container">
+      <div id="coins-container">
+        <div id="image-coins-container">
+          <img id="image-coins" src="images/banana.jpg"/>
+        </div>
+        <div id="number-coins-container">
+          ${coins}
+        </div>
+      </div>
       <div id="key-buttons-container">
         <div id="button-historia-container">
           <button class="key-buttons" id="historia-button"  onclick="toggleSidebarLeft()">HISTORIA</button>
@@ -453,8 +580,11 @@ function CLayOutGenerator(titles, page, text, history, instructions, images) {
           </div>
         </div>
       </div>
-    </div>`;
+    </div>
+    <h1>${titles[page]}</h1>`;
 }
+
+// Plantilla D
 function DLayOutGenerator(
   titles,
   page,
@@ -472,6 +602,14 @@ function DLayOutGenerator(
   ).style.backgroundImage = `url('images/${images[page]}')`;
   return `
     <div id="Dlayout-container">
+      <div id="coins-container">
+        <div id="image-coins-container">
+          <img id="image-coins" src="images/banana.jpg"/>
+        </div>
+        <div id="number-coins-container">
+          ${coins}
+        </div>
+      </div>
       <div id="key-buttons-container">
         <div id="button-historia-container">
           <button class="key-buttons" id="historia-button"  onclick="toggleSidebarLeft()">HISTORIA</button>
@@ -561,15 +699,12 @@ function DLayOutGenerator(
       </div>
           </div>
         </div>
-      </div>
-
-
-
-
-      
-    </div>`;
+      </div>      
+    </div>
+    <h1>${titles[page]}</h1>`;
 }
 
+// Plantilla E
 function ELayOutGenerator(
   titles,
   page,
@@ -592,7 +727,14 @@ function ELayOutGenerator(
   ).style.backgroundImage = `url('images/${images[page]}')`;
   return `
     <div id="Elayout-container">
-
+      <div id="coins-container">
+        <div id="image-coins-container">
+          <img id="image-coins" src="images/banana.jpg"/>
+        </div>
+        <div id="number-coins-container">
+          ${coins}
+        </div>
+      </div>
       <div id="key-buttons-container">
         <div id="button-historia-container">
           <button class="key-buttons" id="historia-button"  onclick="toggleSidebarLeft()">HISTORIA</button>
@@ -707,8 +849,11 @@ function ELayOutGenerator(
 
 
       
-    </div>`;
+    </div>
+    <h1>${titles[page]}</h1>`;
 }
+
+// Plantilla F
 function FLayOutGenerator(
   titles,
   page,
@@ -733,6 +878,14 @@ function FLayOutGenerator(
 
   return `
     <div id="Flayout-container">
+      <div id="coins-container">
+        <div id="image-coins-container">
+          <img id="image-coins" src="images/banana.jpg"/>
+        </div>
+        <div id="number-coins-container">
+          ${coins}
+        </div>
+      </div>
       <div id="key-buttons-container">
         <div id="button-historia-container">
           <button class="key-buttons" id="historia-button"  onclick="toggleSidebarLeft()">HISTORIA</button>
@@ -863,8 +1016,10 @@ function FLayOutGenerator(
 
 
       
-    </div>`;
+    </div>
+    <h1>${titles[page]}</h1>`;
 }
+// Plantilla G
 function GLayOutGenerator(titles, page, text, history) {
   const nextButton = document.getElementById("next-button");
   const pageData = text[page];
@@ -882,6 +1037,14 @@ function GLayOutGenerator(titles, page, text, history) {
   return `
     <div id="Glayout-container">
       <div id="key-buttons-container">
+        <div id="coins-container">
+          <div id="image-coins-container">
+            <img id="image-coins" src="images/banana.jpg"/>
+          </div>
+          <div id="number-coins-container">
+            ${coins}
+          </div>
+        </div>  
         <div id="button-historia-container">
           <button class="key-buttons" id="historia-button"  onclick="toggleSidebarLeft()">HISTORIA</button>
         </div>
@@ -994,8 +1157,11 @@ function GLayOutGenerator(titles, page, text, history) {
       </div>  
 
       
-    </div>`;
+    </div>
+    <h1>${titles[page]}</h1>`;
 }
+
+// Plantilla H
 function HLayOutGenerator(
   titles,
   page,
@@ -1017,6 +1183,14 @@ function HLayOutGenerator(
   ).style.backgroundImage = `url('images/${images[page]}')`;
   return `
     <div id="Hlayout-container">
+      <div id="coins-container">
+        <div id="image-coins-container">
+          <img id="image-coins" src="images/banana.jpg"/>
+        </div>
+        <div id="number-coins-container">
+          ${coins}
+        </div>
+      </div>
       <div id="key-buttons-container">
         <div id="button-historia-container">
           <button class="key-buttons" id="historia-button"  onclick="toggleSidebarLeft()">HISTORIA</button>
@@ -1124,8 +1298,35 @@ function HLayOutGenerator(
         </div>
       </div>
       
-    </div>`;
+    </div>
+    <h1>${titles[page]}</h1>`;
 }
+
+function selectPersonaje(newLayout, numberOfPage) {
+  currentTitlesData = eval("titles" + newLayout + "Data");
+  currentLayoutData = eval("layout" + newLayout + "Data");
+  currentIntructionsData = eval("instructions" + newLayout + "Data");
+  currentFeedbackData = eval("feedback" + newLayout + "Data");
+  currentHistoryData = eval("history" + newLayout + "Data");
+  currentTextData = eval("text" + newLayout + "Data");
+  currentImagesData = eval("images" + newLayout + "Data");
+  currentJumpsData = eval("jumps" + newLayout + "Data");
+  currentPage = numberOfPage;
+  masterRender();
+}
+
+// function selectPersonaje2(newLayout, numberOfPage) {
+//   currentTitlesData = eval("titles" + newLayout + "Data");
+//   currentLayoutData = eval("layout" + newLayout + "Data");
+//   currentIntructionsData = eval("instructions" + newLayout + "Data");
+//   currentFeedbackData = eval("feedback" + newLayout + "Data");
+//   currentHistoryData = eval("history" + newLayout + "Data");
+//   currentTextData = eval("text" + newLayout + "Data");
+//   currentImagesData = eval("images" + newLayout + "Data");
+//   currentJumpsData = eval("jumps" + newLayout + "Data");
+//   currentPage = numberOfPage;
+//   masterRender();
+// }
 
 function toggleSidebarLeft() {
   document.getElementById("sidebar-left").classList.toggle("open");
