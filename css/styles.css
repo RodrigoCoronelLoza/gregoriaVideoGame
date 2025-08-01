@@ -470,11 +470,11 @@ header {
 }
 
 #cha1-button {
-  background-image: url(/images/banana.jpg);
+  background-image: url(../images/banana.jpg);
 }
 
 #cha2-button {
-  background-image: url(/images/grapes.jpg);
+  background-image: url(../images/grapes.jpg);
 }
 
 .container-text-character {
