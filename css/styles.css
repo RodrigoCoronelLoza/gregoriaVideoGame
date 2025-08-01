@@ -422,10 +422,10 @@ header {
   /* min-height: 85vh; */
   overflow: hidden;
   /* background-image: url("../images/jumbotron_1200.jpg"); */
-  background-size: 100% 100%;
+  background-size: 98% 96%; /* or 'contain' depending on your needs */
   background-repeat: no-repeat;
   background-position: center;
-  position: relative;
+  border-radius: 7.8rem;
 }
 
 #Klayout-container {
@@ -433,6 +433,7 @@ header {
 }
 
 #Klayout-container h1 {
+  font-family: var(--font-rubik);
   text-align: center;
   color: var(--color1);
 }
@@ -477,9 +478,11 @@ header {
 }
 
 .container-text-character {
+  font-family: var(--font-averia);
+  font-size: 2em;
   height: 20%;
   width: 100%;
-  padding: 2em;
+  padding: 0.5em;
   background-color: var(--color12);
   color: var(--color7);
   border-radius: 1em;
@@ -503,7 +506,13 @@ header {
 
   position: relative;
 }
-
+#decision-header {
+  /* justify-content: space-between; */
+  margin-top: 1em;
+  display: flex;
+  height: 10em;
+  /* border: 1px solid blue; */
+}
 #decision-container {
   position: absolute;
   bottom: 2em;
@@ -520,8 +529,14 @@ header {
 
 #title-container {
   font-family: var(--font-rubik);
+  /* border: 1px solid red; */
   color: var(--color12);
   font-size: 4em;
+  width: 80%;
+  height: 100%;
+  /* line-height: 1; */
+  display: inline-block;
+  vertical-align: middle;
 }
 
 #question-container {
@@ -533,14 +548,22 @@ header {
   /* border: 2px solid green; */
   display: flex;
   margin-top: 3em;
-  margin-left: 3em;
-  margin-right: 3em;
+  margin-left: 10em;
+  margin-right: 10em;
   justify-content: space-between;
-  height: 8em;
+  height: 40%;
 }
 
 #image-dec-container {
-  margin-top: 3em;
+  width: 20%;
+  /* border: 1px solid green; */
+  height: 100%;
+}
+
+#image-dec {
+  width: 80%;
+  height: 100%;
+  border-radius: 0.5em;
 }
 .dec-container {
   max-width: 25%;
@@ -2849,6 +2872,66 @@ header {
     border-radius: 4rem;
   }
   .Ilayout {
+    font-size: 1em;
+  }
+  .Klayout {
+    border-radius: 4rem;
+  }
+
+  #Klayout-container {
+    padding-top: 0;
+  }
+
+  #characters-container {
+    width: 90%;
+  }
+  .cha-container {
+    border: 1px solid red;
+    width: 45%;
+    border-radius: 0.5em;
+  }
+
+  .container-text-character {
+    font-size: 0.9em;
+    height: 20%;
+    width: 100%;
+    padding: 0.5em;
+    background-color: var(--color12);
+    color: var(--color7);
+    border-radius: 0.5em;
+  }
+
+  .Llayout {
+    border-radius: 4rem;
+  }
+
+  #decision-header {
+    /* justify-content: space-between; */
+    height: 3em;
+    /* border: 1px solid blue; */
+  }
+  #title-container {
+    font-size: 2em;
+  }
+
+  #question-container {
+    margin-top: 1em;
+    font-size: 1em;
+  }
+
+  #options-container {
+    /* border: 2px solid green; */
+    display: flex;
+    margin-top: 1em;
+    margin-left: 3em;
+    margin-right: 3em;
+  }
+
+  #image-dec-container {
+    margin-top: 0;
+  }
+
+  .dec-button {
     font-size: 1em;
   }
 }

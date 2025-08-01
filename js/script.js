@@ -252,13 +252,13 @@ function KLayOutGenerator(titles, page, text, history, images, jumps) {
       <div id="cha1-button-container" class="cha-container">
         <button class="cha-button" id="cha1-button" onclick="selectPersonaje('${newLayout0}',${numberOfPage0})">PERSONAJE1</button>
         <div class="container-text-character">
-          <p>'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur '</p>
+          <p>'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. '</p>
         </div>
       </div>
       <div id="cha2-button-container" class="cha-container">
         <button class="cha-button" id="cha2-button" onclick="selectPersonaje('${newLayout1}',${numberOfPage1})">PERSONAJE2</button>
         <div class="container-text-character">
-          <p>'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur '</p>
+          <p>'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. '</p>
         </div>
       </div>
     </div>
@@ -282,11 +282,13 @@ function LLayOutGenerator(titles, page, text, history, images, jumps) {
       </div>
     </div>
     <div id="decision-container">
-      <div id="title-container">
-        DECISIÓN
-      </div>
-      <div id="image-dec-container">
-        <img id="image-dec" src="images/${images[page][1]}"/>
+      <div id="decision-header">
+        <div id="title-container">
+          DECISIÓN
+        </div>
+        <div id="image-dec-container">
+          <img id="image-dec" src="images/${images[page][1]}"/>
+        </div>
       </div>
       <div id="question-container">
         <p>${text[page][0]}</p>
