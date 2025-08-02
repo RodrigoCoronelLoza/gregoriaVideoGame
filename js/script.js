@@ -72,7 +72,7 @@ function renderPage() {
     currentJumpsData
   );
   // playAudio(audioData, currentPage);
-  // console.log(currentPage);
+  console.log(currentPage);
 }
 
 //Siguiente pagina
@@ -598,6 +598,7 @@ function DLayOutGenerator(
 ) {
   const nextButton = document.getElementById("next-button");
   const pageData = text[page];
+  console.log(text[page]);
   // nextButton.disabled = true;
   document.querySelector(
     ".Dlayout"
@@ -1313,7 +1314,10 @@ function selectPersonaje(newLayout, numberOfPage) {
   currentTextData = eval("text" + newLayout + "Data");
   currentImagesData = eval("images" + newLayout + "Data");
   currentJumpsData = eval("jumps" + newLayout + "Data");
+  console.log("antes" + currentPage);
   currentPage = numberOfPage;
+  console.log("despues" + currentPage);
+
   masterRender();
 }
 
@@ -2195,7 +2199,7 @@ function updateStepNumbers() {
 // Check if recipe order is correct
 function checkRecipeOrder() {
   const orderedSteps = document.querySelectorAll(".ordered-step");
-  const pageData = textData[currentPage];
+  const pageData = currentTextData[currentPage];
   const totalSteps = pageData.recipe.steps.length;
 
   if (orderedSteps.length === 0) {
@@ -2492,7 +2496,7 @@ function updateSentencePreview() {
 // Check if sentence is correct
 function checkSentence() {
   const slots = document.querySelectorAll(".fragment-slot");
-  const pageData = textData[currentPage];
+  const pageData = currentTextData[currentPage];
   const currentSentence = pageData.sentences[currentSentenceIndex];
 
   if (slots.length === 0) {
@@ -2599,7 +2603,7 @@ function resetCurrentSentence() {
 
 // Move to next sentence
 function nextSentence() {
-  const pageData = textData[currentPage];
+  const pageData = currentTextData[currentPage];
 
   if (currentSentenceIndex < pageData.sentences.length - 1) {
     currentSentenceIndex++;
@@ -2627,7 +2631,7 @@ function completeSentenceGame() {
   // Calculate statistics
   const endTime = Date.now();
   const totalTime = Math.round((endTime - sentenceGameStartTime) / 1000);
-  const totalSentences = textData[currentPage].sentences.length;
+  const totalSentences = currentTextData[currentPage].sentences.length;
 
   // Show completion summary
   const summaryDiv = document.getElementById("sentence-game-summary");
@@ -2661,7 +2665,7 @@ function completeSentenceGame() {
 function updateSentenceCounter() {
   const counter = document.getElementById("sentence-counter");
   if (counter) {
-    const totalSentences = textData[currentPage].sentences.length;
+    const totalSentences = currentTextData[currentPage].sentences.length;
     counter.textContent = `${completedSentences}/${totalSentences}`;
   }
 }
@@ -2678,7 +2682,7 @@ function updateSentenceAttempts() {
 function updateSentenceProgress() {
   const progressFill = document.getElementById("sentence-progress-fill");
   if (progressFill) {
-    const totalSentences = textData[currentPage].sentences.length;
+    const totalSentences = currentTextData[currentPage].sentences.length;
     const percentage = (completedSentences / totalSentences) * 100;
     progressFill.style.width = `${percentage}%`;
   }
@@ -2789,7 +2793,7 @@ function checkMatch(feedbackMessage) {
     updateProgress();
 
     // Check if game is complete
-    const totalPairs = textData[currentPage].pairs.length;
+    const totalPairs = currentTextData[currentPage].pairs.length;
     if (matchedPairs.length === totalPairs) {
       setTimeout(() => completeMatchGame(feedbackMessage), 1000);
     }
@@ -2818,8 +2822,9 @@ function updateAttemptsCounter() {
 // Update pairs counter
 function updatePairsCounter() {
   const counter = document.getElementById("pairs-counter");
+  console.log(currentPage);
   if (counter) {
-    const totalPairs = textData[currentPage].pairs.length;
+    const totalPairs = currentTextData[currentPage].pairs.length;
     counter.textContent = `${matchedPairs.length}/${totalPairs}`;
   }
 }
@@ -2827,7 +2832,7 @@ function updatePairsCounter() {
 function updateProgress() {
   const progressFill = document.getElementById("match-progress-fill");
   if (progressFill) {
-    const totalPairs = textData[currentPage].pairs.length;
+    const totalPairs = currentTextData[currentPage].pairs.length;
     const percentage = (matchedPairs.length / totalPairs) * 100;
     progressFill.style.width = `${percentage}%`;
   }
@@ -2842,7 +2847,7 @@ function completeMatchGame(feedbackMessage) {
   // Calculate game statistics
   const endTime = Date.now();
   const totalTime = Math.round((endTime - gameStartTime) / 1000);
-  const totalPairs = textData[currentPage].pairs.length;
+  const totalPairs = currentTextData[currentPage].pairs.length;
   const accuracy = Math.round((totalPairs / attempts) * 100);
 
   // Show completion message
@@ -2874,7 +2879,7 @@ function resetMatchPairs() {
 
 // Handle multiple choice question answers
 function answerMultipleChoice(selectedOption) {
-  const pageTrivia = textData[currentPage];
+  const pageTrivia = currentTextData[currentPage];
   const currentQuestion = pageTrivia.questions[currentQuestionIndex];
   const isCorrect = selectedOption === currentQuestion.correctAnswer;
 
@@ -2897,7 +2902,7 @@ function answerMultipleChoice(selectedOption) {
 }
 // Handle individual question answers
 function answerQuestion(answer) {
-  const pageTrivia = textData[currentPage];
+  const pageTrivia = currentTextData[currentPage];
   const currentQuestion = pageTrivia.questions[currentQuestionIndex];
 
   // Store the answer
@@ -2947,7 +2952,7 @@ function showMultipleChoiceResult(selectedOption, questionData) {
   });
 
   // Update next button text
-  const totalQuestions = textData[currentPage].questions.length;
+  const totalQuestions = currentTextData[currentPage].questions.length;
   if (currentQuestionIndex < totalQuestions - 1) {
     nextBtn.textContent = "Siguiente Pregunta";
   } else {
@@ -2993,7 +2998,7 @@ function showQuestionResult(userAnswer, questionData) {
   }
 
   // Update next button text
-  const totalQuestions = textData[currentPage].questions.length;
+  const totalQuestions = currentTextData[currentPage].questions.length;
   if (currentQuestionIndex < totalQuestions - 1) {
     nextBtn.textContent = "Siguiente Pregunta";
   } else {
@@ -3005,7 +3010,7 @@ function showQuestionResult(userAnswer, questionData) {
 }
 
 function nextQuestion() {
-  const totalQuestions = textData[currentPage].questions.length;
+  const totalQuestions = currentTextData[currentPage].questions.length;
 
   if (currentQuestionIndex < totalQuestions - 1) {
     // Move to next question
@@ -3018,10 +3023,10 @@ function nextQuestion() {
 }
 
 function refreshCurrentQuestion() {
-  const pageTrivia = textData[currentPage];
+  const pageTrivia = currentTextData[currentPage];
   const currentQuestion = pageTrivia.questions[currentQuestionIndex];
   const totalQuestions = pageTrivia.questions.length;
-  const currentLayout = layoutData[currentPage];
+  const currentLayout = currentLayoutData[currentPage];
 
   // Update question counter and progress
   const questionCounter = document.querySelector(".question-counter");
