@@ -1314,10 +1314,12 @@ function selectPersonaje(newLayout, numberOfPage) {
   currentTextData = eval("text" + newLayout + "Data");
   currentImagesData = eval("images" + newLayout + "Data");
   currentJumpsData = eval("jumps" + newLayout + "Data");
-  console.log("antes" + currentPage);
   currentPage = numberOfPage;
-  console.log("despues" + currentPage);
 
+  if (newLayout === "B") {
+    document.documentElement.style.setProperty("--colorvar1", "#5e7547");
+    document.documentElement.style.setProperty("--colorvar2", "#172601");
+  }
   masterRender();
 }
 

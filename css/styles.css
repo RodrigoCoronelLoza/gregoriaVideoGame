@@ -11,6 +11,8 @@
   --color10: #172601;
   --color11: #d1ebe0;
   --color12: #518084;
+  --colorvar1: #d1ebe0;
+  --colorvar2: #518084;
   --font-rubik: "Rubik", sans-serif;
   --font-averia: "Averia Serif Libre", serif;
   --font-openSans: "Open Sans", sans-serif;
@@ -118,7 +120,7 @@ header {
   /* right: 0; */
   /* left: 20em; */
   /* padding-top: 0; */
-  background-color: var(--color12);
+  background-color: var(--colorvar2);
   /* background-color: transparent; */
   /* border: 1px solid black; */
   border: none;
@@ -145,7 +147,7 @@ header {
   /* height: auto; */
   /* height: 100em; */
   padding: 0;
-  background-color: var(--color11);
+  background-color: var(--colorvar1);
   border-radius: 1em;
 }
 #nav-list {
@@ -168,7 +170,7 @@ header {
   height: 100%;
   color: black;
   /* background-color: transparent; */
-  background-color: var(--color11);
+  background-color: var(--colorvar1);
   padding: 0;
   font-size: 1.5em;
   border: none;
@@ -177,14 +179,14 @@ header {
   /* margin-bottom: 1em; */
 }
 .index-buttons:hover {
-  background-color: var(--color12);
+  background-color: var(--colorvar2);
   color: var(--color1);
   /* transform: translateY(-2px); */
   box-shadow: 0.2em 0.1em 0.1em var(--color2);
   border: none;
 }
 .index-buttons:focus {
-  background-color: var(--color12);
+  background-color: var(--colorvar2);
   color: var(--color1);
   /* transform: translateY(-2px); */
   outline: none !important;
@@ -269,7 +271,7 @@ header {
   margin-right: 1em;
 }
 .nav-buttons {
-  background-color: var(--color12);
+  background-color: var(--colorvar2);
   height: 100%;
   width: 4em;
   border-radius: 1em;
@@ -297,29 +299,29 @@ header {
 }
 .modal-content {
   border-radius: 10px;
-  background-color: var(--color11);
+  background-color: var(--colorvar1);
 }
 .modal-header {
-  /* background-color: var(--color12); */
+  /* background-color: var(--colorvar2); */
   /* border-bottom: 2px solid #dee2e6; */
   border-radius: 10px;
   color: var(--color1);
 }
 
 .modal-title {
-  color: var(--color12);
+  color: var(--colorvar2);
   font-weight: bold;
 }
 
 .modal-body {
   font-family: "Roboto", sans-serif;
   line-height: 1.6;
-  color: var(--color12);
+  color: var(--colorvar2);
 }
 
 .btn-primary {
-  background-color: var(--color12);
-  border-color: var(--color12);
+  background-color: var(--colorvar2);
+  border-color: var(--colorvar2);
   color: var(--color1);
 }
 
@@ -597,7 +599,7 @@ header {
   left: 0;
   width: 0;
   /* height: 100%; */
-  background-color: var(--color12);
+  background-color: var(--colorvar2);
   color: white;
   overflow-x: hidden;
   transition: width 0.3s ease;
@@ -630,7 +632,7 @@ header {
   right: 0;
   width: 0;
   /* height: 100%; */
-  background-color: var(--color11);
+  background-color: var(--colorvar1);
   color: white;
   overflow-x: hidden;
   transition: width 0.3s ease;
@@ -693,7 +695,7 @@ header {
   width: 2em;
   color: var(--color1);
   border: none;
-  background-color: var(--color12);
+  background-color: var(--colorvar2);
 }
 
 #button-desafio-close-container {
@@ -705,9 +707,9 @@ header {
 #desafio-close-button {
   height: 100%;
   width: 2em;
-  color: var(--color12);
+  color: var(--colorvar2);
   border: none;
-  background-color: var(--color11);
+  background-color: var(--colorvar1);
 }
 
 #tab-historia {
@@ -741,7 +743,7 @@ header {
 }
 
 #historia-button {
-  background-color: var(--color12);
+  background-color: var(--colorvar2);
   height: 100%;
   font-size: 3em;
   border-top-left-radius: 0;
@@ -756,7 +758,7 @@ header {
   font-weight: bold;
 }
 #historia-button2 {
-  background-color: var(--color12);
+  background-color: var(--colorvar2);
   height: 100%;
   font-size: 3em;
   border-top-left-radius: 0;
@@ -775,7 +777,7 @@ header {
   flex: 1;
 }
 #desafio-button {
-  background-color: var(--color11);
+  background-color: var(--colorvar1);
   height: 100%;
   font-size: 3em;
   border-top-left-radius: 0.3em;
@@ -785,12 +787,12 @@ header {
   writing-mode: sideways-rl;
   border: none;
   box-shadow: -0.2em 0.1em 0.1em var(--color2);
-  color: var(--color12);
+  color: var(--colorvar2);
   font-family: var(--font-rubik);
   font-weight: bold;
 }
 #desafio-button2 {
-  background-color: var(--color11);
+  background-color: var(--colorvar1);
   height: 100%;
   font-size: 3em;
   border-top-left-radius: 0.3em;
@@ -801,7 +803,7 @@ header {
   border: none;
   /* box-shadow: -0.2em 0.1em 0.1em var(--color2); */
   font-family: var(--font-rubik);
-  color: var(--color12);
+  color: var(--colorvar2);
   font-weight: bold;
 }
 
@@ -831,7 +833,7 @@ header {
   right: 10em;
   top: 0.5em;
   color: var(--color1);
-  background-color: var(--color12);
+  background-color: var(--colorvar2);
   z-index: 1000;
   display: flex;
   height: 3em;

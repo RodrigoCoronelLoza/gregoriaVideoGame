@@ -859,7 +859,7 @@ const feedbackData = {
 //   6: "Dlayout",//PAREJAS CORRECTAS
 //   7: "Elayout",//ORDENAR FRAGMENTOS DE UNA ORACION
 //   8: "Flayout",//ORDENAR PASOS
-//   9: "Glayout",
+//   9: "Glayout",//COMPLETAR FRASES CON PALABRAS SUELTAS
 //   10: "Hlayout",//MEMORIA
 //   11: "Klayout",//SELECCIONAR UN JUGADOR
 //   12: "Llayout",//SELECTOR DE BIFURCACION
