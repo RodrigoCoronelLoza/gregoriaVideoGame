@@ -15,6 +15,8 @@ let sentenceGameStartTime = null;
 let sentenceAttempts = 0;
 let completedSentences = 0;
 
+let selectedMultipleAnswers = [];
+
 let recipeGameCompleted = false;
 let recipeGameStartTime = null;
 let recipeAttempts = 0;
@@ -2883,25 +2885,169 @@ function resetMatchPairs() {
 function answerMultipleChoice(selectedOption) {
   const pageTrivia = currentTextData[currentPage];
   const currentQuestion = pageTrivia.questions[currentQuestionIndex];
-  const isCorrect = selectedOption === currentQuestion.correctAnswer;
+
+  // Check if this is a multi-select question
+  const isMultiSelect = Array.isArray(
+    currentQuestion.correctAnswers || currentQuestion.correctAnswer
+  );
+
+  if (isMultiSelect) {
+    // Handle multi-select logic
+    const optionIndex = selectedMultipleAnswers.indexOf(selectedOption);
+
+    if (optionIndex > -1) {
+      // Deselect if already selected
+      selectedMultipleAnswers.splice(optionIndex, 1);
+      document
+        .querySelector(`[data-option="${selectedOption}"]`)
+        .classList.remove("selected");
+    } else {
+      // Select if not already selected
+      selectedMultipleAnswers.push(selectedOption);
+      document
+        .querySelector(`[data-option="${selectedOption}"]`)
+        .classList.add("selected");
+    }
+
+    // Show submit button for multi-select questions
+    showSubmitButton();
+  } else {
+    // Handle single-select logic (existing behavior)
+    const correctAnswer =
+      currentQuestion.correctAnswer || currentQuestion.correctAnswers[0];
+    const isCorrect = selectedOption === correctAnswer;
+
+    // Store the answer
+    userAnswers[currentQuestionIndex] = {
+      userAnswer: selectedOption,
+      correct: isCorrect,
+      question: currentQuestion.question,
+      explanation: currentQuestion.explanation,
+      selectedOption: currentQuestion.options[selectedOption],
+      correctOption: currentQuestion.options[correctAnswer],
+    };
+
+    // Show result for current question
+    showMultipleChoiceResult(selectedOption, currentQuestion);
+
+    // Disable buttons
+    const buttons = document.querySelectorAll(".trivia-btn");
+    buttons.forEach((btn) => (btn.disabled = true));
+  }
+}
+
+// 4. New function to handle multi-select submission
+function submitMultipleAnswers() {
+  const pageTrivia = currentTextData[currentPage];
+  const currentQuestion = pageTrivia.questions[currentQuestionIndex];
+  const correctAnswers = currentQuestion.correctAnswers || [
+    currentQuestion.correctAnswer,
+  ];
+
+  // Check if selected answers match correct answers
+  const isCorrect =
+    selectedMultipleAnswers.length === correctAnswers.length &&
+    selectedMultipleAnswers.every((answer) =>
+      correctAnswers.includes(answer)
+    ) &&
+    correctAnswers.every((answer) => selectedMultipleAnswers.includes(answer));
 
   // Store the answer
   userAnswers[currentQuestionIndex] = {
-    userAnswer: selectedOption,
+    userAnswer: selectedMultipleAnswers.slice(), // Copy array
     correct: isCorrect,
     question: currentQuestion.question,
     explanation: currentQuestion.explanation,
-    selectedOption: currentQuestion.options[selectedOption],
-    correctOption: currentQuestion.options[currentQuestion.correctAnswer],
+    selectedOptions: selectedMultipleAnswers.map(
+      (index) => currentQuestion.options[index]
+    ),
+    correctOptions: correctAnswers.map(
+      (index) => currentQuestion.options[index]
+    ),
   };
 
   // Show result for current question
-  showMultipleChoiceResult(selectedOption, currentQuestion);
+  showMultiSelectResult(selectedMultipleAnswers, currentQuestion);
 
   // Disable buttons
   const buttons = document.querySelectorAll(".trivia-btn");
   buttons.forEach((btn) => (btn.disabled = true));
+
+  // Hide submit button
+  document.getElementById("submit-answers-btn").style.display = "none";
 }
+
+// 5. New function to show submit button
+function showSubmitButton() {
+  let submitBtn = document.getElementById("submit-answers-btn");
+  if (!submitBtn) {
+    const buttonContainer = document.querySelector(
+      ".trivia-buttons.multiple-choice"
+    );
+    submitBtn = document.createElement("button");
+    submitBtn.id = "submit-answers-btn";
+    submitBtn.className = "trivia-btn submit-btn";
+    submitBtn.textContent = "Enviar Respuestas";
+    submitBtn.onclick = submitMultipleAnswers;
+    buttonContainer.appendChild(submitBtn);
+  }
+
+  // Show/hide based on whether any answers are selected
+  submitBtn.style.display =
+    selectedMultipleAnswers.length > 0 ? "block" : "none";
+}
+
+// 6. New function to show multi-select results
+function showMultiSelectResult(selectedOptions, questionData) {
+  const resultDiv = document.getElementById("question-result");
+  const messageDiv = document.getElementById("result-message");
+  const explanationDiv = document.getElementById("explanation");
+  const nextBtn = document.getElementById("next-question-btn");
+
+  const correctAnswers = questionData.correctAnswers || [
+    questionData.correctAnswer,
+  ];
+  const isCorrect =
+    selectedOptions.length === correctAnswers.length &&
+    selectedOptions.every((answer) => correctAnswers.includes(answer)) &&
+    correctAnswers.every((answer) => selectedOptions.includes(answer));
+
+  // Update result message
+  if (isCorrect) {
+    messageDiv.innerHTML = '<span class="correct">¡Correcto!</span>';
+    messageDiv.className = "result-message correct";
+  } else {
+    messageDiv.innerHTML = '<span class="incorrect">Incorrecto</span>';
+    messageDiv.className = "result-message incorrect";
+  }
+
+  explanationDiv.textContent = questionData.explanation;
+
+  // Highlight buttons
+  const buttons = document.querySelectorAll(".option-btn");
+  buttons.forEach((btn, index) => {
+    if (correctAnswers.includes(index)) {
+      btn.classList.add("correct-answer");
+    } else if (
+      selectedOptions.includes(index) &&
+      !correctAnswers.includes(index)
+    ) {
+      btn.classList.add("wrong-answer");
+    }
+  });
+
+  // Update next button text
+  const totalQuestions = currentTextData[currentPage].questions.length;
+  if (currentQuestionIndex < totalQuestions - 1) {
+    nextBtn.textContent = "Siguiente Pregunta";
+  } else {
+    nextBtn.textContent = "Ver Resultados";
+  }
+
+  // Show result section
+  resultDiv.style.display = "block";
+}
+
 // Handle individual question answers
 function answerQuestion(answer) {
   const pageTrivia = currentTextData[currentPage];
@@ -2930,7 +3076,12 @@ function showMultipleChoiceResult(selectedOption, questionData) {
   const explanationDiv = document.getElementById("explanation");
   const nextBtn = document.getElementById("next-question-btn");
 
-  const isCorrect = selectedOption === questionData.correctAnswer;
+  // Handle both single and multiple correct answers
+  const correctAnswers = Array.isArray(questionData.correctAnswers)
+    ? questionData.correctAnswers
+    : [questionData.correctAnswer];
+
+  const isCorrect = correctAnswers.includes(selectedOption);
 
   // Update result message
   if (isCorrect) {
@@ -2946,9 +3097,9 @@ function showMultipleChoiceResult(selectedOption, questionData) {
   // Highlight buttons
   const buttons = document.querySelectorAll(".option-btn");
   buttons.forEach((btn, index) => {
-    if (index === questionData.correctAnswer) {
+    if (correctAnswers.includes(index)) {
       btn.classList.add("correct-answer");
-    } else if (index === selectedOption && !isCorrect) {
+    } else if (index === selectedOption && !correctAnswers.includes(index)) {
       btn.classList.add("wrong-answer");
     }
   });
@@ -3030,6 +3181,9 @@ function refreshCurrentQuestion() {
   const totalQuestions = pageTrivia.questions.length;
   const currentLayout = currentLayoutData[currentPage];
 
+  // Reset multi-select state
+  selectedMultipleAnswers = [];
+
   // Update question counter and progress
   const questionCounter = document.querySelector(".question-counter");
   const progressFill = document.querySelector(".progress-fill");
@@ -3049,6 +3203,17 @@ function refreshCurrentQuestion() {
 
   if (questionText) {
     questionText.textContent = currentQuestion.question;
+  }
+
+  const isMultiSelect = Array.isArray(
+    currentQuestion.correctAnswers || currentQuestion.correctAnswer
+  );
+
+  const instructionElement = document.querySelector(".trivia-question h2");
+  if (instructionElement) {
+    instructionElement.textContent = isMultiSelect
+      ? "Selecciona todas las respuestas correctas:"
+      : "Selecciona la respuesta correcta:";
   }
 
   // For multiple choice questions (B layout), regenerate the entire button container
@@ -3139,6 +3304,7 @@ function resetTrivia() {
   currentQuestionIndex = 0;
   userAnswers = [];
   pageCompleted = false;
+  selectedMultipleAnswers = [];
   resetMatchPairs();
   resetSentenceGame();
   resetRecipeGameState();

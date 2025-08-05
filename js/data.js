@@ -138,19 +138,10 @@ const textAData = {
   0: {
     questions: [
       {
-        question:
-          "¿Cuáles de estas señales podrían indicar que una amiga o amigo podría no estar atravesando una situación de violencia o control?",
-        options: [
-          "Cambios repentinos en el ánimo o comportamiento",
-          "Dejar de hablar con sus amistades sin razón clara",
-          "Comenzar a recibir regalos de personas adultas desconocidas ",
-          "Reírse más de lo habitual y socializar más",
-          "Evitar hablar de alguien con quien antes se veía mucho",
-          " Contestar mensajes a escondidas, con nerviosismo",
-        ],
-        correctAnswer: 3, // Index of correct answer (París)
-        explanation:
-          "Reírse más no suele ser una señal de violencia. La clave está en observar cambios inusuales o evasivos.",
+        question: "Which of these are European capitals?",
+        options: ["London", "Tokyo", "Paris", "New York"],
+        correctAnswers: [0, 2], // Both London and Paris are correct
+        explanation: "London and Paris are both European capitals.",
       },
     ],
   },
