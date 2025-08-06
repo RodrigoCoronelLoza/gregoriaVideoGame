@@ -1,10 +1,12 @@
-let currentPage = 0;
+let currentPage = 1;
 let currentAudio = null;
 let currentQuestionIndex = 0;
 let userAnswers = [];
 let pageCompleted = false;
 let coins = 1000;
 const lostCoins = 50;
+let nextBranch = "";
+let nextNumberOfPage = 0;
 
 let currentSentenceIndex = 0;
 let sentenceFragments = [];
@@ -41,14 +43,16 @@ let memoryMatchedPairs = 0;
 let memoryCards = [];
 let memoryGameInProgress = false;
 
-currentTitlesData = titlesVData;
-currentLayoutData = layoutVData;
-currentIntructionsData = instructionsVData;
-currentFeedbackData = feedbackVData;
-currentHistoryData = historyVData;
-currentTextData = textVData;
-currentImagesData = imagesVData;
-currentJumpsData = jumpsVData;
+let currentTitlesData = titlesVData;
+let currentLayoutData = layoutVData;
+let currentIntructionsData = instructionsVData;
+let currentFeedbackData = feedbackVData;
+let currentHistoryData = historyVData;
+let currentTextData = textVData;
+let currentImagesData = imagesVData;
+let currentJumpsData = jumpsVData;
+let currentNextData = nextVData;
+let currentBranch = "V";
 
 function renderPage() {
   const pageContent = document.getElementById("page-content");
@@ -74,19 +78,38 @@ function renderPage() {
     currentJumpsData
   );
   // playAudio(audioData, currentPage);
-  console.log(currentPage);
+  console.log("currentPAge: " + currentPage);
+  console.log("currentBranch: " + currentBranch);
 }
 
 //Siguiente pagina
 function nextPage() {
-  if (currentPage < Object.keys(currentLayoutData).length - 1) {
+  const keys = Object.keys(currentLayoutData);
+  const lastKey = keys[keys.length - 1];
+  if (currentPage < lastKey + 1) {
     if (currentLayoutData !== layoutVData) {
       coins = coins - lostCoins;
     }
-    currentPage++;
+    // console.log(currentNextData[currentPage].branch);
+    nextBranch = currentNextData[currentPage].branch;
+    nextNumberOfPage = currentNextData[currentPage].numberOfPage;
+
+    console.log("next branch:" + nextBranch);
+    console.log("next number of page:" + nextNumberOfPage);
+
     resetTrivia();
     resetAdvButtons();
-    masterRender();
+
+    if (nextBranch !== currentBranch) {
+      jumpBranch(nextBranch, nextNumberOfPage);
+    } else {
+      currentPage = nextNumberOfPage;
+      masterRender();
+    }
+
+    // currentPage++;
+    // resetTrivia();
+    // resetAdvButtons();
   }
 }
 
@@ -252,13 +275,13 @@ function KLayOutGenerator(titles, page, text, history, images, jumps) {
     <h1>SELECCIONA EL PERSONAJE</h1>
     <div id="characters-container">
       <div id="cha1-button-container" class="cha-container">
-        <button class="cha-button" id="cha1-button" onclick="selectPersonaje('${newLayout0}',${numberOfPage0})">PERSONAJE1</button>
+        <button class="cha-button" id="cha1-button" onclick="jumpBranch('${newLayout0}',${numberOfPage0})">PERSONAJE1</button>
         <div class="container-text-character">
           <p>'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. '</p>
         </div>
       </div>
       <div id="cha2-button-container" class="cha-container">
-        <button class="cha-button" id="cha2-button" onclick="selectPersonaje('${newLayout1}',${numberOfPage1})">PERSONAJE2</button>
+        <button class="cha-button" id="cha2-button" onclick="jumpBranch('${newLayout1}',${numberOfPage1})">PERSONAJE2</button>
         <div class="container-text-character">
           <p>'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. '</p>
         </div>
@@ -309,7 +332,7 @@ function buttonGeneratorOptions(jumps, page, text) {
     result =
       result +
       `<div id="dec${i}-button-container" class="dec-container">
-        <button class="dec-button" id="dec${i}-button" onclick="selectPersonaje('${
+        <button class="dec-button" id="dec${i}-button" onclick="jumpBranch('${
         jumps[page][i].newLayout
       }',${jumps[page][i].numberOfPage})"> ${text[page][i + 1]}</button>
       </div>`;
@@ -600,7 +623,7 @@ function DLayOutGenerator(
 ) {
   const nextButton = document.getElementById("next-button");
   const pageData = text[page];
-  console.log(text[page]);
+  // console.log(text[page]);
   // nextButton.disabled = true;
   document.querySelector(
     ".Dlayout"
@@ -1307,7 +1330,7 @@ function HLayOutGenerator(
     <h1>${titles[page]}</h1>`;
 }
 
-function selectPersonaje(newLayout, numberOfPage) {
+function jumpBranch(newLayout, numberOfPage) {
   currentTitlesData = eval("titles" + newLayout + "Data");
   currentLayoutData = eval("layout" + newLayout + "Data");
   currentIntructionsData = eval("instructions" + newLayout + "Data");
@@ -1316,27 +1339,20 @@ function selectPersonaje(newLayout, numberOfPage) {
   currentTextData = eval("text" + newLayout + "Data");
   currentImagesData = eval("images" + newLayout + "Data");
   currentJumpsData = eval("jumps" + newLayout + "Data");
+  currentNextData = eval("next" + newLayout + "Data");
+  currentBranch = newLayout;
   currentPage = numberOfPage;
 
-  if (newLayout === "B") {
+  if (newLayout === "H") {
     document.documentElement.style.setProperty("--colorvar1", "#5e7547");
     document.documentElement.style.setProperty("--colorvar2", "#172601");
   }
+  if (newLayout === "A" || newLayout === "V") {
+    document.documentElement.style.setProperty("--colorvar1", "#d1ebe0");
+    document.documentElement.style.setProperty("--colorvar2", "#518084");
+  }
   masterRender();
 }
-
-// function selectPersonaje2(newLayout, numberOfPage) {
-//   currentTitlesData = eval("titles" + newLayout + "Data");
-//   currentLayoutData = eval("layout" + newLayout + "Data");
-//   currentIntructionsData = eval("instructions" + newLayout + "Data");
-//   currentFeedbackData = eval("feedback" + newLayout + "Data");
-//   currentHistoryData = eval("history" + newLayout + "Data");
-//   currentTextData = eval("text" + newLayout + "Data");
-//   currentImagesData = eval("images" + newLayout + "Data");
-//   currentJumpsData = eval("jumps" + newLayout + "Data");
-//   currentPage = numberOfPage;
-//   masterRender();
-// }
 
 function toggleSidebarLeft() {
   document.getElementById("sidebar-left").classList.toggle("open");

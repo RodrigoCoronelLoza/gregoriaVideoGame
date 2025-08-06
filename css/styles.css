@@ -441,7 +441,7 @@ header {
 }
 
 #characters-container {
-  border: 1px solid green;
+  /* border: 1px solid green; */
   display: flex;
   width: 80%;
   height: 75%;
@@ -457,7 +457,7 @@ header {
 }
 
 .cha-container {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   width: 40%;
   border-radius: 1em;
 }
@@ -2904,7 +2904,7 @@ header {
     width: 90%;
   }
   .cha-container {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     width: 45%;
     border-radius: 0.5em;
   }
