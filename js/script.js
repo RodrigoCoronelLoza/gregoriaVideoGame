@@ -58,7 +58,11 @@ function renderPage() {
   const pageContent = document.getElementById("page-content");
   const headerElement = document.querySelector("header");
   const advButton = document.getElementById("adv-buttons");
-  if (currentPage === 0 && currentLayoutData === layoutVData) {
+  if (
+    (currentPage === 1 && currentLayoutData === layoutVData) ||
+    currentLayoutData[currentPage] === "Llayout" ||
+    currentLayoutData[currentPage] === "Klayout"
+  ) {
     headerElement.style.display = "none";
     advButton.style.display = "none";
   } else {
@@ -151,7 +155,14 @@ function createStructure(
   if (currentLayout === "Alayout") {
     content = ALayOutGenerator(titles, page, images);
   } else if (currentLayout === "Blayout") {
-    content = BLayOutGenerator(titles, page, text, history, images);
+    content = BLayOutGenerator(
+      titles,
+      page,
+      text,
+      history,
+      images,
+      instructions
+    );
   } else if (currentLayout === "Clayout") {
     content = CLayOutGenerator(
       titles,
@@ -192,7 +203,14 @@ function createStructure(
       images
     );
   } else if (currentLayout === "Glayout") {
-    content = GLayOutGenerator(titles, page, text, history, images);
+    content = GLayOutGenerator(
+      titles,
+      page,
+      text,
+      history,
+      images,
+      instructions
+    );
   } else if (currentLayout === "Hlayout") {
     content = HLayOutGenerator(
       titles,
@@ -387,7 +405,7 @@ function XLayOutGenerator(titles, page, text, history, images) {
 }
 
 // Plantilla B
-function BLayOutGenerator(titles, page, text, history, images) {
+function BLayOutGenerator(titles, page, text, history, images, instructions) {
   const nextButton = document.getElementById("next-button");
   const pageTrivia = text[page];
   const totalQuestions = pageTrivia.questions.length;
@@ -458,7 +476,7 @@ function BLayOutGenerator(titles, page, text, history, images) {
               </div>
             </div>
             <div class="trivia-question">
-              <h2>Selecciona la respuesta correcta:</h2>
+              <h2>${instructions[page]}</h2>
               <p class="question-text">${currentQuestion.question}</p>
             </div>
             <div class="trivia-buttons multiple-choice">
@@ -828,7 +846,7 @@ function ELayOutGenerator(
           <h3>Instrucciones:</h3>
           <p> ${
             instructions[page]
-          }Arrastra las partes de la oración para formar una oración completa con sentido lógico.</p>
+          }Arrastra los fragmentos para formar la oración correcta.</p>
         </div>
         
         <div id="sentence-game-area" class="sentence-game-area">
@@ -1048,7 +1066,7 @@ function FLayOutGenerator(
     <h1>${titles[page]}</h1>`;
 }
 // Plantilla G
-function GLayOutGenerator(titles, page, text, history) {
+function GLayOutGenerator(titles, page, text, history, images, instructions) {
   const nextButton = document.getElementById("next-button");
   const pageData = text[page];
   // nextButton.disabled = true;
@@ -1134,7 +1152,7 @@ function GLayOutGenerator(titles, page, text, history) {
         
         <div class="phrase-instructions">
           <h3>Instrucciones:</h3>
-          <p>Arrastra las palabras correctas para completar las frases. Cada palabra encaja en un lugar específico.</p>
+          <p>${instructions[page]}</p>
         </div>
         
         <div id="phrase-game-area" class="phrase-game-area">
