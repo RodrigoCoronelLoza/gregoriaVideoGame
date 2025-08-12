@@ -2164,8 +2164,8 @@ const titlesFData = {
 
 const layoutFData = {
   1: "Ilayout",
-  2: "Xlayout",
-  3: "Xlayout",
+  2: "X2layout",
+  3: "X2layout",
   4: "Ilayout",
 };
 

@@ -3,8 +3,8 @@ let currentAudio = null;
 let currentQuestionIndex = 0;
 let userAnswers = [];
 let pageCompleted = false;
-let coins = 1000;
-const lostCoins = 50;
+let coins = 3600;
+let lostCoins = 50;
 let nextBranch = "";
 let nextNumberOfPage = 0;
 
@@ -98,11 +98,15 @@ function nextPage() {
     nextBranch = currentNextData[currentPage].branch;
     nextNumberOfPage = currentNextData[currentPage].numberOfPage;
 
-    console.log("next branch:" + nextBranch);
-    console.log("next number of page:" + nextNumberOfPage);
-
     resetTrivia();
     resetAdvButtons();
+
+    if (coins <= 0) {
+      jumpBranch("F", 1);
+      coins = 1;
+      lostCoins = 0;
+      return;
+    }
 
     if (nextBranch !== currentBranch) {
       jumpBranch(nextBranch, nextNumberOfPage);
@@ -223,6 +227,8 @@ function createStructure(
     );
   } else if (currentLayout === "Xlayout") {
     content = XLayOutGenerator(titles, page, text, history, images);
+  } else if (currentLayout === "X2layout") {
+    content = X2LayOutGenerator(titles, page, text, history, images);
   } else if (currentLayout === "Ilayout") {
     content = ILayOutGenerator(titles, page, text, history, images);
   } else if (currentLayout === "Jlayout") {
@@ -346,7 +352,6 @@ function LLayOutGenerator(titles, page, text, history, images, jumps) {
 function buttonGeneratorOptions(jumps, page, text) {
   let result = "";
   for (let i = 0; i < jumps[page].length; i++) {
-    console.log(jumps[page][i].newLayout);
     result =
       result +
       `<div id="dec${i}-button-container" class="dec-container">
@@ -404,13 +409,52 @@ function XLayOutGenerator(titles, page, text, history, images) {
   <h1>${titles[page]}</h1>`;
 }
 
+// Plantilla X-2 NO coins
+function X2LayOutGenerator(titles, page, text, history, images) {
+  document.querySelector(
+    ".X2layout"
+  ).style.backgroundImage = `url('images/${images[page]}')`;
+  return ` 
+  <div id="Xlayout-container">
+    <div id="key-buttons-container">
+      <div id="button-historia-container">
+        <button class="key-buttons" id="historia-button"  onclick="toggleSidebarLeft()">HISTORIA</button>
+      </div>
+      <div id="middle-part">
+      </div>
+      <div id="button-desafio-container">
+        <button class="key-buttons" id="desafio-button">DESAFÍO</button>
+      </div>
+    </div>
+    <div id="sidebar-left">
+      <div id="sidebar-left-corpus">
+        <div id="historia-container">
+          <div id="button-historia-close-container">
+            <button id="historia-close-button" onclick="toggleSidebarLeft()" >X</button>
+          </div>
+          <div id="text-historia">
+            <p>${history[page]}</p>
+          </div>          
+        </div>
+        <div id="tab-historia">
+          <div id="button-historia-container">
+            <button class="key-buttons" id="historia-button2"  onclick="toggleSidebarLeft()">HISTORIA</button>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <h1>${titles[page]}</h1>`;
+}
+
 // Plantilla B
 function BLayOutGenerator(titles, page, text, history, images, instructions) {
   const nextButton = document.getElementById("next-button");
   const pageTrivia = text[page];
   const totalQuestions = pageTrivia.questions.length;
   const currentQuestion = pageTrivia.questions[currentQuestionIndex];
-  // nextButton.disabled = true;
+  nextButton.disabled = true;
   document.querySelector(
     ".Blayout"
   ).style.backgroundImage = `url('images/${images[page]}')`;
@@ -525,7 +569,7 @@ function CLayOutGenerator(titles, page, text, history, instructions, images) {
   const pageTrivia = text[page];
   const totalQuestions = pageTrivia.questions.length;
   const currentQuestion = pageTrivia.questions[currentQuestionIndex];
-  // nextButton.disabled = true;
+  nextButton.disabled = true;
   document.querySelector(
     ".Clayout"
   ).style.backgroundImage = `url('images/${images[page]}')`;
@@ -642,7 +686,7 @@ function DLayOutGenerator(
   const nextButton = document.getElementById("next-button");
   const pageData = text[page];
   // console.log(text[page]);
-  // nextButton.disabled = true;
+  nextButton.disabled = true;
   document.querySelector(
     ".Dlayout"
   ).style.backgroundImage = `url('images/${images[page]}')`;
@@ -762,7 +806,7 @@ function ELayOutGenerator(
 ) {
   const nextButton = document.getElementById("next-button");
   const pageData = text[page];
-  // nextButton.disabled = true;
+  nextButton.disabled = true;
 
   // Initialize game state
   if (pageData && pageData.sentences) {
@@ -911,7 +955,7 @@ function FLayOutGenerator(
 ) {
   const nextButton = document.getElementById("next-button");
   const pageData = text[page];
-  // nextButton.disabled = true;
+  nextButton.disabled = true;
 
   // Initialize recipe game state
   if (pageData && pageData.recipe) {
@@ -1069,7 +1113,7 @@ function FLayOutGenerator(
 function GLayOutGenerator(titles, page, text, history, images, instructions) {
   const nextButton = document.getElementById("next-button");
   const pageData = text[page];
-  // nextButton.disabled = true;
+  nextButton.disabled = true;
 
   // Initialize phrase game state
   if (pageData && pageData.phrases) {
@@ -1219,7 +1263,7 @@ function HLayOutGenerator(
 ) {
   const nextButton = document.getElementById("next-button");
   const pageData = text[page];
-  // nextButton.disabled = true;
+  nextButton.disabled = true;
   // Initialize memory game state
   if (pageData && pageData.memoryImages) {
     initializeMemoryGame(pageData.memoryImages);
@@ -3310,6 +3354,11 @@ function showQuizSummary() {
       <div class="score-fill" style="width: ${percentage}%"></div>
     </div>
   `;
+
+  if (correctAnswers < totalQuestions) {
+    coins = coins - lostCoins;
+    console.log("hay un issue");
+  }
 
   // Generate answers review
   let reviewHTML = "<h4>Revisión de Respuestas:</h4>";

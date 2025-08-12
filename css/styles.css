@@ -585,10 +585,23 @@ header {
   height: auto;
   /* min-height: 85vh; */
   overflow: hidden;
-  background-image: url("../images/jumbotron_1200.jpg");
-  background-size: 100% 100%;
+  
+   background-size: 98% 96%; /* or 'contain' depending on your needs */
   background-repeat: no-repeat;
   background-position: center;
+  border-radius: 7.8rem;
+}
+
+.X2layout {
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+  /* min-height: 85vh; */
+  overflow: hidden;
+  background-size: 98% 96%; /* or 'contain' depending on your needs */
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 7.8rem;
 }
 
 #sidebar-left {
@@ -2893,6 +2906,12 @@ header {
     font-size: 1em;
   }
   .Klayout {
+    border-radius: 4rem;
+  }
+  .Xlayout {
+    border-radius: 4rem;
+  }
+  .X2layout {
     border-radius: 4rem;
   }
 
