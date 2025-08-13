@@ -321,7 +321,7 @@ function LLayOutGenerator(titles, page, text, history, images, jumps) {
   <div id="Llayout-container">
     <div id="coins-container">
       <div id="image-coins-container">
-        <img id="image-coins" src="images/banana.jpg"/>
+        <img id="image-coins" src="images/RELOJ 2.gif"/>
       </div>
       <div id="number-coins-container">
         ${coins}
@@ -368,7 +368,7 @@ function XLayOutGenerator(titles, page, text, history, images) {
   <div id="Xlayout-container">
     <div id="coins-container">
       <div id="image-coins-container">
-        <img id="image-coins" src="images/banana.jpg"/>
+        <img id="image-coins" src="images/RELOJ 2.gif"/>
       </div>
       <div id="number-coins-container">
         ${coins}
@@ -457,7 +457,7 @@ function BLayOutGenerator(titles, page, text, history, images, instructions) {
     <div id="Blayout-container">
       <div id="coins-container">
         <div id="image-coins-container">
-          <img id="image-coins" src="images/banana.jpg"/>
+          <img id="image-coins" src="images/RELOJ 2.gif"/>
         </div>
         <div id="number-coins-container">
           ${coins}
@@ -571,7 +571,7 @@ function CLayOutGenerator(titles, page, text, history, instructions, images) {
     <div id="Clayout-container">
       <div id="coins-container">
         <div id="image-coins-container">
-          <img id="image-coins" src="images/banana.jpg"/>
+          <img id="image-coins" src="images/RELOJ 2.gif"/>
         </div>
         <div id="number-coins-container">
           ${coins}
@@ -687,7 +687,7 @@ function DLayOutGenerator(
     <div id="Dlayout-container">
       <div id="coins-container">
         <div id="image-coins-container">
-          <img id="image-coins" src="images/banana.jpg"/>
+          <img id="image-coins" src="images/RELOJ 2.gif"/>
         </div>
         <div id="number-coins-container">
           ${coins}
@@ -811,7 +811,7 @@ function ELayOutGenerator(
     <div id="Elayout-container">
       <div id="coins-container">
         <div id="image-coins-container">
-          <img id="image-coins" src="images/banana.jpg"/>
+          <img id="image-coins" src="images/RELOJ 2.gif"/>
         </div>
         <div id="number-coins-container">
           ${coins}
@@ -961,7 +961,7 @@ function FLayOutGenerator(
     <div id="Flayout-container">
       <div id="coins-container">
         <div id="image-coins-container">
-          <img id="image-coins" src="images/banana.jpg"/>
+          <img id="image-coins" src="images/RELOJ 2.gif"/>
         </div>
         <div id="number-coins-container">
           ${coins}
@@ -1119,7 +1119,7 @@ function GLayOutGenerator(titles, page, text, history, images, instructions) {
       <div id="key-buttons-container">
         <div id="coins-container">
           <div id="image-coins-container">
-            <img id="image-coins" src="images/banana.jpg"/>
+            <img id="image-coins" src="images/RELOJ 2.gif"/>
           </div>
           <div id="number-coins-container">
             ${coins}
@@ -1264,7 +1264,7 @@ function HLayOutGenerator(
     <div id="Hlayout-container">
       <div id="coins-container">
         <div id="image-coins-container">
-          <img id="image-coins" src="images/banana.jpg"/>
+          <img id="image-coins" src="images/RELOJ 2.gif"/>
         </div>
         <div id="number-coins-container">
           ${coins}

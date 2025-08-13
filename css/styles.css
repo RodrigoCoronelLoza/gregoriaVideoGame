@@ -19,9 +19,9 @@
 }
 body {
   background-color: black;
-  background-image: url("../images/amalie-steiness.gif");
+  background-image: url("../images/Buffer.gif");
   background-repeat: no-repeat;
-  background-size: 80% 80%;
+  background-size: 100% 100%;
   background-position: center;
   font-family: var(--font-openSans);
   /* height: 100vh; */

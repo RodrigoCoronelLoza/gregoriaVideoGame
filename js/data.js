@@ -1014,7 +1014,12 @@ const textAData = {
     ],
   },
   17: {
-    memoryImages: ["14-1.png", "14-3.png", "14-5.png", "14-7.png"],
+    memoryImages: [
+      "A17 MEMORIA 1.png",
+      "A17 MEMORIA 2.png",
+      "A17 MEMORIA 3.png",
+      "A17 MEMORIA 4.png",
+    ],
   },
   18: {
     pairs: [
@@ -1593,7 +1598,12 @@ const historyHData = {
 const textHData = {
   1: "",
   2: {
-    memoryImages: ["14-1.png", "14-3.png", "14-5.png", "14-7.png"],
+    memoryImages: [
+      "H2 MEMORIA 1.png",
+      "H2 MEMORIA 2.png",
+      "H2 MEMORIA 3.png",
+      "H2 MEMORIA 4.png",
+    ],
   },
   3: [
     "Tu madre insiste en que tal vez María aparecerá pronto, pero no está segura. Estás frente a dos opciones: ¿Qué harás?",
@@ -1757,7 +1767,12 @@ const textHData = {
     ],
   },
   15: {
-    memoryImages: ["14-1.png", "14-3.png", "14-5.png", "14-7.png"],
+    memoryImages: [
+      "H15 MEMORIA 1.png",
+      "H15 MEMORIA 2.png",
+      "H15 MEMORIA 3.png",
+      "H15 MEMORIA 4.png",
+    ],
   },
   16: {
     sentences: [
@@ -1960,7 +1975,12 @@ const textHData = {
     ],
   },
   31: {
-    memoryImages: ["14-1.png", "14-3.png", "14-5.png", "14-7.png"],
+    memoryImages: [
+      "H31 MEMORIA 1.png",
+      "H31 MEMORIA 2.png",
+      "H31 MEMORIA 3.png",
+      "H31 MEMORIA 4.png",
+    ],
   },
 };
 
