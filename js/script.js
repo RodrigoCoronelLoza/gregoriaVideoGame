@@ -927,11 +927,6 @@ function ELayOutGenerator(
           </div>
         </div>
       </div>
-      
-
-
-
-      
     </div>`;
 }
 
