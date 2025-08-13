@@ -332,13 +332,14 @@ function LLayOutGenerator(titles, page, text, history, images, jumps) {
         <div id="title-container">
           DECISIÓN
         </div>
+        <div id="question-container">
+          <p>${text[page][0]}</p>
+        </div>
         <div id="image-dec-container">
           <img id="image-dec" src="images/${images[page][1]}"/>
         </div>
       </div>
-      <div id="question-container">
-        <p>${text[page][0]}</p>
-      </div>
+      
       <div id="options-container">
         ${buttonGeneratorOptions(jumps, page, text)}
       </div>
