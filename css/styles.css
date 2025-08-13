@@ -536,7 +536,8 @@ header {
   font-family: var(--font-averia);
   height: 70vh;
   width: 80%;
-  background-color: var(--color11);
+  background-color: var(--colorvar1);
+  opacity: 0.8;
   color: var(--color2);
   text-align: center;
   border-radius: 0.5em;
@@ -545,7 +546,7 @@ header {
 #title-container {
   font-family: var(--font-rubik);
   /* border: 1px solid red; */
-  color: var(--color12);
+  color: var(--colorvar2);
   font-size: 4em;
   width: 80%;
   height: 100%;
@@ -586,7 +587,7 @@ header {
 
 .dec-button {
   height: 100%;
-  background-color: var(--color12);
+  background-color: var(--colorvar2);
   color: var(--color1);
   border-radius: 0.5em;
   font-size: 1.5em;
@@ -1293,7 +1294,7 @@ header {
 }
 
 .match-card {
-  background: linear-gradient(135deg, var(--color11) 0%, var(--color12) 100%);
+  background: linear-gradient(135deg, var(--colorvar1) 0%, var(--colorvar2) 100%);
   border-radius: 10px;
   padding: 20px;
   cursor: pointer;

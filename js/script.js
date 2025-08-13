@@ -250,8 +250,7 @@ function ALayOutGenerator(titles, page, images) {
     <div class="button-caratula-container">
       <button class="nav-buttons" id="comenzar-button" onclick="nextPage()">Comienza</button>
     </div>
-  </div>
-  <h1>${titles[page]}</h1>`;
+  </div>`;
 }
 
 function ILayOutGenerator(titles, page, text, history, images) {
@@ -263,8 +262,7 @@ function ILayOutGenerator(titles, page, text, history, images) {
     <div id="text-container">
       <p>${history[page]}</p>
     </div>
-  </div>
-  <h1>${titles[page]}</h1>`;
+  </div>`;
 }
 
 // Plantilla J
@@ -277,8 +275,7 @@ function JLayOutGenerator(titles, page, text, history, images) {
   ).style.backgroundImage = `url('images/${images[page]}')`;
   return ` 
   <div id="Jlayout-container">
-  </div>
-  <h1>${titles[page]}</h1>`;
+  </div>`;
 }
 
 // Plantilla K
@@ -405,8 +402,7 @@ function XLayOutGenerator(titles, page, text, history, images) {
       </div>
       
     </div>
-  </div>
-  <h1>${titles[page]}</h1>`;
+  </div>`;
 }
 
 // Plantilla X-2 NO coins
@@ -444,8 +440,7 @@ function X2LayOutGenerator(titles, page, text, history, images) {
       </div>
       
     </div>
-  </div>
-  <h1>${titles[page]}</h1>`;
+  </div>`;
 }
 
 // Plantilla B
@@ -558,8 +553,7 @@ function BLayOutGenerator(titles, page, text, history, images, instructions) {
         </div>
       </div>
     </div>    
-  </div>
-  <h1>${titles[page]}</h1>`;
+  </div>`;
 }
 
 // Plantilla C
@@ -669,8 +663,7 @@ function CLayOutGenerator(titles, page, text, history, instructions, images) {
           </div>
         </div>
       </div>
-    </div>
-    <h1>${titles[page]}</h1>`;
+    </div>`;
 }
 
 // Plantilla D
@@ -790,8 +783,7 @@ function DLayOutGenerator(
           </div>
         </div>
       </div>      
-    </div>
-    <h1>${titles[page]}</h1>`;
+    </div>`;
 }
 
 // Plantilla E
@@ -939,8 +931,7 @@ function ELayOutGenerator(
 
 
       
-    </div>
-    <h1>${titles[page]}</h1>`;
+    </div>`;
 }
 
 // Plantilla F
@@ -1106,8 +1097,7 @@ function FLayOutGenerator(
 
 
       
-    </div>
-    <h1>${titles[page]}</h1>`;
+    </div>`;
 }
 // Plantilla G
 function GLayOutGenerator(titles, page, text, history, images, instructions) {
@@ -1247,8 +1237,7 @@ function GLayOutGenerator(titles, page, text, history, images, instructions) {
       </div>  
 
       
-    </div>
-    <h1>${titles[page]}</h1>`;
+    </div>`;
 }
 
 // Plantilla H
@@ -1388,8 +1377,7 @@ function HLayOutGenerator(
         </div>
       </div>
       
-    </div>
-    <h1>${titles[page]}</h1>`;
+    </div>`;
 }
 
 function jumpBranch(newLayout, numberOfPage) {
