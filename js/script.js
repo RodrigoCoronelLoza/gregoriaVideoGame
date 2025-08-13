@@ -680,7 +680,7 @@ function DLayOutGenerator(
   const nextButton = document.getElementById("next-button");
   const pageData = text[page];
   // console.log(text[page]);
-  nextButton.disabled = true;
+  // nextButton.disabled = true;
   document.querySelector(
     ".Dlayout"
   ).style.backgroundImage = `url('images/${images[page]}')`;
@@ -1248,7 +1248,7 @@ function HLayOutGenerator(
 ) {
   const nextButton = document.getElementById("next-button");
   const pageData = text[page];
-  nextButton.disabled = true;
+  // nextButton.disabled = true;
   // Initialize memory game state
   if (pageData && pageData.memoryImages) {
     initializeMemoryGame(pageData.memoryImages);

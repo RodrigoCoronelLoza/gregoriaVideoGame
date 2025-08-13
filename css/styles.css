@@ -270,14 +270,14 @@ header {
   top: 0.2em;
   right: 0;
   /* width: 50%; */
-  height: 3em;
+  height: 6em;
   /* border: 1px solid red; */
   margin-right: 1em;
 }
 .nav-buttons {
   background-color: var(--colorvar2);
   height: 100%;
-  width: 4em;
+  width: 8em;
   border-radius: 1em;
   color: var(--color1);
 }
@@ -724,6 +724,7 @@ header {
   color: var(--color1);
   border: none;
   background-color: var(--colorvar2);
+  font-size: 2.5em;
 }
 
 #button-desafio-close-container {
@@ -738,6 +739,8 @@ header {
   color: var(--colorvar2);
   border: none;
   background-color: var(--colorvar1);
+  font-size: 2.5em;
+  font-family: var(--font-averia);
 }
 
 #tab-historia {
@@ -1295,7 +1298,11 @@ header {
 }
 
 .match-card {
-  background: linear-gradient(135deg, var(--colorvar1) 0%, var(--colorvar2) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--colorvar1) 0%,
+    var(--colorvar2) 100%
+  );
   border-radius: 10px;
   padding: 20px;
   cursor: pointer;
@@ -2552,7 +2559,11 @@ header {
 }
 
 .card-front {
-  background: linear-gradient(135deg, var(--colorvar1) 0%, var(--colorvar2) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--colorvar1) 0%,
+    var(--colorvar2) 100%
+  );
   color: white;
 }
 
