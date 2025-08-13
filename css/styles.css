@@ -905,7 +905,7 @@ header {
 }
 
 .option-btn {
-  background-color: var(--color12);
+  background-color: var(--colorvar2);
   text-align: left;
   padding: 15px;
   min-height: 50px;
@@ -2551,7 +2551,7 @@ header {
 }
 
 .card-front {
-  background: linear-gradient(135deg, var(--color11) 0%, var(--color12) 100%);
+  background: linear-gradient(135deg, var(--colorvar1) 0%, var(--colorvar2) 100%);
   color: white;
 }
 
