@@ -54,7 +54,7 @@
                     data-toggle="modal"
                     data-target="#modal1"
                   >
-                    Instrucciones/Creditos
+                    Instrucciones
                   </button>
                 </div>
               </li>
@@ -66,7 +66,7 @@
                     data-toggle="modal"
                     data-target="#modal2"
                   >
-                    Comenzar de nuevo
+                    Ayuda
                   </button>
                 </div>
               </li>
@@ -78,7 +78,7 @@
                     data-toggle="modal"
                     data-target="#modal3"
                   >
-                    Avance del juego
+                    Sistema de puntaje
                   </button>
                 </div>
               </li>
@@ -90,7 +90,19 @@
                     data-toggle="modal"
                     data-target="#modal4"
                   >
-                    Ayuda
+                    Comenzar de nuevo
+                  </button>
+                </div>
+              </li>
+              <li class="list-item">
+                <div class="list-button">
+                  <button
+                    class="index-buttons btn btn-default"
+                    id="index-button5"
+                    data-toggle="modal"
+                    data-target="#modal5"
+                  >
+                    Créditos
                   </button>
                 </div>
               </li>
@@ -130,19 +142,29 @@
             >
               <span aria-hidden="true">&times;</span>
             </button>
-            <h4 class="modal-title" id="modal1Label">Instrucciones</h4>
+            <h4 class="modal-title" id="modal1Label">INSTRUCCIONES</h4>
           </div>
           <div class="modal-body">
-            <h5>OBJETIVO DEL JUEGO</h5>
             <p>
-              Investigar la desaparición de María, una estudiante de 15 años,
-              descubriendo las señales de violencia que todos ignoraron. Tu
-              misión:
+              Este juego es una historia interactiva inspirada en situaciones
+              reales que muchas y muchos adolescentes enfrentan a diario. Tu rol
+              será seguir las pistas y tomar decisiones desde el punto de vista
+              de Mónica o Miguel, para entender qué está pasando con María, su
+              amiga o hermana, quien ha desaparecido misteriosamente.
             </p>
+            <h5>¿Qué debes hacer?</h5>
             <ul>
-              <li>Recolectar pistas ocultas en diálogos, objetos y redes sociales.</li>
-              <li>Tomar decisiones críticas que alteran el destino de María.</li>
-              <li>Romper la cadena de silencio que permite la violencia.</li>
+              <li>Explora cada escena con atención.</li>
+              <li>
+                Toma decisiones con criterio: no siempre hay respuestas
+                correctas, pero sí consecuencias.
+              </li>
+              <li>
+                Responde las trivias y desafíos: te ayudarán a reflexionar sobre
+                temas como consentimiento, relaciones, violencia, derechos
+                sexuales y reproductivos.
+              </li>
+              <li>El juego tiene finales distintos según tus elecciones.</li>
             </ul>
           </div>
           <div class="modal-footer">
@@ -172,36 +194,40 @@
             >
               <span aria-hidden="true">&times;</span>
             </button>
-            <h4 class="modal-title" id="modal2Label">Comienza de nuevo</h4>
-          </div>
-          <div class="modal-body">
-            <h5>Panel de Configuración</h5>
-            <p>Puedes comenzar de nuevo el juego</p>
-            <!-- <div class="form-group">
-              <label for="volume">Volumen:</label>
-              <input
-                type="range"
-                class="form-control"
-                id="volume"
-                min="0"
-                max="100"
-                value="50"
-              />
+            <h4 class="modal-title" id="modal2Label">
+              AYUDA SOBRE LAS TRIVIAS
+            </h4>
+            <div class="modal-body">
+              <p>
+                Durante la historia encontrarás momentos clave donde deberás
+                resolver trivias interactivas. Estas trivias están diseñadas
+                para ayudarte a reflexionar sobre las decisiones de los
+                personajes y los temas centrales del juego: autonomía corporal,
+                consentimiento, relaciones sanas, prevención de violencia y
+                derechos sexuales y reproductivos
+              </p>
+              <ul>
+                <li>Selección múltiple</li>
+                <li>Unir pares</li>
+                <li>Ordenar frases</li>
+                <li>Falso/Verdadero</li>
+                <li>Juegos de memoria</li>
+              </ul>
             </div>
-            <div class="checkbox">
-              <label> <input type="checkbox" /> Activar sonidos </label>
-            </div> -->
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary">
-              Comenzar de nuevo
-            </button>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-dismiss="modal"
+              >
+                Cerrar
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Modal 3 -->
     <div
       class="modal fade"
       id="modal3"
@@ -220,51 +246,45 @@
             >
               <span aria-hidden="true">&times;</span>
             </button>
-            <h4 class="modal-title" id="modal3Label">Avance/Inventario</h4>
-          </div>
-          <div class="modal-body">
-            <h5>Ver el avance/inventario</h5>
-            <p>
-              Aquí puedes ver todos los elementos que has recolectado o el
-              avance del juego:
-            </p>
-            <div class="row">
-              <div class="col-xs-6 col-sm-3">
-                <div class="thumbnail">
-                  <div
-                    style="
-                      height: 60px;
-                      background-color: #f0f0f0;
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
-                    "
-                  >
-                    <span>Objeto 1</span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xs-6 col-sm-3">
-                <div class="thumbnail">
-                  <div
-                    style="
-                      height: 60px;
-                      background-color: #f0f0f0;
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
-                    "
-                  >
-                    <span>Objeto 2</span>
-                  </div>
-                </div>
-              </div>
+            <h4 class="modal-title" id="modal3Label">SISTEMA DE PUNTAJE</h4>
+            <div class="modal-body">
+              <p>
+                Comienzas el juego con 3600 monedas. ¡Tu objetivo es llegar al
+                final sin quedarte sin ellas! Cada acción que tomes puede
+                costarte o ayudarte a conservar tu puntaje.
+              </p>
+              <h5>¿Cómo funciona?</h5>
+              <ul>
+                <li>
+                  Cada vez que avances en la historia (al cambiar de ventana),
+                  gastarás 50 monedas.
+                </li>
+                <li>
+                  Si fallas una trivia de tipo Falso/Verdadero o Selección
+                  Múltiple, perderás 50 monedas adicionales.
+                </li>
+                <li>
+                  Las trivias de Unir pares, Ordenar oraciones o Memoria no
+                  descuentan monedas, pero son necesarias para desbloquear
+                  nuevas pistas.
+                </li>
+              </ul>
+              <p>
+                Si tu saldo llega a cero monedas, pierdes el juego. Tendrás que
+                volver a empezar desde el principio, así que elige con atención,
+                piensa bien tus respuestas y mantente alerta a cada detalle de
+                la historia.
+              </p>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">
-              Cerrar
-            </button>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-dismiss="modal"
+              >
+                Cerrar
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -289,53 +309,75 @@
             >
               <span aria-hidden="true">&times;</span>
             </button>
-            <h4 class="modal-title" id="modal4Label">Ayuda</h4>
-          </div>
-          <div class="modal-body">
-            <h5>¿Necesitas ayuda?</h5>
-            <p>Aquí encontrarás información útil sobre cómo usar este juego:</p>
-            <div class="panel-group" id="accordion">
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h6 class="panel-title">
-                    <a
-                      data-toggle="collapse"
-                      data-parent="#accordion"
-                      href="#collapse1"
-                    >
-                      ¿Cómo empezar?
-                    </a>
-                  </h6>
-                </div>
-                <div id="collapse1" class="panel-collapse collapse in">
-                  <div class="panel-body">
-                    Simplemente haz clic en los botones para comenzar tu
-                    aventura.
-                  </div>
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h6 class="panel-title">
-                    <a
-                      data-toggle="collapse"
-                      data-parent="#accordion"
-                      href="#collapse2"
-                    >
-                      Controles del juego
-                    </a>
-                  </h6>
-                </div>
-                <div id="collapse2" class="panel-collapse collapse">
-                  <div class="panel-body">
-                    Usa los botones de navegación para moverte por las páginas.
-                  </div>
-                </div>
-              </div>
+            <h4 class="modal-title" id="modal4Label">Comienza de nuevo</h4>
+            <div class="modal-body">
+              <p>
+                Puedes comenzar de nuevo el juego. Los avances no se guardaran
+              </p>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-primary"
+                onclick="location.reload()"
+              >
+                Comenzar de nuevo
+              </button>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal 5 -->
+    <div
+      class="modal fade"
+      id="modal5"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="modal5Label"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="modal5Label">CREDITOS</h4>
+          </div>
+          <div class="modal-body">
+            <h4>ECOS DEL SILENCIO</h4>
+            <p>
+              Este juego interactivo propone una experiencia narrativa basada en
+              hechos ficticios que permite explorar y reflexionar sobre temas
+              críticos como la autonomía corporal, la educación integral en
+              sexualidad (EIS), la interrupción legal del embarazo (ILE) y la
+              prevención de violencias. A través de decisiones, pistas y dilemas
+              reales, se invita a comprender las señales de alerta que muchas
+              veces son invisibilizadas en el entorno cotidiano.
+            </p>
+            <h4><br />Revisión y ajustes:</h4>
+            <p>
+              Lic. Samadi Valcárcel Rodas <br />
+              Responsable de Movilización y Activismo – CPMGA
+            </p>
+            <h4><br />Primera edición:</h4>
+            <p>El Alto, Bolivia – Agosto 2025</p>
+            <h4><br />Dirección general:</h4>
+            <p>
+              Lic. Mónica Gutiérrez <br />
+              Directora Ejecutiva – CPMGA
+            </p>
+            <h4><br />Programación, diseño y diagramación:</h4>
+            <p>Iris Ortega - Kevin Loza - Rodrigo Coronel</p>
+          </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">
               Cerrar
             </button>
           </div>

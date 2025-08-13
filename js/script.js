@@ -299,15 +299,15 @@ function KLayOutGenerator(titles, page, text, history, images, jumps) {
     <h1>SELECCIONA EL PERSONAJE</h1>
     <div id="characters-container">
       <div id="cha1-button-container" class="cha-container">
-        <button class="cha-button" id="cha1-button" onclick="jumpBranch('${newLayout0}',${numberOfPage0})">PERSONAJE1</button>
+        <button class="cha-button" id="cha1-button" onclick="jumpBranch('${newLayout0}',${numberOfPage0})"></button>
         <div class="container-text-character">
-          <p>'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. '</p>
+          <p class="character-desc">MONICA</p>
         </div>
       </div>
       <div id="cha2-button-container" class="cha-container">
-        <button class="cha-button" id="cha2-button" onclick="jumpBranch('${newLayout1}',${numberOfPage1})">PERSONAJE2</button>
+        <button class="cha-button" id="cha2-button" onclick="jumpBranch('${newLayout1}',${numberOfPage1})"></button>
         <div class="container-text-character">
-          <p>'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. '</p>
+          <p class="character-desc">MIGUEL</p>
         </div>
       </div>
     </div>
