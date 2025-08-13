@@ -18,11 +18,11 @@
   --font-openSans: "Open Sans", sans-serif;
 }
 body {
-  background-color: var(--color2);
+  background-color: black;
   background-image: url("../images/amalie-steiness.gif");
-  background-repeat: no-repeat; 
-  background-size: 50% 50%; 
-  background-position: center; 
+  background-repeat: no-repeat;
+  background-size: 80% 80%;
+  background-position: center;
   font-family: var(--font-openSans);
   /* height: 100vh; */
   /* height: auto; */
