@@ -451,7 +451,7 @@ const textVData = {
 };
 
 const imagesVData = {
-  1: "Ecos del silencio.png",
+  1: "V1.jpg",
   2: "V2.jpg",
   3: "V2.jpg",
   4: "V4.jpg",
