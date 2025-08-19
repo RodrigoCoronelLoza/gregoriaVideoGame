@@ -1,4 +1,4 @@
-let currentPage = 1;
+let currentPage = 0;
 let currentAudio = null;
 let currentQuestionIndex = 0;
 let userAnswers = [];
@@ -59,7 +59,8 @@ function renderPage() {
   const headerElement = document.querySelector("header");
   const advButton = document.getElementById("adv-buttons");
   if (
-    (currentPage === 1 && currentLayoutData === layoutVData) ||
+    ((currentPage === 0 || currentPage === 1) &&
+      currentLayoutData === layoutVData) ||
     currentLayoutData[currentPage] === "Llayout" ||
     currentLayoutData[currentPage] === "Klayout"
   ) {
@@ -237,6 +238,10 @@ function createStructure(
     content = KLayOutGenerator(titles, page, text, history, images, jumps);
   } else if (currentLayout === "Llayout") {
     content = LLayOutGenerator(titles, page, text, history, images, jumps);
+  } else if (currentLayout === "Zlayout") {
+    content = ZLayOutGenerator(titles, page, images);
+  } else if (currentLayout === "Ylayout") {
+    content = YLayOutGenerator(titles, page, text, history, images);
   }
   return content;
 }
@@ -249,6 +254,17 @@ function ALayOutGenerator(titles, page, images) {
   <div id="Alayout-container">
     <div class="button-caratula-container">
       <button class="nav-buttons" id="comenzar-button" onclick="nextPage()">Comienza</button>
+    </div>
+  </div>`;
+}
+function ZLayOutGenerator(titles, page, images) {
+  document.querySelector(
+    ".Zlayout"
+  ).style.backgroundImage = `url('images/${images[page]}')`;
+  return ` 
+  <div id="Alayout-container">
+    <div class="button-caratula-container">
+      <button class="nav-buttons" id="comenzar-button" onclick="location.reload()">Empezar de nuevo</button>
     </div>
   </div>`;
 }
@@ -273,8 +289,24 @@ function JLayOutGenerator(titles, page, text, history, images) {
   document.querySelector(
     ".Jlayout"
   ).style.backgroundImage = `url('images/${images[page]}')`;
+  // setTimeout(() => {
+  // nextPage();
+  // }, 2000);
   return ` 
   <div id="Jlayout-container">
+  </div>`;
+}
+
+function YLayOutGenerator(titles, page, text, history, images) {
+  console.log("carajo" + images[page]);
+  document.querySelector(
+    ".Ylayout"
+  ).style.backgroundImage = `url('images/${images[page]}')`;
+  setTimeout(() => {
+  nextPage();
+  }, 3000);
+  return ` 
+  <div id="Ylayout-container">
   </div>`;
 }
 
@@ -321,7 +353,7 @@ function LLayOutGenerator(titles, page, text, history, images, jumps) {
   <div id="Llayout-container">
     <div id="coins-container">
       <div id="image-coins-container">
-        <img id="image-coins" src="images/RELOJ 2.gif"/>
+        <img id="image-coins" src="images/COIN.gif"/>
       </div>
       <div id="number-coins-container">
         ${coins}
@@ -369,7 +401,7 @@ function XLayOutGenerator(titles, page, text, history, images) {
   <div id="Xlayout-container">
     <div id="coins-container">
       <div id="image-coins-container">
-        <img id="image-coins" src="images/RELOJ 2.gif"/>
+        <img id="image-coins" src="images/COIN.gif"/>
       </div>
       <div id="number-coins-container">
         ${coins}
@@ -380,9 +412,6 @@ function XLayOutGenerator(titles, page, text, history, images) {
         <button class="key-buttons" id="historia-button"  onclick="toggleSidebarLeft()">HISTORIA</button>
       </div>
       <div id="middle-part">
-      </div>
-      <div id="button-desafio-container">
-        <button class="key-buttons" id="desafio-button">DESAFÍO</button>
       </div>
     </div>
     <div id="sidebar-left">
@@ -419,9 +448,7 @@ function X2LayOutGenerator(titles, page, text, history, images) {
       </div>
       <div id="middle-part">
       </div>
-      <div id="button-desafio-container">
-        <button class="key-buttons" id="desafio-button">DESAFÍO</button>
-      </div>
+      
     </div>
     <div id="sidebar-left">
       <div id="sidebar-left-corpus">
@@ -458,11 +485,12 @@ function BLayOutGenerator(titles, page, text, history, images, instructions) {
     <div id="Blayout-container">
       <div id="coins-container">
         <div id="image-coins-container">
-          <img id="image-coins" src="images/RELOJ 2.gif"/>
+          <img id="image-coins" src="images/COIN.gif"/>
         </div>
         <div id="number-coins-container">
           ${coins}
         </div>
+       
       </div>
       <div id="key-buttons-container">
         <div id="button-historia-container">
@@ -572,7 +600,7 @@ function CLayOutGenerator(titles, page, text, history, instructions, images) {
     <div id="Clayout-container">
       <div id="coins-container">
         <div id="image-coins-container">
-          <img id="image-coins" src="images/RELOJ 2.gif"/>
+          <img id="image-coins" src="images/COIN.gif"/>
         </div>
         <div id="number-coins-container">
           ${coins}
@@ -688,7 +716,7 @@ function DLayOutGenerator(
     <div id="Dlayout-container">
       <div id="coins-container">
         <div id="image-coins-container">
-          <img id="image-coins" src="images/RELOJ 2.gif"/>
+          <img id="image-coins" src="images/COIN.gif"/>
         </div>
         <div id="number-coins-container">
           ${coins}
@@ -812,7 +840,7 @@ function ELayOutGenerator(
     <div id="Elayout-container">
       <div id="coins-container">
         <div id="image-coins-container">
-          <img id="image-coins" src="images/RELOJ 2.gif"/>
+          <img id="image-coins" src="images/COIN.gif"/>
         </div>
         <div id="number-coins-container">
           ${coins}
@@ -957,7 +985,7 @@ function FLayOutGenerator(
     <div id="Flayout-container">
       <div id="coins-container">
         <div id="image-coins-container">
-          <img id="image-coins" src="images/RELOJ 2.gif"/>
+          <img id="image-coins" src="images/COIN.gif"/>
         </div>
         <div id="number-coins-container">
           ${coins}
@@ -1099,7 +1127,7 @@ function FLayOutGenerator(
 function GLayOutGenerator(titles, page, text, history, images, instructions) {
   const nextButton = document.getElementById("next-button");
   const pageData = text[page];
-  nextButton.disabled = true;
+  // nextButton.disabled = true;
 
   // Initialize phrase game state
   if (pageData && pageData.phrases) {
@@ -1115,7 +1143,7 @@ function GLayOutGenerator(titles, page, text, history, images, instructions) {
       <div id="key-buttons-container">
         <div id="coins-container">
           <div id="image-coins-container">
-            <img id="image-coins" src="images/RELOJ 2.gif"/>
+            <img id="image-coins" src="images/COIN.gif"/>
           </div>
           <div id="number-coins-container">
             ${coins}
@@ -1260,7 +1288,7 @@ function HLayOutGenerator(
     <div id="Hlayout-container">
       <div id="coins-container">
         <div id="image-coins-container">
-          <img id="image-coins" src="images/RELOJ 2.gif"/>
+          <img id="image-coins" src="images/COIN.gif"/>
         </div>
         <div id="number-coins-container">
           ${coins}
@@ -2611,6 +2639,8 @@ function checkSentence() {
       setTimeout(() => completeSentenceGame(), 1500);
     }
   } else {
+    const nextButton = document.getElementById("next-button");
+    nextButton.disabled = false;
     showSentenceFeedback(
       false,
       `Incorrecto. ${

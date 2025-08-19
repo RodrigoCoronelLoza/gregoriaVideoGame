@@ -427,6 +427,18 @@ header {
   background-position: center;
 }
 
+.Ylayout {
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+  /* min-height: 85vh; */
+  overflow: hidden;
+  /* background-image: url("../images/jumbotron_1200.jpg"); */
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 .Klayout {
   width: 100%;
   min-height: 100vh;

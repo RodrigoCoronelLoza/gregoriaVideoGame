@@ -1,5 +1,6 @@
 /* RAMA V*/
 const titlesVData = {
+  0: "TITLE V00",
   1: "TITLE V01",
   2: "TITLE V02",
   3: "TITLE V03",
@@ -26,9 +27,11 @@ const titlesVData = {
   25: "TITLE V25",
   26: "TITLE V26",
   27: "TITLE V27",
+  28: "TITLE V28",
 };
 
 const layoutVData = {
+  0: "Ylayout",
   1: "Alayout",
   2: "Ilayout",
   3: "Klayout",
@@ -55,11 +58,13 @@ const layoutVData = {
   25: "Clayout",
   26: "Xlayout",
   27: "Xlayout",
+  28: "Zlayout",
 
   // 3: "Llayout",
 };
 
 const instructionsVData = {
+  0: "",
   1: "",
   2: "",
   3: "",
@@ -86,9 +91,11 @@ const instructionsVData = {
   25: "Indica si la afirmación es verdadera o falsa.",
   26: "",
   27: "",
+  28: "",
 };
 
 const feedbackVData = {
+  0: "",
   1: "",
   2: "",
   3: "",
@@ -115,9 +122,11 @@ const feedbackVData = {
   25: "",
   26: "",
   27: "",
+  28: "",
 };
 
 const historyVData = {
+  0: "",
   1: "",
   2: "Esto no es un juego. Es una carrera contra el tiempo. Debes atar cabos, leer entre líneas y tomar decisiones que podrían cambiar una historia que aún no termina. <br/>En el marco del proyecto: <br/>“Juventudes con voz y poder, por los derechos sexuales y derechos reproductivos y una vida libre de violencias.” <br/><br/>Año: 2025 <br/>Lugar: El Alto – Bolivia ",
   3: "",
@@ -144,10 +153,11 @@ const historyVData = {
   25: "Golpean la puerta, pero nadie responde. Detrás, Miguel detecta un pasillo que conecta con la casa contigua. Decide entrar.",
   26: "El encargado intenta impedirles el paso. Miguel discute, su padre interviene, y finalmente logran pasar.<br/>Allí, en una habitación pequeña, encuentran a María tirada en la cama, pálida, con signos de hemorragia.",
   27: "Mónica recibe una llamada mientras acompañan a María al hospital:<br/>—“Va a recuperarse” —le dice una enfermera.<br/>Miguel respira aliviado por primera vez en días. Sabe que todo cambiará, pero al menos está viva.",
-  // 3: "",
+  28: "",
 };
 
 const textVData = {
+  0: "",
   1: "",
   2: "",
   3: "",
@@ -448,9 +458,11 @@ const textVData = {
   },
   26: "",
   27: "",
+  28: "",
 };
 
 const imagesVData = {
+  0: "rsfu.jpg",
   1: "V1.jpg",
   2: "V2.jpg",
   3: "V2.jpg",
@@ -477,10 +489,13 @@ const imagesVData = {
   25: "V25.jpg",
   26: "V26.jpg",
   27: "V27.jpg",
+  28: "V99.jpg",
+
   // 3: ["blackback.jpeg", "strawberry.jpg"],
 };
 
 const jumpsVData = {
+  0: "",
   1: "",
   2: "",
   3: [
@@ -522,6 +537,10 @@ const jumpsVData = {
 };
 
 const nextVData = {
+  0: {
+    branch: "V",
+    numberOfPage: 1,
+  },
   1: {
     branch: "V",
     numberOfPage: 2,
@@ -610,7 +629,11 @@ const nextVData = {
     branch: "V",
     numberOfPage: 27,
   },
-  27: "",
+  27: {
+    branch: "V",
+    numberOfPage: 28,
+  },
+  28: "",
 };
 
 // 1: {
@@ -733,7 +756,7 @@ const instructionsAData = {
   14: "Arrastra los fragmentos para formar la oración correcta.",
   15: "Arrastra la palabra correcta para completar la frase.",
   16: "Indica si la afirmación es verdadera o falsa.",
-  17: "Haz clic en las tarjetas para encontrar y emparejar las que tengan relación entre sí.",
+  17: "Haz clic en las tarjetas para encontrar y emparejar las que tengan relación entre sí. Encuentra las 4 parejas de imágenes relacionadas con señales digitales que pueden indicar riesgo o pérdida de privacidad.",
   18: "Relaciona cada elemento de la primera columna con su par correspondiente en la segunda. Une cada comportamiento con la consecuencia o señal de alerta que representa.",
   19: "Lee atentamente la pregunta y selecciona la única respuesta correcta.",
   20: "Arrastra los fragmentos para formar la oración correcta.",
@@ -793,7 +816,7 @@ const historyAData = {
   11: "Luisa recuerda:</br>—“Un día la recogió un tipo en un auto gris. Pensamos que era su hermano…”</br> Pero todas saben que el hermano de María no tiene auto y casi nunca está en Pucarani.",
   13: "",
   14: "Luisa baja la voz:</br>—“Yo la cubría… decía que se quedaba en mi casa, pero en realidad se iba con su novio… al que llamaba ‘Patito’.”</br>—“No quise delatarla…”",
-  15: "Otra  amiga comenta: </br> —“Seguro se escapaba para darse su cariño, ya es grande.” </br>Mónica siente rabia: “¿Desde cuándo ‘cariño’ significa callar, esconderse y desaparecer?”",
+  15: "Otra amiga comenta: </br> —“Seguro se escapaba para darse su cariño, ya es grande.” </br>Mónica siente rabia: “¿Desde cuándo ‘cariño’ significa callar, esconderse y desaparecer?”",
   16: "—“Quizás solo quería experimentar, no hay que exagerar…” dice otra.</br>—“Pero, ¿con quién? ¿Y por qué se escondía entonces?”</br>Luisa recuerda: “Si quieres tener novio, tienes que aguantar… sino ellos buscan a otra.”",
   17: "Deciden revisar el Instagram de María desde el celular de Luisa. El perfil está casi vacío.",
   18: "Han desaparecido fotos con amigas y familia. Solo queda una selfie vieja con fondo borroso. </br> —“¿Y si alguien le pidió que lo borrara todo?” —pregunta Mónica.",
@@ -2179,13 +2202,15 @@ const titlesFData = {
   2: "TITLE F02",
   3: "TITLE F03",
   4: "TITLE F04",
+  5: "TITLE F05",
 };
 
 const layoutFData = {
-  1: "Ilayout",
+  1: "X2layout",
   2: "X2layout",
   3: "X2layout",
-  4: "Ilayout",
+  4: "Jlayout",
+  5: "Zlayout",
 };
 
 const instructionsFData = {
@@ -2193,6 +2218,7 @@ const instructionsFData = {
   2: "",
   3: "",
   4: "",
+  5: "",
 };
 
 const feedbackFData = {
@@ -2200,6 +2226,7 @@ const feedbackFData = {
   2: "",
   3: "",
   4: "",
+  5: "",
 };
 
 const historyFData = {
@@ -2207,6 +2234,7 @@ const historyFData = {
   2: "Días después, Mónica se entera de que el colegio organizará un taller sobre sexualidad y prevención.",
   3: "En el aula, un especialista habla de consentimiento, relaciones seguras y apoyo en casos de violencia.<br/>Las palabras suenan importantes, pero para Miguel llegan demasiado tarde.",
   4: "GAME OVER <br/> A veces, la conversación que no tuvimos a tiempo puede costar una vida. Hablar de sexualidad, derechos y prevención es urgente, siempre.",
+  5: "",
 };
 
 const textFData = {
@@ -2214,13 +2242,15 @@ const textFData = {
   2: "",
   3: "",
   4: "",
+  5: "",
 };
 
 const imagesFData = {
-  1: "blackback.jpeg",
-  2: "blackback.jpeg",
-  3: "blackback.jpeg",
-  4: "blackback.jpeg",
+  1: "V28.jpg",
+  2: "V29.jpg",
+  3: "V30.jpg",
+  4: "V31.jpg",
+  5: "V99.jpg",
 };
 
 const jumpsFData = {
@@ -2228,6 +2258,7 @@ const jumpsFData = {
   2: "",
   3: "",
   4: "",
+  5: "",
 };
 
 const nextFData = {
@@ -2243,7 +2274,11 @@ const nextFData = {
     branch: "F",
     numberOfPage: 4,
   },
-  4: "",
+  4: {
+    branch: "F",
+    numberOfPage: 5,
+  },
+  5: "",
 };
 
 const titlesData = {
