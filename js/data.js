@@ -194,9 +194,9 @@ const textVData = {
     ],
   },
   6: [
-    "Entre las hojas, ven varios números escritos en los márgenes, algunos rodeados de corazones. Miguel toma el celular y prueba uno de esos números como PIN. La pantalla se desbloquea. Ambos se miran, sorprendidos.",
-    "OPCION 1",
-    "OPCION 2",
+    "Entre las hojas, ven varios números escritos en los márgenes, algunos rodeados de corazones. Miguel toma el celular y prueba uno de esos números como PIN. La pantalla se desbloquea. Ambos se miran, sorprendidos.¿Crees que puedes adivinar le pin del segundo selular de Maria?",
+    "SI",
+    "NO",
   ],
   7: {
     phrases: [
@@ -313,9 +313,9 @@ const textVData = {
     ],
   },
   15: [
-    "",
-    "CAMINO 1",
-    "CAMINO 2",
+    "Continuemos viendo la historia desde los ojos de un personaje, escoge:",
+    "Mónica",
+    "Miguel",
   ],
   16: {
     questions: [
@@ -1877,7 +1877,11 @@ const textHData = {
       },
     ],
   },
-  22: ["Miguel toma una desición", "dec1", "dec2"],
+  22: [
+    "¿Miguel deberia ir a Viacha a verificar el lugar que acaba de descubrir?",
+    "SI",
+    "NO",
+  ],
   23: {
     phrases: [
       {
