@@ -313,9 +313,9 @@ const textVData = {
     ],
   },
   15: [
-    "15VVVVPregunta dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ",
-    "ELIJO OPCION 111111 ELIJO OPCION 111111 ",
-    "ELIJO OPCION 222222 ELIJO OPCION 222222",
+    "",
+    "CAMINO 1",
+    "CAMINO 2",
   ],
   16: {
     questions: [
