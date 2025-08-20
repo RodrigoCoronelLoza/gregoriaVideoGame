@@ -40,8 +40,8 @@ const layoutVData = {
   6: "Llayout",
   7: "Glayout",
   9: "Blayout",
-  10: "Glayout",
-  11: "Clayout",
+  10: "Xlayout",
+  11: "Xlayout",
   12: "Elayout",
   13: "Glayout",
   14: "Clayout",
@@ -53,7 +53,7 @@ const layoutVData = {
   20: "Llayout",
   21: "Dlayout",
   22: "Blayout",
-  23: "Dlayout",
+  23: "Xlayout",
   24: "Blayout",
   25: "Clayout",
   26: "Xlayout",
@@ -84,7 +84,7 @@ const instructionsVData = {
   18: "Lee la pregunta y marca todas las respuestas que consideres correctas.",
   19: "Lee la pregunta y marca todas las respuestas que consideres correctas.",
   20: "",
-  21: "Relaciona cada elemento de la primera columna con su par correspondiente en la segunda. Une cada acción con la consecuencia o razón que la respalda.",
+  21: "Relaciona cada frase con su par correspondiente. Une cada acción con la consecuencia o razón que la respalda.",
   22: "Lee la pregunta y marca todas las respuestas que consideres correctas.",
   23: "Relaciona cada elemento de la primera columna con su par correspondiente en la segunda. Une cada conducta con su significado o consecuencia",
   24: "Lee atentamente la pregunta y selecciona la única respuesta correcta.",
@@ -223,14 +223,14 @@ const textVData = {
     questions: [
       {
         question:
-          "¿Cuál de estas frases representa claramente una señal de manipulación o control en una relación?",
+          "Al leer frases como:<br/>“Me dijo que solo con él sería especial.”<br/>“Tengo miedo de decirle que no.”<br/>¿Qué aspecto de la autonomía corporal está en juego?",
         options: [
-          "Me dijo que solo con él sería especial.",
-          "Hoy fuimos a comer con amigos.",
-          "Si llueve, nos quedamos en casa.",
-          "Fuimos al cine el fin de semana.",
+          "El derecho a decidir libremente qué quiero hacer con mi cuerpo.",
+          "La presión y manipulación que limitan mi capacidad de decidir.",
+          "La importancia de reconocer mis emociones y decir “no” cuando algo no me hace bien.",
+          "Todas las anteriores",
         ],
-        correctAnswers: [0], // Both London and Paris are correct
+        correctAnswers: [3], // Both London and Paris are correct
         explanation: "",
       },
     ],
@@ -280,14 +280,22 @@ const textVData = {
     phrases: [
       {
         template:
-          "Registrar detalles como un número {0} o de otra ciudad puede ser clave para identificar una situación de riesgo.",
+          "“Antes de ir a un hotel o alojamiento con alguien que acabo de conocer, debo {0}, decir {1} si algo no me gusta y asegurarme de que mi {2} esté garantizada.”.",
         blanks: [
           {
-            word: "desconocido",
+            word: "pedir ayuda",
+            hint: "",
+          },
+          {
+            word: "no",
+            hint: "",
+          },
+          {
+            word: "mi seguridad",
             hint: "",
           },
         ],
-        words: ["desconocido", "raro", "largo"],
+        words: ["pedir ayuda", "no", "mi seguridad", "decisiones", "la verdad"],
         hint: "",
         explanation: "",
       },
@@ -376,20 +384,20 @@ const textVData = {
   21: {
     pairs: [
       {
-        left: "Avisar a un adulto de confianza o a las autoridades ",
-        right: "Permite actuar con apoyo y seguridad. ",
+        left: "Solicitar información en un centro de salud",
+        right: "Es un derecho y permite tomar decisiones informadas. ",
       },
       {
-        left: "Ir de inmediato sin avisar a nadie ",
-        right: "Aumenta el riesgo y dificulta la intervención. ",
+        left: "Pedir apoyo a un adulto de confianza ",
+        right: "Ayuda a garantizar protección emocional y legal. ",
       },
       {
-        left: "Compartir la ubicación con la policía ",
-        right: "Facilita la localización y respuesta rápida.",
+        left: "Recibir atención médica sin juicio ni discriminación ",
+        right: "Es parte del derecho a la salud sexual y reproductiva. ",
       },
       {
-        left: "Coordinar el traslado con personas adultas ",
-        right: "Reduce peligros y mejora la protección.",
+        left: "Reconocer señales de violencia o coerción ",
+        right: "Permite activar rutas de denuncia y atención. ",
       },
     ],
   },
@@ -397,14 +405,15 @@ const textVData = {
     questions: [
       {
         question:
-          "Cuando existe la sospecha de que una menor de edad está en una situación de violencia o abuso, ¿qué acciones son correctas tomar?",
+          "Si una menor de edad ha quedado embarazada como resultado de una situación de violencia sexual, ¿cuáles son las acciones correctas que deben tomarse para garantizar su protección y acceso a derechos?",
         options: [
-          "Avisar a su familia o a un adulto de confianza",
-          "Contactar a la policía u otras autoridades competentes",
-          "Guardar silencio para “no meterse en problemas”",
-          "Actuar sin compañía ni apoyo de un adulto ",
+          "Informar a un adulto de confianza o a su familia para que pueda recibir apoyo y acompañamiento.",
+          "Buscar atención médica e información sobre sus derechos en salud sexual y reproductiva.",
+          "No contarle a nadie para evitar que “se complique” su situación. ",
+          "Acudir a las autoridades o servicios especializados para activar los protocolos de protección. ",
+          "Asegurar que tome una decisión rápida sin consultar a nadie.",
         ],
-        correctAnswers: [0, 1],
+        correctAnswers: [0, 1, 3],
         explanation: "",
       },
     ],
@@ -712,23 +721,23 @@ const titlesAData = {
 };
 
 const layoutAData = {
-  1: "Blayout",
-  2: "Dlayout",
+  1: "Xlayout",
+  2: "Xlayout",
   5: "Llayout",
   6: "Blayout",
   7: "Elayout",
   8: "Blayout",
-  9: "Blayout",
+  9: "Xlayout",
   10: "Clayout",
   11: "Glayout",
   13: "Llayout",
   14: "Elayout",
   15: "Glayout",
   16: "Clayout",
-  17: "Hlayout",
+  17: "Xlayout",
   18: "Dlayout",
   19: "Blayout",
-  20: "Elayout",
+  20: "Xlayout",
   21: "Glayout",
   22: "Glayout",
   23: "Elayout",
@@ -757,7 +766,7 @@ const instructionsAData = {
   15: "Arrastra la palabra correcta para completar la frase.",
   16: "Indica si la afirmación es verdadera o falsa.",
   17: "Haz clic en las tarjetas para encontrar y emparejar las que tengan relación entre sí. Encuentra las 4 parejas de imágenes relacionadas con señales digitales que pueden indicar riesgo o pérdida de privacidad.",
-  18: "Relaciona cada elemento de la primera columna con su par correspondiente en la segunda. Une cada comportamiento con la consecuencia o señal de alerta que representa.",
+  18: "Relaciona cada frase con su par correspondiente. Une cada comportamiento con la consecuencia o señal de alerta que representa.",
   19: "Lee atentamente la pregunta y selecciona la única respuesta correcta.",
   20: "Arrastra los fragmentos para formar la oración correcta.",
   21: "Arrastra la palabra correcta para completar la frase. Completa la frase con las palabras correctas para reforzar la idea de qué hacer cuando percibimos que algo no está bien.",
@@ -765,7 +774,7 @@ const instructionsAData = {
   23: "Arrastra los fragmentos para formar la oración correcta.Ordena los fragmentos para reconstruir un mensaje que refleja una señal de violencia que podría necesitar intervención inmediata.",
   24: "",
   25: "Selecciona la palabra correcta para completar la frase. Completa la siguiente frase con las palabras correctas para reflejar una forma de manipulación que puede ocurrir en situaciones de abuso:",
-  26: "Relaciona cada elemento de la primera columna con su par correspondiente en la segunda. Une cada situación con su significado o implicación.",
+  26: "Relaciona cada frase con su par correspondiente. Relaciona cada situación o derecho con su significado correspondiente. Lee con atención.",
   27: "Selecciona la palabra correcta para completar la frase. ",
   28: "Lee atentamente la pregunta y selecciona la única respuesta correcta.",
   29: "Indica si la afirmación es verdadera o falsa.",
@@ -805,8 +814,8 @@ const feedbackAData = {
 };
 
 const historyAData = {
-  1: "Mónica entra al cole, se acomoda en su asiento y mira hacia la fila de adelante. El pupitre de María otra vez vacío.</br>(Mónica piensa): “Ya son varios días… ¿Nadie va a decir nada? Si una falta tanto, deberían llamar a su casa. A veces siento que no importamos…”</br>La campana suena, pero Mónica sigue mirando el lugar vacío.",
-  2: "En la hora libre, la profe Inés se acerca con algo en la mano:</br>—“No tiene nombre… pero tal vez puedas ayudarme a devolverlo.”</br>Es un cuaderno con dibujos en las esquinas y los márgenes rayados. Mónica lo reconoce al instante.</br>(Mónica piensa): “Es de María… ¿por qué estaría tirado en el patio?”",
+  1: "Mónica entra al cole, al sentarse nota que María Mónica lleva varios días sin asistir al colegio y parece que nadie se da cuenta.",
+  2: "Durante una hora libre, la profesora Inés le entrega un cuaderno encontrado en el patio. La profe le pide ayuda para devolverlo,</br>(Mónica piensa): “Es de María… ¿por qué estaría tirado en el patio?”",
   5: "",
   6: "Mónica abre el cuaderno y ve frases tachadas, letras grandes y dibujos rotos:</br>“Me da miedo decirle que no.”</br>“No sé si me creerían.”</br>“Mi niña especial” firmado con corazones.</br>(Pensamiento): “¿María tenía novio? ¿Por qué lo escondía así?”",
   7: "El corazón de Mónica late rápido. Recuerda cuando vio a María con moretones en los brazos.</br>—“Me caí en el micro”— dijo, sin mirarla a los ojos. </br>Mónica pensó que exageraba… pero muchos dicen “a todos nos pegan” como si fuera normal.",
@@ -883,15 +892,15 @@ const textAData = {
     questions: [
       {
         question:
-          "¿Cuáles de estas frases o señales podrían indicar que una persona está viviendo una situación de control o violencia?",
+          "¿Cuáles de estas frases reflejan estereotipos dañinos sobre cómo deben comportarse las chicas en relación con el amor y la sexualidad?",
         options: [
-          "“Me da miedo decirle que no.”",
-          "“No sé si me creerían.”",
-          "“Mi niña especial” firmado con corazones.",
-          "Ocultar una relación por temor a reacciones.",
-          "Recibir regalos de personas adultas desconocidas.",
+          "“Si es una chica buena, no tiene novio.”",
+          "“Las chicas que se respetan no piensan en esas cosas.”",
+          "“Tener novio es una etapa normal en la adolescencia.”",
+          "“Las chicas deben esperar a que los chicos las busquen.”",
+          "“Lo importante es que las relaciones se basen en el respeto.”",
         ],
-        correctAnswers: [0, 1, 3, 4], // Both London and Paris are correct
+        correctAnswers: [0, 1, 2, 3], // Both London and Paris are correct
         explanation:
           "Frases que expresan miedo, dudas sobre ser creída, y comportamientos como ocultar la relación o recibir regalos de adultos pueden ser indicadores de riesgo que requieren atención inmediata.",
       },
@@ -915,14 +924,13 @@ const textAData = {
     questions: [
       {
         question:
-          "¿Cuáles de estas señales pueden indicar que una persona cercana podría estar viviendo una situación de riesgo o control?",
+          "¿Cuáles de las siguientes frases o situaciones pueden reflejar que no se está respetando la autonomía corporal en una relación?",
         options: [
-          "Cambios repentinos en el comportamiento o el ánimo",
-          "Alejarse de amistades y familiares sin explicación",
-          "Uso frecuente de apodos o sobrenombres impuestos por otra persona de forma insistente",
-          "Mostrar nerviosismo al recibir mensajes o llamadas",
-          "Reírse más de lo habitual y pasar más tiempo con amistades",
-          "Participar en más actividades escolares",
+          "“Si me quieres, deberías demostrarlo con tu cuerpo.” ",
+          "“No le contés a nadie lo que hicimos, es nuestro secreto.” ",
+          "“Podemos decidir juntos hasta dónde llegar en la relación.”",
+          "“No quiero que hables con otros chicos, me incomoda.”",
+          "“Está bien que cada persona ponga sus límites.”",
         ],
         correctAnswers: [0, 1, 2, 3],
         explanation: "",
@@ -1000,26 +1008,27 @@ const textAData = {
   15: {
     phrases: [
       {
-        template: "“¿Desde cuándo ‘{0}’ significa {1}, {2} y {3}?”",
+        template:
+          "“Una relación basada en el verdadero cariño nunca debe hacerte sentir {0}, alejarte de otras personas, ni pedirte que {1} lo que te pasa.”",
         blanks: [
           {
-            word: "cariño",
+            word: "miedo",
             hint: "",
           },
           {
-            word: "callar",
+            word: "calles",
             hint: "",
           },
           {
-            word: "esconderse",
+            word: "felicidad",
             hint: "",
           },
           {
-            word: "desaparecer",
+            word: "grites",
             hint: "",
           },
         ],
-        words: ["cariño", "callar", "esconderse", "desaparecer"],
+        words: ["miedo", "calles", "felicidad", "grites"],
         hint: "",
         explanation: "",
       },
@@ -1068,14 +1077,14 @@ const textAData = {
     questions: [
       {
         question:
-          "¿Qué tipo de comportamiento muestra la situación cuando alguien pide a su pareja borrar todo de sus redes para “no hablar con otros chicos”?",
+          "Cuando una persona exige que su pareja borre fotos, contactos o publicaciones para que no hable con otras personas, ¿qué tipo de comportamiento está mostrando?",
         options: [
-          "Un acto de cuidado y protección.",
-          "Una señal de control y celos posesivos.",
-          "Una muestra de desinterés.",
-          "Una forma de respeto mutuo.",
+          "Un acto de amor y compromiso.",
+          "Una muestra de respeto a la intimidad.",
+          "Un comportamiento controlador que vulnera la autonomía digital.",
+          "Una estrategia para mejorar la relación.",
         ],
-        correctAnswers: [1], // Both London and Paris are correct
+        correctAnswers: [2], // Both London and Paris are correct
         explanation: "",
       },
     ],
@@ -1163,11 +1172,11 @@ const textAData = {
           "No quería, pero me dijo que era la única forma de demostrar que lo {0}.",
         blanks: [
           {
-            word: "quería",
+            word: "apoyaba",
             hint: "",
           },
         ],
-        words: ["quería", "apoyaba", "respetaba", "ayudaba"],
+        words: ["apoyaba", "amo", "respetaba", "ayudaba"],
         hint: "",
         explanation: "",
       },
@@ -1176,20 +1185,20 @@ const textAData = {
   26: {
     pairs: [
       {
-        left: "Decir “te amo” pero obligar a tener relaciones sexuales ",
-        right: "Violencia sexual, no amor.",
+        left: "Tener relaciones sin consentimiento claro ",
+        right: "Se vulnera la autonomía sobre el cuerpo. ",
       },
       {
-        left: "Mantener relaciones sin consentimiento ",
-        right: "Vulnerar la autonomía corporal.",
+        left: "Decidir por otra persona si debe ser madre o no ",
+        right: "Le quita su derecho a decidir sobre la maternidad. ",
       },
       {
-        left: "Decidir sobre el cuerpo de otra persona sin su permiso ",
-        right: "Negar el derecho al consentimiento libre y voluntario. ",
+        left: "Respetar cuando alguien dice “no” ",
+        right: "Es reconocer sus límites y decisiones. ",
       },
       {
-        left: "Respetar las decisiones y límites de la pareja ",
-        right: "Base de una relación saludable.",
+        left: "Dar o negar permiso para tocar o acceder a mi cuerpo",
+        right: "Es ejercer mi derecho al consentimiento.",
       },
     ],
   },
@@ -1232,10 +1241,10 @@ const textAData = {
     questions: [
       {
         question:
-          "Cuando enfrentas una situación difícil o tienes información importante sobre un posible caso de violencia, buscar apoyo de un adulto de confianza es una acción correcta y segura. Indica si esta afirmación es verdadera o falsa.",
+          "Compartir una preocupación o situación difícil con una persona adulta de confianza no es una señal de debilidad, sino una forma de ejercer el derecho a recibir apoyo y protección.",
         answer: true,
         explanation:
-          "Es verdadero. Buscar apoyo en adultos responsables, como docentes o familiares, ayuda a activar medidas de protección y a no enfrentar el problema en soledad.",
+          "¡Correcto! En ESI se reconoce que buscar ayuda es un acto de valentía y cuidado propio. Las personas adultas responsables, como docentes o familiares, pueden brindar acompañamiento y activar redes de protección. Nadie debería cargar solo con un problema.",
       },
     ],
   },
@@ -1489,13 +1498,13 @@ const titlesHData = {
 
 const layoutHData = {
   1: "Xlayout",
-  2: "Hlayout",
+  2: "Xlayout",
   3: "Llayout",
   4: "Blayout",
   5: "Clayout",
-  6: "Elayout",
+  6: "Xlayout",
   7: "Blayout",
-  8: "Dlayout",
+  8: "Xlayout",
   9: "Glayout",
   10: "Blayout",
   11: "Xlayout",
@@ -1504,20 +1513,20 @@ const layoutHData = {
   14: "Glayout",
   15: "Hlayout",
   16: "Elayout",
-  17: "Clayout",
+  17: "Xlayout",
   19: "Elayout",
-  20: "Elayout",
-  21: "Blayout",
+  20: "Xlayout",
+  21: "Xlayout",
   22: "Llayout",
   23: "Glayout",
   24: "Blayout",
   25: "Clayout",
   26: "Dlayout",
-  27: "Elayout",
+  27: "Xlayout",
   28: "Glayout",
   29: "Blayout",
   30: "Clayout",
-  31: "Hlayout",
+  31: "Xlayout",
 };
 
 const instructionsHData = {
@@ -1545,7 +1554,7 @@ const instructionsHData = {
   23: "Selecciona la palabra correcta para completar la frase. Completa la frase con las palabras correctas para recordar la importancia de la comunicación familiar:",
   24: "Lee la pregunta y marca todas las respuestas que consideres correctas.",
   25: "Indica si la afirmación es verdadera o falsa.",
-  26: "Relaciona cada elemento de la primera columna con su par correspondiente en la segunda. Une cada acción o señal con la forma adecuada de manejarla o su consecuencia.",
+  26: "Relaciona cada frase con su par correspondiente. Une cada acción o señal con la forma adecuada de manejarla o su consecuencia.",
   27: "Arrastra los fragmentos para formar la oración correcta. Ordena las siguientes partes para formar una recomendación correcta sobre cómo actuar en un lugar que te genera desconfianza.",
   28: "Selecciona la palabra correcta para completar la frase.",
   29: "Lee atentamente la pregunta y selecciona la única respuesta correcta.",
@@ -1591,7 +1600,7 @@ const historyHData = {
   2: "Miguel está a punto de entrar ir a estudiar con unos amigos,  cuando suena su teléfono. <br/> Es su madre, su voz quebrada: <br/> —Miguel… tu hermana María no volvió del colegio.",
   3: "",
   4: "En el patio, Miguel comenta a una amiga que su hermana no llegó a casa.<br/>Ella se encoge de hombros:<br/>—Seguro se fue de fiesta… a veces pasa.<br/>Miguel la mira con molestia.<br/>—Mi hermana es pequeña, no hace esas cosas.",
-  6: "Molesto y con la cabeza llena de las insinuaciones de sus compañeros, Miguel decide irse y volver a casa.El trayecto a casa se le hace largo, cada paso acompañado por imágenes y pensamientos que no quiere imaginar.",
+  6: "Molesto y con la cabeza llena de las insinuaciones de sus compañeros, Miguel decide irse y volver a casa.<br/>Encuentra a su madre en la sala, preocupada. A esta hora suele estar en el puesto.",
   7: "Al llegar, nota que María no ha regresado. Sus padres lo ven entrar y, sin decir palabra, toman sus abrigos para salir a buscarla.",
   8: "Solo en casa, Miguel entra al cuarto de su hermana. En el basurero encuentra hojas arrancadas de un cuaderno, con manchas que parecen lágrimas.<br/>Frases inconexas se asoman entre tachaduras.<br/>¿Qué intentabas decir, María? ¿Por qué callaste?",
   9: "Miguel se sienta en el suelo y revisa cada hoja.<br/>Algunas frases están incompletas, otras tachadas con rabia:<br/>No sé si es mío o de él.<br/>Me dijo que era mi culpa.<br/>Se queda helado. Algo grave estaba ocurriendo.",
@@ -1614,7 +1623,7 @@ const historyHData = {
   27: "Viacha lo recibe con un aire helado y calles polvorientas. Miguel camina siguiendo las indicaciones de una vendedora, que le señala la calle que lleva a la zona de alojamientos.<br/>Siente un escalofrío. —“No quiero imaginar qué pasó ahí.”<br/>Acelera el paso, como si de ello dependiera alcanzar a su hermana.",
   28: "En el alojamiento, el encargado lo mira con indiferencia.<br/>—“No hay registro de esa persona.”<br/>Miguel aprieta los puños. La impotencia le arde en el estómago. Sabe que están ocultando algo, pero no tiene cómo probarlo.",
   29: "Una vendedora en la esquina lo observa con curiosidad.<br/>—“Vi a una joven como la de la foto… estaba con un hombre mayor hace unos días.”<br/>El corazón de Miguel late con fuerza.<br/>Más adelante, en un pequeño alojamiento, un encargado con gorra lo recibe. Miguel le muestra la foto de María. El hombre frunce el ceño, pero no dice nada.",
-  30: "De vuelta en el alojamiento, un empleado menos precavido le confiesa:<br/> —“Un hombre de unos treinta años entró con una menor. No pidieron identificación.”<br/>Miguel siente que la sangre se le hiela. La imagen de ese desconocido junto a su hermana se clava en su mente como una herida.",
+  30: "De vuelta en el alojamiento, un empleado menos precavido le confiesa:<br/>—“Un hombre de unos treinta años entró con su hermanita. No tengo anotado su carnet.”<br/>Miguel siente que la sangre se le hiela. La imagen de ese desconocido junto a su hermana se clava en su mente como una herida.",
   31: "Con el estómago revuelto, Miguel decide reunirse con Mónica de nuevo. Necesita más respuestas. Si alguien vio a María con ese hombre, tal vez en las inmediaciones o a la salida, podrá confirmar lo que teme. Durante el largo viaje, tiene mucho que pensar.",
 };
 
@@ -1893,14 +1902,15 @@ const textHData = {
     questions: [
       {
         question:
-          "¿Cuáles de las siguientes actitudes pueden indicar que un grupo de amistades no está apoyando realmente a alguien en una situación de riesgo? Selecciona todas las correctas.",
+          "¿Cuáles de estas actitudes atentan contra la autonomía corporal de una adolescente y refuerzan estereotipos dañinos? Selecciona todas las que correspondan.",
         options: [
-          "Burlarse o minimizar lo que le pasa",
-          "Difundir rumores o mentiras sobre la persona",
-          "Guardar silencio para “no meterse en problemas”",
-          "Escuchar con respeto y sin juzgar ",
+          "Juzgar a alguien por tener o no tener pareja.",
+          "Difundir rumores sobre la vida personal de una amiga. ",
+          "Respetar sus decisiones y acompañarla si necesita apoyo.",
+          "Decidir por otra persona lo que es correcto para su cuerpo o relaciones.",
+          "Criticar la forma en que viste o con quién se relaciona.",
         ],
-        correctAnswers: [0, 1, 2],
+        correctAnswers: [0, 1, 3, 4],
         explanation: "",
       },
     ],
@@ -1990,10 +2000,10 @@ const textHData = {
     questions: [
       {
         question:
-          "Un alojamiento o establecimiento debe pedir identificación a todas las personas que ingresan, especialmente si hay menores de edad.",
+          "Si un establecimiento no verifica la identidad de adultos que ingresan con menores de edad, se pone en riesgo la protección de los derechos sexuales y reproductivos, y puede obstaculizar el acceso a la justicia o a servicios como la Interrupción Legal del Embarazo (ILE).",
         answer: true,
         explanation:
-          "Pedir identificación es una medida básica de seguridad y protección de derechos. Su omisión puede facilitar situaciones de explotación o violencia contra menores.",
+          "La verificación de identidad en establecimientos es una medida de prevención clave contra la explotación sexual y el abuso, que son causas comunes de embarazos forzados en menores.",
       },
     ],
   },
