@@ -55,6 +55,7 @@ let currentNextData = nextVData;
 let currentBranch = "V";
 
 function renderPage() {
+  checkOrientation();
   const pageContent = document.getElementById("page-content");
   const headerElement = document.querySelector("header");
   const advButton = document.getElementById("adv-buttons");
@@ -70,6 +71,7 @@ function renderPage() {
     advButton.style.display = "block";
     headerElement.style.display = "block";
   }
+
   pageContent.className = currentLayoutData[currentPage];
   pageContent.innerHTML = createStructure(
     currentTitlesData,
@@ -85,6 +87,19 @@ function renderPage() {
   // playAudio(audioData, currentPage);
   console.log("currentPAge: " + currentPage);
   console.log("currentBranch: " + currentBranch);
+  window.addEventListener("resize", checkOrientation);
+  window.addEventListener("orientationchange", checkOrientation);
+}
+function checkOrientation() {
+  if (window.innerHeight > window.innerWidth) {
+    // Portrait
+    document.getElementById("rotate-warning").style.display = "flex";
+    // document.getElementById("main-content").style.display = "none";
+  } else {
+    // Landscape
+    document.getElementById("rotate-warning").style.display = "none";
+    // document.getElementById("main-content").style.display = "block";
+  }
 }
 
 //Siguiente pagina
@@ -250,6 +265,9 @@ function ALayOutGenerator(titles, page, images) {
   document.querySelector(
     ".Alayout"
   ).style.backgroundImage = `url('images/${images[page]}')`;
+  // const isPortrait = window.innerHeight > window.innerWidth;
+  // const warningDisplay = isPortrait ? "block" : "none";
+  // console.log(warningDisplay);
   return ` 
   <div id="Alayout-container">
     <div class="button-caratula-container">
@@ -303,7 +321,7 @@ function YLayOutGenerator(titles, page, text, history, images) {
     ".Ylayout"
   ).style.backgroundImage = `url('images/${images[page]}')`;
   setTimeout(() => {
-  nextPage();
+    nextPage();
   }, 3000);
   return ` 
   <div id="Ylayout-container">

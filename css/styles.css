@@ -389,6 +389,21 @@ header {
   width: 100%;
   font-size: 1em;
 }
+#rotate-warning {
+  /* border: 1px solid red; */
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+  font-size: 2rem;
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 9999;
+  /* padding: 20px; */
+}
 
 .Ilayout {
   width: 100%;
@@ -3015,3 +3030,25 @@ header {
     font-size: 1em;
   }
 }
+
+/* @media (max-width: 1199px) and (orientation: portrait) {
+  #rotate-warning {
+    display: none ; 
+    position: fixed;
+    inset: 0; 
+    background: rgba(0, 0, 0, 0.85);
+    color: white;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 9999;
+    padding: 20px;
+  }
+}
+@media (max-width: 1199px) and (orientation: landscape) {
+  #rotate-warning {
+    display: flex !important;
+  }
+} */
