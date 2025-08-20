@@ -3,7 +3,7 @@ let currentAudio = null;
 let currentQuestionIndex = 0;
 let userAnswers = [];
 let pageCompleted = false;
-let coins = 2100;
+let coins = 2650;
 let lostCoins = 50;
 let nextBranch = "";
 let nextNumberOfPage = 0;
@@ -107,9 +107,10 @@ function nextPage() {
   const keys = Object.keys(currentLayoutData);
   const lastKey = keys[keys.length - 1];
   if (currentPage < lastKey + 1) {
-    if (currentLayoutData !== layoutVData) {
-      coins = coins - lostCoins;
-    }
+    // if (currentLayoutData !== layoutVData) {
+    //   coins = coins - lostCoins;
+    // }
+    coins = coins - lostCoins;
     // console.log(currentNextData[currentPage].branch);
     nextBranch = currentNextData[currentPage].branch;
     nextNumberOfPage = currentNextData[currentPage].numberOfPage;
@@ -280,7 +281,7 @@ function ZLayOutGenerator(titles, page, images) {
     ".Zlayout"
   ).style.backgroundImage = `url('images/${images[page]}')`;
   return ` 
-  <div id="Alayout-container">
+  <div id="Zlayout-container">
     <div class="button-caratula-container">
       <button class="nav-buttons" id="comenzar-button" onclick="location.reload()">Empezar de nuevo</button>
     </div>

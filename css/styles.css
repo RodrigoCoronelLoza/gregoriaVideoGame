@@ -380,6 +380,23 @@ header {
   position: relative;
 }
 
+.Zlayout {
+  /* padding: 0;
+  margin: 0; */
+  height: 100vh;
+  /* min-height: 85vh; */
+  background-image: url("../images/intro.png");
+  background-size: 100% 100%; /* or 'contain' depending on your needs */
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#Zlayout-container {
+  /* padding: 0; */
+  height: 100%;
+  position: relative;
+}
+
 .button-caratula-container {
   position: absolute;
   bottom: 7%;
