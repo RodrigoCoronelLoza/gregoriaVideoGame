@@ -274,9 +274,9 @@ header {
   /* border: 1px solid red; */
   margin-right: 1em;
 }
-#warning-container {
+/* #warning-container {
   
-}
+} */
 .nav-buttons {
   background-color: var(--colorvar2);
   height: 100%;
@@ -749,6 +749,7 @@ header {
 }
 
 #text-historia {
+  width:80%;
   /* border: 1px solid green; */
   /* flex: 1;
   height: 95%;
