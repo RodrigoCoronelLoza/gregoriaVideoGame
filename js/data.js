@@ -128,7 +128,7 @@ const feedbackVData = {
 const historyVData = {
   0: "",
   1: "",
-  2: "Esto no es un juego. Es una carrera contra el tiempo. Debes atar cabos, leer entre líneas y tomar decisiones que podrían cambiar una historia que aún no termina. <br/>En el marco del proyecto: <br/>“Juventudes con voz y poder, por los derechos sexuales y derechos reproductivos y una vida libre de violencias.” <br/><br/>Año: 2025 <br/>Lugar: El Alto – Bolivia ",
+  2: "Esto no es un juego. Es una carrera contra el tiempo. Debes atar cabos, leer entre líneas y tomar decisiones que podrían cambiar una historia que aún no termina. <br/><br/>A lo largo del juego deberás abrir las ventanas laterales: HISTORIA, para conocer que pasa con los personajes y DESAFIO para resolver trivias que te permitirán avanzar.<br/><br/>¡Adelante con este desafío!<br/><br/>Año: 2025 <br/>Lugar: El Alto – Bolivia ",
   3: "",
   4: "Mónica y Miguel se sientan en un banco del patio, lejos del ruido. <br/> Mónica abre el cuaderno que encontró; las páginas crujen, algunas están manchadas de tinta.<br/>Miguel le cuenta que halló un celular rosado escondido en la habitación de su hermana.<br/>—“Tal vez este cuaderno tenga alguna pista…” —dice Mónica.",
   5: "Mónica baja la mirada y su voz tiembla: “La vi con moretones… dijo que se había caído, pero no le creí del todo.” Miguel aprieta la mandíbula: “En casa nadie le hizo daño. ¡Eso no puede ser!” Un silencio incómodo se instala entre ambos.",
