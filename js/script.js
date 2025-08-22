@@ -3,8 +3,9 @@ let currentAudio = null;
 let currentQuestionIndex = 0;
 let userAnswers = [];
 let pageCompleted = false;
-let coins = 2650;
+let coins = 1650;
 let lostCoins = 50;
+let wonCoins = 110;
 let nextBranch = "";
 let nextNumberOfPage = 0;
 
@@ -118,9 +119,9 @@ function nextPage() {
     resetTrivia();
     resetAdvButtons();
 
-    if (coins <= 0) {
+    if (coins < 0) {
       jumpBranch("F", 1);
-      coins = 1;
+      coins = 0;
       lostCoins = 0;
       return;
     }
@@ -283,7 +284,10 @@ function ZLayOutGenerator(titles, page, images) {
   return ` 
   <div id="Zlayout-container">
     <div class="button-caratula-container">
-      <button class="nav-buttons" id="comenzar-button" onclick="location.reload()">Empezar de nuevo</button>
+      <div id="points-end">
+         Monedas: ${coins} 
+      </div>
+      <button class="nav-buttons" id="comenzar-button" onclick="location.reload()">Recomenzar</button>
     </div>
   </div>`;
 }
@@ -317,7 +321,6 @@ function JLayOutGenerator(titles, page, text, history, images) {
 }
 
 function YLayOutGenerator(titles, page, text, history, images) {
-  console.log("carajo" + images[page]);
   document.querySelector(
     ".Ylayout"
   ).style.backgroundImage = `url('images/${images[page]}')`;
@@ -1679,6 +1682,7 @@ function completeMemoryGame() {
   const totalTime = Math.round((endTime - memoryGameStartTime) / 1000);
 
   // Show completion summary
+  coins = coins + wonCoins;
   document.getElementById("memory-game-summary").style.display = "block";
   document.getElementById(
     "memory-total-time"
@@ -2129,6 +2133,7 @@ function completePhraseGame() {
   document.getElementById("phrase-game-area").style.display = "none";
   document.querySelector(".phrase-controls").style.display = "none";
   document.getElementById("phrase-result").style.display = "none";
+  coins = coins + wonCoins;
   summaryDiv.style.display = "block";
 }
 
@@ -2773,6 +2778,7 @@ function completeSentenceGame() {
   document.getElementById("sentence-game-area").style.display = "none";
   document.querySelector(".sentence-controls").style.display = "none";
   document.getElementById("sentence-result").style.display = "none";
+  coins = coins + wonCoins;
   summaryDiv.style.display = "block";
 }
 
@@ -2980,6 +2986,7 @@ function completeMatchGame(feedbackMessage) {
   document.getElementById("accuracy").textContent = `${accuracy}%`;
 
   // Show results
+  coins = coins + wonCoins;
   resultDiv.style.display = "block";
 }
 
@@ -3390,7 +3397,10 @@ function showQuizSummary() {
 
   if (correctAnswers < totalQuestions) {
     coins = coins - lostCoins;
-    console.log("hay un issue");
+  }
+
+  if (correctAnswers === totalQuestions) {
+    coins = coins + wonCoins;
   }
 
   // Generate answers review

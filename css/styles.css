@@ -405,6 +405,15 @@ header {
   width: 20vw;
   font-size: 2em;
 }
+
+ #points-end {
+    color: #000;
+    background-color: transparent;
+    border: 1px solid black;
+    border-radius: 1em;
+    font-size: 1em;
+    text-align: center;
+  }
 #comenzar-button {
   width: 100%;
   font-size: 1em;
@@ -749,7 +758,7 @@ header {
 }
 
 #text-historia {
-  width:80%;
+  width: 80%;
   /* border: 1px solid green; */
   /* flex: 1;
   height: 95%;
@@ -2952,6 +2961,14 @@ header {
 
   .button-caratula-container {
     font-size: 1.5em;
+  }
+
+  #points-end {
+    color: #000;
+    background-color: transparent;
+    border: 1px solid black;
+    border-radius: 1em;
+    font-size: 1em;
   }
   #text-historia {
     font-size: 1em;
